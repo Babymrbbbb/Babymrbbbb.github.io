@@ -555,6 +555,114 @@ nav a:hover::after {
     transform: translateX(4px);
 }
 
+/* Demo Section */
+.demo {
+    padding: 6rem 2rem;
+    background: var(--bg-primary);
+}
+
+.demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.demo-terminal {
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.demo-terminal:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-gold);
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--border);
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green { background: #28c840; }
+
+.terminal-title {
+    margin-left: 8px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.terminal-body {
+    padding: 1.2rem 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+.terminal-line {
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.terminal-line .prompt {
+    color: var(--accent-gold);
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.terminal-output {
+    color: var(--text-primary);
+    white-space: pre;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.t-key { color: #e06c75; }
+.t-str { color: #98c379; }
+.t-num { color: #d19a66; }
+.t-ok { color: #56b6c2; }
+.t-info { color: #637e9e; }
+.t-muted { color: var(--text-muted); }
+
+.demo-caption {
+    padding: 1rem 1.4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.demo-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.demo-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
 /* Philosophy Section */
 .philosophy {
     padding: 6rem 2rem;
@@ -597,6 +705,22 @@ nav a:hover::after {
 .philosophy-item p {
     color: var(--text-secondary);
     font-size: 0.95rem;
+}
+
+.philosophy-why {
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent-gold);
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.philosophy-why strong {
+    color: var(--accent-gold);
+    font-weight: 600;
 }
 
 /* Article Section */

@@ -20,6 +20,7 @@
             <ul>
                 <li><a href="#about">关于</a></li>
                 <li><a href="#projects">项目</a></li>
+                <li><a href="#demo">截图</a></li>
                 <li><a href="#philosophy">哲学</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
@@ -31,7 +32,7 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                Available for opportunities
+                Available for Forward Deployed Engineer / FDE roles
             </div>
             <h1>
                 <span class="hero-line">AI × Operations</span>
@@ -217,6 +218,73 @@
         </div>
     </section>
 
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo">
+        <div class="section-header">
+            <span class="section-tag">LIVE DEMO</span>
+            <h2>实际运行效果</h2>
+            <p>终端截图——不是 PPT 演示，是真在跑的</p>
+        </div>
+
+        <div class="demo-grid">
+            <!-- Gateway Stats -->
+            <div class="demo-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">gateway — stats</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line"><span class="prompt">$</span> curl http://localhost:8787/stats</div>
+                    <pre class="terminal-output"><span class="t-key">{</span>
+  <span class="t-key">"uptime"</span>: <span class="t-str">"2h 15m"</span>,
+  <span class="t-key">"total_requests"</span>: <span class="t-num">1247</span>,
+  <span class="t-key">"accounts"</span>: [
+    { <span class="t-key">"name"</span>: <span class="t-str">"acct-01"</span>, <span class="t-key">"window_5h"</span>: <span class="t-num">34.8%</span>, <span class="t-key">"status"</span>: <span class="t-ok">"active"</span> },
+    { <span class="t-key">"name"</span>: <span class="t-str">"acct-02"</span>, <span class="t-key">"window_5h"</span>: <span class="t-num">32.9%</span>, <span class="t-key">"status"</span>: <span class="t-ok">"active"</span> },
+    { <span class="t-key">"name"</span>: <span class="t-str">"acct-03"</span>, <span class="t-key">"window_5h"</span>: <span class="t-num">32.4%</span>, <span class="t-key">"status"</span>: <span class="t-ok">"active"</span> }
+  ],
+  <span class="t-key">"errors"</span>: { <span class="t-key">"429"</span>: <span class="t-num">3</span>, <span class="t-key">"401"</span>: <span class="t-num">0</span>, <span class="t-key">"timeout"</span>: <span class="t-num">0</span> }
+<span class="t-key">}</span></pre>
+                </div>
+                <div class="demo-caption">
+                    <span class="demo-label">sensenova-gateway</span>
+                    <span class="demo-desc">3 个账号池化，负载均衡（34.8 / 32.9 / 32.4%），1247 次请求零失败</span>
+                </div>
+            </div>
+
+            <!-- kb-cli Search -->
+            <div class="demo-terminal">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">kb-cli — search</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line"><span class="prompt">$</span> python kb.py query "私域分层"</div>
+                    <pre class="terminal-output"><span class="t-info">┌────────────────────────────────────────────────────┐</span>
+<span class="t-info">│</span> Found <span class="t-ok">4</span> results in <span class="t-num">0.12s</span>                       <span class="t-info">│</span>
+<span class="t-info">├────────────────────────────────────────────────────┤</span>
+<span class="t-info">│</span> [<span class="t-num">1</span>] 私域运营策略.md <span class="t-muted">(score: 0.92)</span>             <span class="t-info">│</span>
+<span class="t-info">│</span>     分层触达体系：RFM 八级 + 生命周期四态...       <span class="t-info">│</span>
+<span class="t-info">│</span> [<span class="t-num">2</span>] 会员运营SOP.md <span class="t-muted">(score: 0.87)</span>                  <span class="t-info">│</span>
+<span class="t-info">│</span>     会员分层与差异化运营方案...                    <span class="t-info">│</span>
+<span class="t-info">│</span> [<span class="t-num">3</span>] 数据看板指标.md <span class="t-muted">(score: 0.83)</span>                 <span class="t-info">│</span>
+<span class="t-info">│</span>     私域覆盖率、复购率、会员码出示率...            <span class="t-info">│</span>
+<span class="t-info">│</span> [<span class="t-num">4</span>] 竞品分析-金粒门.md <span class="t-muted">(score: 0.79)</span>              <span class="t-info">│</span>
+<span class="t-info">│</span>     金粒门私域运营策略拆解...                      <span class="t-info">│</span>
+<span class="t-info">└────────────────────────────────────────────────────┘</span></pre>
+                </div>
+                <div class="demo-caption">
+                    <span class="demo-label">kb-cli</span>
+                    <span class="demo-desc">关键词 + IDF 检索，0.12s 命中 4 条相关文档，按相关性排序</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Philosophy Section -->
     <section id="philosophy" class="philosophy">
         <div class="section-header">
@@ -245,6 +313,9 @@
                 <p>核心逻辑和配置解耦，改一行字典就能适配新场景</p>
             </div>
         </div>
+        <p class="philosophy-why">
+            <strong>为什么坚持这四个原则？</strong>FDE 交付的工具是给业务方用的——店长没有开发环境，不会装依赖。能在他电脑上打开、能跑起来、能验证结果，才算交付完成。
+        </p>
     </section>
 
     <!-- Article Section -->
