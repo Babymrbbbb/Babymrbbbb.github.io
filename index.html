@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betianxia · AI × Operations Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BETIANXIA</div>
+            <ul>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>AI × Operations</h1>
+        <p class="subtitle">用工程化的方式解决真实业务问题</p>
+        <p class="desc">43 家门店的烘焙品牌运营负责人，同时在用 AI 重构运营生产线。</p>
+        <div class="cta">
+            <a href="#projects" class="btn primary">查看项目</a>
+            <a href="https://github.com/betianxia" class="btn secondary">GitHub</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>我能做什么</h2>
+        <div class="capabilities">
+            <div class="capability">
+                <div class="icon">🌐</div>
+                <h3>AI 工程化</h3>
+                <p>把 AI 从玩具变成生产线（自建 MCP、网关、质检）</p>
+            </div>
+            <div class="capability">
+                <div class="icon">✍️</div>
+                <h3>AI 提示词工程</h3>
+                <p>从"一句话许愿"到"一句话下订单"的系统化方法论</p>
+            </div>
+            <div class="capability">
+                <div class="icon">📊</div>
+                <h3>数据驱动决策</h3>
+                <p>多源验证、防错回滚，有生产级的测试意识</p>
+            </div>
+            <div class="capability">
+                <div class="icon">🔧</div>
+                <h3>工具化沉淀</h3>
+                <p>把工作里的重复动作写成 CLI / 脚本 / MCP</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2>精选项目</h2>
+        <p class="section-desc">三个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识</strong></p>
+
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-tag">接入 AI</span>
+                <h3>sensenova-gateway</h3>
+            </div>
+            <p class="project-desc">零依赖的本地 OpenAI 兼容网关，把 N 个 SenseNova API key 聚合成一个端点。</p>
+            <ul class="project-features">
+                <li>多账号轮询（按 5h 窗口内用量最少）</li>
+                <li>429/401 自动切换 + 冷却隔离</li>
+                <li>别名映射 + SSE 流式转发</li>
+                <li>530 行 Node.js 核心代码，只用内置模块</li>
+                <li>16 项离线自测全通过</li>
+            </ul>
+            <div class="project-highlight">
+                <strong>面试价值锚点：</strong>能搭生产级基础设施 · 有配额/限流/冷却等真实生产问题意识 · 测试驱动开发
+            </div>
+            <a href="https://github.com/betianxia/sensenova-gateway" class="project-link">查看仓库 →</a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-tag">用好 AI</span>
+                <h3>prompt-craft</h3>
+            </div>
+            <p class="project-desc">AI 提示词写法库（图像 + 视频），从"一句话许愿"到"一句话下订单"的实战手册。</p>
+            <ul class="project-features">
+                <li>通用铁律 6 条（抽象词翻译 / "不要"比"要"更有效 / 数量动作写死...）</li>
+                <li>图像篇：九要素结构、写实增强层、人物防大头贴、电影感六件...</li>
+                <li>视频篇：三大治法、5 大维度骨架、情绪三法、塔塔体系</li>
+                <li>所有内容均经过实测验证，不是理论推导</li>
+                <li>1189 行方法论 + 2 个配套脚本</li>
+            </ul>
+            <div class="project-highlight">
+                <strong>面试价值锚点：</strong>有 AI 提示词工程的系统化方法论 · 有跨模态的完整知识体系 · 有可量化的验证标准
+            </div>
+            <a href="https://github.com/betianxia/prompt-craft" class="project-link">查看仓库 →</a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-tag">管理知识</span>
+                <h3>kb-cli</h3>
+            </div>
+            <p class="project-desc">零依赖的本地知识库检索工具，把散落的 markdown 文档重组为「多子库 × 多层」结构。</p>
+            <ul class="project-features">
+                <li>三层架构：L1 速查 / L2 导航 / L3 原始</li>
+                <li>多子库拆分 + 单文件 158 行检索器</li>
+                <li>召回优先策略（多词 AND + 出现次数排序）</li>
+                <li>UTF-8 强制输出 + 双写，Windows 不炸</li>
+                <li>200 多行 Python 3.8+，零依赖</li>
+            </ul>
+            <div class="project-highlight">
+                <strong>面试价值锚点：</strong>能设计信息架构 · 能处理跨平台工程细节 · 从 0 到 1 构建工具链
+            </div>
+            <a href="https://github.com/betianxia/kb-cli" class="project-link">查看仓库 →</a>
+        </div>
+    </section>
+
+    <section class="philosophy">
+        <h2>设计哲学</h2>
+        <div class="philosophy-grid">
+            <div class="philosophy-item">
+                <h3>零依赖</h3>
+                <p>能用标准库解决，不装第三方</p>
+            </div>
+            <div class="philosophy-item">
+                <h3>可运行</h3>
+                <p>git clone + 一行命令就能跑</p>
+            </div>
+            <div class="philosophy-item">
+                <h3>可自测</h3>
+                <p>不需要 mock 环境也能验证</p>
+            </div>
+            <div class="philosophy-item">
+                <h3>可扩展</h3>
+                <p>核心逻辑和配置解耦，改一行字典就能适配新场景</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>联系我</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-label">邮箱</span>
+                <span class="contact-value">358368437@qq.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">微信</span>
+                <span class="contact-value">Edward_bei</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value"><a href="https://github.com/betianxia">github.com/betianxia</a></span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Betianxia · 用工程化的方式解决真实业务问题</p>
+    </footer>
+</body>
+</html>
