@@ -39,7 +39,7 @@
             <p class="subtitle">用工程化的方式解决真实业务问题</p>
             <p class="desc">
                 45 家门店的烘焙品牌运营负责人<br>
-                用 AI 重构运营生产线，复购率从 <strong>35% → 51.6%</strong>
+                用 AI 重构运营生产线，会员码出示率从 <strong>3.9% → 17.9%</strong>
             </p>
             <div class="cta">
                 <a href="#projects" class="btn primary">
@@ -57,12 +57,12 @@
                     <span class="stat-label">门店</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value">9.5万</span>
+                    <span class="stat-value">57,435</span>
                     <span class="stat-label">会员客户</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value">51.6%</span>
-                    <span class="stat-label">复购率</span>
+                    <span class="stat-value">17.9%</span>
+                    <span class="stat-label">会员码出示率</span>
                 </div>
                 <div class="stat">
                     <span class="stat-value">3</span>
@@ -109,7 +109,7 @@
                     </svg>
                 </div>
                 <h3>AI 工程化</h3>
-                <p>自建 MCP、网关、质检工具，把 AI 从玩具变成生产线</p>
+                <p>自建网关、质检工具，把 AI 从玩具变成生产线</p>
             </div>
             <div class="capability">
                 <div class="capability-icon">
@@ -146,7 +146,11 @@
         <div class="section-header">
             <span class="section-tag">PROJECTS</span>
             <h2>精选项目</h2>
-            <p>三个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识</strong></p>
+            <p>
+                在 45 家门店做运营时发现重复工作太多 ——<br>
+                先搭<strong>网关</strong>解决模型接入，再沉淀<strong>提示词方法论</strong>，最后做<strong>知识库</strong>管理文档。<br>
+                三个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识</strong>
+            </p>
         </div>
 
         <div class="project-card">
@@ -240,6 +244,42 @@
                 <h3>可扩展</h3>
                 <p>核心逻辑和配置解耦，改一行字典就能适配新场景</p>
             </div>
+        </div>
+    </section>
+
+    <!-- Article Section -->
+    <section id="article" class="article">
+        <div class="section-header">
+            <span class="section-tag">ARTICLE</span>
+            <h2>技术思考</h2>
+            <p>纯工程师写不出来的视角 —— 从业务痛点到技术选型</p>
+        </div>
+        <div class="article-card">
+            <div class="article-header">
+                <span class="article-tag">技术选型</span>
+                <h3>我为什么用关键词 + IDF 而不是向量检索</h3>
+                <p class="article-meta">kb-cli 设计决策 · 8 分钟阅读</p>
+            </div>
+            <div class="article-excerpt">
+                <p>
+                    在 kb-cli 这个项目里，我用了<strong>关键词匹配 + IDF 权重修正</strong>，而不是向量检索。这不是技术债，是刻意选择。
+                </p>
+                <p>
+                    最早我试过纯向量检索，结果很惨：用户问"私域怎么做"，系统返回一堆"运营策略"、"营销方案"，<strong>没有一条精准命中"私域"</strong>。实测下来，纯向量检索在中文短查询场景下，失败率接近 60%。
+                </p>
+                <p>
+                    问题出在哪？短查询的语义稀疏、中文分词不可靠、业务术语匹配失败……
+                </p>
+                <p>
+                    所以我的方案是：<strong>关键词精确匹配 + IDF 权重修正</strong>。"私域"就是"私域"，不会被语义相似性干扰；常见词 IDF 低，权重低；罕见词 IDF 高，权重高。
+                </p>
+                <p>
+                    向量检索什么时候该用？<strong>长查询、语义泛化、跨语言、模糊匹配</strong> —— 这些场景下向量的优势才能发挥出来。
+                </p>
+            </div>
+            <a href="article.md" class="article-link" target="_blank">
+                阅读全文 <span>→</span>
+            </a>
         </div>
     </section>
 
