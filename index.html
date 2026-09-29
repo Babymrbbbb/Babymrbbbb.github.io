@@ -3,159 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babymrbbbb · AI × Operations Portfolio</title>
+    <title>Babymrbbbb · AI × Operations</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Background Grid -->
+    <div class="bg-grid"></div>
+    
+    <!-- Navigation -->
     <header>
         <nav>
-            <div class="logo">BABYMRBBBB</div>
+            <div class="logo">
+                <span class="logo-mark">◆</span> BABYMRBBBB
+            </div>
             <ul>
                 <li><a href="#about">关于</a></li>
                 <li><a href="#projects">项目</a></li>
+                <li><a href="#philosophy">哲学</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>AI × Operations</h1>
-        <p class="subtitle">用工程化的方式解决真实业务问题</p>
-        <p class="desc">45 家门店的烘焙品牌运营负责人，用 AI 重构运营生产线，复购率从 35% 提升至 51.6%。</p>
-        <div class="cta">
-            <a href="#projects" class="btn primary">查看项目</a>
-            <a href="https://github.com/Babymrbbbb" class="btn secondary">GitHub</a>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                Available for opportunities
+            </div>
+            <h1>
+                <span class="hero-line">AI × Operations</span>
+            </h1>
+            <p class="subtitle">用工程化的方式解决真实业务问题</p>
+            <p class="desc">
+                45 家门店的烘焙品牌运营负责人<br>
+                用 AI 重构运营生产线，复购率从 <strong>35% → 51.6%</strong>
+            </p>
+            <div class="cta">
+                <a href="#projects" class="btn primary">
+                    查看项目
+                    <span class="btn-arrow">→</span>
+                </a>
+                <a href="https://github.com/Babymrbbbb" class="btn secondary" target="_blank">
+                    GitHub
+                    <span class="btn-icon">↗</span>
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-value">45</span>
+                    <span class="stat-label">门店</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">9.5万</span>
+                    <span class="stat-label">会员客户</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">51.6%</span>
+                    <span class="stat-label">复购率</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">开源项目</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="code-window">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-title">gateway.js</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="code-keyword">const</span> <span class="code-var">client</span> = <span class="code-keyword">new</span> <span class="code-class">OpenAI</span>({
+  baseURL: <span class="code-string">"http://127.0.0.1:8787/v1"</span>,
+  apiKey: <span class="code-string">"sk-local-gateway"</span>
+});
+
+<span class="code-comment">// 聚合 N 个 AI 账号 → 1 个端点</span>
+<span class="code-keyword">await</span> client.chat.completions.<span class="code-method">create</span>({
+  model: <span class="code-string">"sensenova-6.8-flash-lite"</span>,
+  messages: [{ role: <span class="code-string">"user"</span>, content: <span class="code-string">"你好"</span> }]
+});</pre>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about">
-        <h2>我能做什么</h2>
+        <div class="section-header">
+            <span class="section-tag">ABOUT</span>
+            <h2>我能做什么</h2>
+            <p>从 AI 工程化到数据驱动运营，全链路能力</p>
+        </div>
         <div class="capabilities">
             <div class="capability">
-                <div class="icon">🌐</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
                 <h3>AI 工程化</h3>
-                <p>把 AI 从玩具变成生产线（自建 MCP、网关、质检）</p>
+                <p>自建 MCP、网关、质检工具，把 AI 从玩具变成生产线</p>
             </div>
             <div class="capability">
-                <div class="icon">✍️</div>
-                <h3>AI 提示词工程</h3>
-                <p>从"一句话许愿"到"一句话下订单"的系统化方法论</p>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                    </svg>
+                </div>
+                <h3>提示词工程</h3>
+                <p>系统化方法论，从"一句话许愿"到"一句话下订单"</p>
             </div>
             <div class="capability">
-                <div class="icon">📊</div>
-                <h3>数据驱动决策</h3>
-                <p>多源验证、防错回滚，有生产级的测试意识</p>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v18h18M9 17V7m4 10V7m4 10V7"/>
+                    </svg>
+                </div>
+                <h3>数据驱动</h3>
+                <p>全渠道数据统一口径，每天自动产出三套交付物</p>
             </div>
             <div class="capability">
-                <div class="icon">🔧</div>
+                <div class="capability-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
                 <h3>工具化沉淀</h3>
                 <p>把工作里的重复动作写成 CLI / 脚本 / MCP</p>
             </div>
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="projects">
-        <h2>精选项目</h2>
-        <p class="section-desc">三个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识</strong></p>
+        <div class="section-header">
+            <span class="section-tag">PROJECTS</span>
+            <h2>精选项目</h2>
+            <p>三个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识</strong></p>
+        </div>
 
         <div class="project-card">
             <div class="project-header">
                 <span class="project-tag">接入 AI</span>
                 <h3>sensenova-gateway</h3>
+                <span class="project-badge">530 行 · 零依赖</span>
             </div>
             <p class="project-desc">零依赖的本地 OpenAI 兼容网关，把 N 个 SenseNova API key 聚合成一个端点。</p>
             <ul class="project-features">
                 <li>多账号轮询（按 5h 窗口内用量最少）</li>
                 <li>429/401 自动切换 + 冷却隔离</li>
                 <li>别名映射 + SSE 流式转发</li>
-                <li>530 行 Node.js 核心代码，只用内置模块</li>
                 <li>16 项离线自测全通过</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>能搭生产级基础设施 · 有配额/限流/冷却等真实生产问题意识 · 测试驱动开发
+                <strong>核心价值：</strong>能搭生产级基础设施 · 有配额/限流/冷却等真实生产问题意识
             </div>
-            <a href="https://github.com/Babymrbbbb/my-sensenova-gateway" class="project-link">查看仓库 →</a>
+            <a href="https://github.com/Babymrbbbb/my-sensenova-gateway" class="project-link" target="_blank">
+                查看仓库 <span>→</span>
+            </a>
         </div>
 
         <div class="project-card">
             <div class="project-header">
                 <span class="project-tag">用好 AI</span>
                 <h3>prompt-craft</h3>
+                <span class="project-badge">1189 行 · 方法论</span>
             </div>
             <p class="project-desc">AI 提示词写法库（图像 + 视频），从"一句话许愿"到"一句话下订单"的实战手册。</p>
             <ul class="project-features">
-                <li>通用铁律 6 条（抽象词翻译 / "不要"比"要"更有效 / 数量动作写死...）</li>
+                <li>通用铁律 6 条（抽象词翻译 / "不要"比"要"更有效...）</li>
                 <li>图像篇：九要素结构、写实增强层、人物防大头贴、电影感六件...</li>
                 <li>视频篇：三大治法、5 大维度骨架、情绪三法、叙事方法论</li>
                 <li>所有内容均经过实测验证，不是理论推导</li>
-                <li>1189 行方法论 + 2 个配套脚本</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>有 AI 提示词工程的系统化方法论 · 有跨模态的完整知识体系 · 有可量化的验证标准
+                <strong>核心价值：</strong>有 AI 提示词工程的系统化方法论 · 有跨模态的完整知识体系
             </div>
-            <a href="https://github.com/Babymrbbbb/prompt-craft" class="project-link">查看仓库 →</a>
+            <a href="https://github.com/Babymrbbbb/prompt-craft" class="project-link" target="_blank">
+                查看仓库 <span>→</span>
+            </a>
         </div>
 
         <div class="project-card">
             <div class="project-header">
                 <span class="project-tag">管理知识</span>
                 <h3>kb-cli</h3>
+                <span class="project-badge">200 行 · 零依赖</span>
             </div>
             <p class="project-desc">零依赖的本地知识库检索工具，把散落的 markdown 文档重组为「多子库 × 多层」结构。</p>
             <ul class="project-features">
                 <li>三层架构：L1 速查 / L2 导航 / L3 原始</li>
                 <li>多子库拆分 + 单文件 158 行检索器</li>
-                <li>召回优先策略（多词 AND + 出现次数排序）</li>
+                <li>自动同步聊天记录，智能分类到不同子库</li>
                 <li>UTF-8 强制输出 + 双写，Windows 不炸</li>
-                <li>200 多行 Python 3.8+，零依赖</li>
             </ul>
             <div class="project-highlight">
                 <strong>核心价值：</strong>能设计信息架构 · 能处理跨平台工程细节 · 从 0 到 1 构建工具链
             </div>
-            <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link">查看仓库 →</a>
+            <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link" target="_blank">
+                查看仓库 <span>→</span>
+            </a>
         </div>
     </section>
 
-    <section class="philosophy">
-        <h2>设计哲学</h2>
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="philosophy">
+        <div class="section-header">
+            <span class="section-tag">PHILOSOPHY</span>
+            <h2>设计哲学</h2>
+        </div>
         <div class="philosophy-grid">
             <div class="philosophy-item">
+                <span class="philosophy-num">01</span>
                 <h3>零依赖</h3>
                 <p>能用标准库解决，不装第三方</p>
             </div>
             <div class="philosophy-item">
+                <span class="philosophy-num">02</span>
                 <h3>可运行</h3>
                 <p>git clone + 一行命令就能跑</p>
             </div>
             <div class="philosophy-item">
+                <span class="philosophy-num">03</span>
                 <h3>可自测</h3>
                 <p>不需要 mock 环境也能验证</p>
             </div>
             <div class="philosophy-item">
+                <span class="philosophy-num">04</span>
                 <h3>可扩展</h3>
                 <p>核心逻辑和配置解耦，改一行字典就能适配新场景</p>
             </div>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact">
-        <h2>联系我</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <span class="contact-label">邮箱</span>
-                <span class="contact-value">358368437@qq.com</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-label">微信</span>
-                <span class="contact-value">Edward_bei</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-label">GitHub</span>
-                <span class="contact-value"><a href="https://github.com/Babymrbbbb">github.com/Babymrbbbb</a></span>
+        <div class="contact-content">
+            <h2>让我看看能不能帮到你</h2>
+            <p>无论是 AI 工程化、数据驱动运营，还是工具化沉淀，都欢迎聊聊。</p>
+            <div class="contact-info">
+                <a href="mailto:358368437@qq.com" class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">邮箱</span>
+                        <span class="contact-value">358368437@qq.com</span>
+                    </div>
+                </a>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">微信</span>
+                        <span class="contact-value">Edward_bei</span>
+                    </div>
+                </div>
+                <a href="https://github.com/Babymrbbbb" class="contact-item" target="_blank">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">github.com/Babymrbbbb</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>© 2026 Babymrbbbb · 用工程化的方式解决真实业务问题</p>
     </footer>
