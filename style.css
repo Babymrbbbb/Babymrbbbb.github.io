@@ -804,12 +804,12 @@ nav a:hover::after {
 .article-link:hover span {
     transform: translateX(4px);
 }
-}
 
 /* Contact Section */
 .contact {
     padding: 6rem 2rem;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
 }
 
 .contact-content {
@@ -924,6 +924,33 @@ footer {
     50% {
         opacity: 0.5;
         transform: scale(1.2);
+    }
+}
+
+/* Demo Shot (real screenshots) */
+.demo-shot {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.demo-shot:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-gold);
+}
+
+.demo-shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* About 3-column layout on desktop */
+@media (min-width: 900px) {
+    .about .capabilities {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

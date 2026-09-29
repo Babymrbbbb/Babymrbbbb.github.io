@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我为什么用关键词 + IDF，而不是一上来就向量检索 · Babymrbbbb</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>◆</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .article-page { max-width: 760px; margin: 0 auto; padding: 9rem 2rem 4rem; }
+        .article-page h1 { font-size: 2.4rem; line-height: 1.3; margin-bottom: 1rem; }
+        .article-page .lead-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2.5rem; font-family: 'JetBrains Mono', monospace; }
+        .article-page h2 { font-size: 1.5rem; margin: 2.8rem 0 1rem; color: var(--accent-gold); }
+        .article-page p { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.9; margin-bottom: 1.1rem; }
+        .article-page strong { color: var(--text-primary); }
+        .article-page ul { margin: 0 0 1.1rem 1.2rem; }
+        .article-page li { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.9; }
+        .article-page pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem 1.5rem; overflow-x: auto; margin: 1.2rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.7; color: var(--text-primary); }
+        .article-page .back { display: inline-flex; align-items: center; gap: .4rem; color: var(--accent-gold); text-decoration: none; font-weight: 600; margin-top: 3rem; }
+        .article-page blockquote { border-left: 3px solid var(--accent-gold); background: var(--bg-card); padding: 1rem 1.4rem; border-radius: 0 8px 8px 0; color: var(--text-secondary); margin: 1.5rem 0; }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <header>
+        <nav>
+            <div class="logo"><span class="logo-mark">◆</span> BABYMRBBBB</div>
+            <ul>
+                <li><a href="index.html#about">关于</a></li>
+                <li><a href="index.html#projects">项目</a></li>
+                <li><a href="index.html#demo">截图</a></li>
+                <li><a href="article.html">文章</a></li>
+                <li><a href="index.html#philosophy">哲学</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <article class="article-page">
+        <h1>我为什么用关键词 + IDF，而不是一上来就向量检索</h1>
+        <p class="lead-meta">kb-cli 设计决策 · 约 8 分钟阅读</p>
+
+        <p>在 kb-cli 这个项目里，我用的是<strong>关键词 AND 匹配 + IDF 加权打分</strong>，没有上向量检索。这不是没听过向量、也不是技术债，而是针对我这个具体场景做的选择。下面把踩过的坑、为什么这么选、什么时候会改，一次讲清楚。</p>
+
+        <h2>先讲我真实踩过的坑：59.8%</h2>
+        <p>最早检索器的排序用的是<strong>绝对词频</strong>——一个词在某篇文档里出现几次，就给这篇加几分。</p>
+        <p>拿它跑 2,000 多篇同领域语料，问题非常明显：<strong>59.8% 的文档被"运营""管理""系统"这类到处都出现的泛词，压到了同一个主题下面</strong>。而真正有区分度的词——"私域""复购""会员码"——反而排不上来。</p>
+        <p>根因是：绝对词频只奖励"出现得多"，不惩罚"到处都出现"。泛词在每一篇里都出现，于是每一篇都靠它拿高分，文档全塌缩到一起。</p>
+        <p>修正办法是加 <strong>IDF（逆文档频率）</strong>：一个词越普遍，它的权重越低；越罕见、越能代表主题，权重越高。改成 TF × IDF 之后，文档被均匀地分散回各自的主题，那个 59.8% 的塌缩就消失了。</p>
+
+        <h2>那为什么没顺势上向量检索？</h2>
+        <p>向量检索我评估过，但这个场景下有三条理由让我暂时不用：</p>
+        <ul>
+            <li><strong>语料垂直、用词稳定。</strong>2,000 多篇都是同领域的中文资料，术语很固定（私域、复购、件单、会员码），关键词召回本来就够用，不存在"用户换个说法就找不到"的问题。</li>
+            <li><strong>查询都是短的精确查询。</strong>"私域分层""复购率怎么算"，用户心里是有关键词的，要的是精确命中，而不是一堆"语义相近"的东西。</li>
+            <li><strong>要零依赖、可交付。</strong>kb-cli 的原则是 clone 下来一行命令就能跑；向量检索要带 embedding 模型和向量索引，正好违背这条。</li>
+        </ul>
+        <p>还有一个额外好处是<strong>可解释</strong>：业务方看得懂"这篇为什么排前面"——因为命中了哪个罕见词；向量相似度给的是一个数字，业务方没法理解，也没法验证。</p>
+
+        <h2>核心代码（零依赖，只用标准库）</h2>
+        <p>检索分两步：先做关键词 AND 过滤，再用 TF-IDF 打分排序。math 是 Python 标准库，不引入任何第三方依赖。</p>
+        <pre>import math
+
+def search(query_terms, docs, df, total):
+    """docs: [{"id":..., "tokens":[...]}]；df: {词: 含该词的文档数}；total: 文档总数"""
+    hits = []
+    for doc in docs:
+        # 1) 关键词 AND：所有查询词都命中，才入选
+        if not all(t in doc["tokens"] for t in query_terms):
+            continue
+        # 2) TF-IDF 加权打分
+        score = 0.0
+        for t in query_terms:
+            tf = doc["tokens"].count(t)
+            idf = math.log((total + 1) / (df.get(t, 0) + 1)) + 1
+            score += tf * idf
+        hits.append((score, doc["id"]))
+    return sorted(hits, reverse=True)</pre>
+
+        <h2>什么时候我会上向量？</h2>
+        <p>不是向量不好，是场景没到。出现下面任一情况，我就会引入向量：</p>
+        <ul>
+            <li>语料规模过万，关键词覆盖不过来；</li>
+            <li>出现"用户问法"和"文档用词"对不上的语义鸿沟；</li>
+            <li>需要长查询、跨语言、模糊/口语化匹配。</li>
+        </ul>
+        <p>真到那一步，我的做法是<strong>本地 embedding（bge-m3）+ sqlite-vec</strong> 就够，不需要一上来就 Milvus；再让向量召回和关键词召回做 RRF 融合，变成混合检索。</p>
+
+        <blockquote>没有最好的方案，只有对当前场景最合适、而且自己讲得清原理的方案。</blockquote>
+
+        <a class="back" href="index.html">← 返回首页</a>
+    </article>
+
+    <footer>
+        <p>© 2026 Babymrbbbb · 用工程化的方式解决真实业务问题</p>
+    </footer>
+</body>
+</html>
