@@ -555,6 +555,115 @@ nav a:hover::after {
     transform: translateX(4px);
 }
 
+/* Delivered Software Section */
+.product {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-info .project-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.product-diagram {
+    position: sticky;
+    top: 2rem;
+}
+
+.diagram-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.diagram-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    text-align: center;
+}
+
+.diagram-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.flow-node {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: border-color 0.2s;
+}
+
+.flow-node:hover {
+    border-color: var(--accent-gold);
+}
+
+.node-icon {
+    font-size: 1.1rem;
+}
+
+.flow-node.source {
+    border-left: 3px solid #4a9eff;
+}
+
+.flow-node.process {
+    border-left: 3px solid var(--accent-gold);
+}
+
+.flow-node.ai {
+    border-left: 3px solid #b06eff;
+    background: rgba(176, 110, 255, 0.06);
+}
+
+.flow-node.output {
+    border-left: 3px solid #4ade80;
+    background: rgba(74, 222, 128, 0.05);
+}
+
+.flow-arrow {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0.1rem 0;
+}
+
 /* Demo Section */
 .demo {
     padding: 6rem 2rem;
