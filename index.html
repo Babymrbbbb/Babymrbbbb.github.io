@@ -39,7 +39,7 @@
             <h1>
                 <span class="hero-line">AI × Operations</span>
             </h1>
-            <p class="subtitle">既是 45 家门店的用户运营负责人，也是 5 个公开项目的作者 —— 大模型应用交付：模型网关 · Prompt 工程 · RAG 检索 · Agent 编排 · 桌面端落地</p>
+            <p class="subtitle">既是 45 家门店的用户运营负责人，也是 5 个公开项目的作者 —— 大模型应用交付：模型网关 · Prompt 工程 · LLM×RAG 知识库调取 · Agent 编排 · 桌面端落地</p>
             <p class="desc">
                 45 家烘焙行业门店用户运营负责人<br>
                 用 AI 重构运营生产线，会员复购率提升 <strong>10%~15%</strong>
@@ -171,7 +171,7 @@
             <h2>精选项目</h2>
             <p>
                 在 45 家门店做运营时发现重复工作太多 ——<br>
-                围绕「45 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → RAG 知识库 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
+                围绕「45 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → LLM×RAG 知识库 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
                 每个产出解决一个具体故障，合起来把「AI 能干嘛」变成「AI 真的在业务里每天跑」。
             </p>
         </div>
@@ -247,21 +247,21 @@
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">RAG 知识库</span>
+                <span class="project-tag">LLM × RAG 知识库</span>
                 <h3>llm-wiki</h3>
-                <span class="project-badge">RAG 知识库 · 概念聚合 · 增量编译</span>
+                <span class="project-badge">LLM×RAG 知识库调取 · 概念聚合 · 增量编译</span>
             </div>
-            <p class="project-desc">raw → wiki → RAG 双轨知识编译层：把 1,600+ 篇原始资料自动编译成可导航的 wiki 知识层（实体 / 概念 / 对比 / 综合），替代早期 kb-cli 成为 RAG 知识库主实现。</p>
+            <p class="project-desc">LLM × RAG 结合的知识库调取系统：LLM 把 1,600+ 篇原始资料编译成可导航的 wiki 知识层（实体 / 概念 / 对比 / 综合），RAG 精确召回，编译产物供 LLM 问答与人工检索共用，替代早期 kb-cli 成为知识库主实现。</p>
             <ul class="project-features">
-                <li>概念聚合：同一概念多源合并一页，来源逐条列源（80+ 源）</li>
+                <li>LLM 参与知识组织：Schema 契约注入，同一概念多源合并一页（80+ 源）</li>
                 <li>双向链接：entity ↔ concept ↔ synthesis 层级互链</li>
                 <li>增量局部重编：--local-rebuild 实测仅重编 4 页</li>
                 <li>lint 巡检：锚定 / 死链 / 孤立页 / 冲突 / 死循环，锚定 100%</li>
             </ul>
             <div class="project-highlight">
                 <strong>为什么改造：</strong>原始资料不可导航，RAG 泛词塌缩。<br>
-                <strong>场景价值：</strong>RAG 知识库完整实现（编译 + 检索），替代早期 kb-cli。<br>
-                <strong>单独用：</strong>上千篇原始资料的团队可直接复用这套 RAG 编译方法论。
+                <strong>场景价值：</strong>LLM×RAG 知识库调取层（编译 + 召回），LLM 与人工共用。<br>
+                <strong>单独用：</strong>上千篇原始资料的团队可复用这套 LLM+RAG 知识库方法论。
             </div>
             <a href="https://github.com/Babymrbbbb/llm-wiki" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
