@@ -45,19 +45,6 @@ git push -u origin HEAD:gh-pages
 
 ---
 
-## 简历里怎么写
-
-在简历的"个人项目"或"作品集"部分加一行：
-
-```
-个人作品集：https://Babymrbbbb.github.io
-GitHub：https://github.com/Babymrbbbb
-```
-
-
-
----
-
 ## 自定义域名（可选）
 
 如果你有自己的域名（如 `Babymrbbbb.com`），可以在 GitHub Pages 设置里绑定：
