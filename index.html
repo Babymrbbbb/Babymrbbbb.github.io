@@ -171,8 +171,8 @@
             <h2>精选项目</h2>
             <p>
                 在 45 家门店做运营时发现重复工作太多 ——<br>
-                先搭<strong>网关</strong>解决模型接入，再沉淀<strong>提示词方法论</strong>，做<strong>知识库</strong>管理文档，最后把整套 AI 能力<strong>组织化</strong>落地。<br>
-                四个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识 → 组织 AI 落地</strong>
+                先搭<strong>网关</strong>解决模型接入，再沉淀<strong>提示词方法论</strong>，做<strong>知识库</strong>管理文档，用 <strong>LLM Wiki</strong> 把原始资料编译成可导航知识层，最后把整套 AI 能力<strong>组织化</strong>落地。<br>
+                五个开源仓库，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识 → 编译知识 → 组织 AI 落地</strong>
             </p>
         </div>
 
@@ -235,6 +235,27 @@
                 <strong>核心价值：</strong>能设计信息架构 · 能处理跨平台工程细节 · 从 0 到 1 构建工具链
             </div>
             <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link" target="_blank">
+                查看仓库 <span>→</span>
+            </a>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-tag">编译知识</span>
+                <h3>llm-wiki</h3>
+                <span class="project-badge">RAG 知识库 · 概念聚合 · 增量编译</span>
+            </div>
+            <p class="project-desc">raw → wiki → RAG 双轨知识编译层：把 1,600+ 篇原始资料自动编译成可导航的 wiki 知识层（实体 / 概念 / 对比 / 综合）。</p>
+            <ul class="project-features">
+                <li>概念聚合：同一概念多源合并一页，来源逐条列源（80+ 源）</li>
+                <li>双向链接：entity ↔ concept ↔ synthesis 层级互链</li>
+                <li>增量局部重编：--local-rebuild 实测仅重编 4 页</li>
+                <li>lint 巡检：锚定 / 死链 / 孤立页 / 冲突 / 死循环，锚定 100%</li>
+            </ul>
+            <div class="project-highlight">
+                <strong>核心价值：</strong>RAG 直接喂原始文档会泛词塌缩，加一层可导航编译层，人工与 RAG 共用同一产物
+            </div>
+            <a href="https://github.com/Babymrbbbb/llm-wiki" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
             </a>
         </div>
@@ -318,6 +339,54 @@
                         <div class="flow-node output">
                             <span class="node-icon">🖥️</span>
                             <span>黑金主题桌面端<br>4 张结论卡 · AI 对话</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI 调度运维工作台 -->
+        <div class="product-grid">
+            <div class="product-info">
+                <div class="project-header">
+                    <span class="project-tag">桌面端 · 自制工作台</span>
+                    <h3>AI 调度运维工作台</h3>
+                    <span class="project-badge">Electron 桌面端 · 本地运维控制台</span>
+                </div>
+                <p class="project-desc">一套本地 AI 调度运维控制台（Electron + Node 原生，打包为 Windows 桌面 exe）：聚合 AI 调度中枢的系统健康、自动化任务清单、模型池配额、任务队列、41+ AI 角色团队树、知识库索引与求职进度，一屏掌握系统运行状态。</p>
+                <ul class="project-features">
+                    <li>配置化服务一键启停：Daemon 调度守护 / 模型网关 / SwanHub 一键启动</li>
+                    <li>服务状态交叉验证：本地运行时记录 + 守护进程事件</li>
+                    <li>单实例锁 + 空闲端口自动探测 + 中文应用菜单 + 异常兜底不崩溃</li>
+                    <li>零经营数据 / 零企微 / 零外部 API，仅读本地 JSON/MD，目录穿越防护</li>
+                </ul>
+                <div class="project-highlight">
+                    <strong>核心价值：</strong>把「本地多服务难管理」做成双击即用的桌面工作台
+                </div>
+            </div>
+
+            <div class="product-diagram">
+                <div class="diagram-box">
+                    <div class="diagram-title">工作台架构</div>
+                    <div class="diagram-flow">
+                        <div class="flow-node source">
+                            <span class="node-icon">🖥️</span>
+                            <span>Electron 桌面端<br>自带 Chromium 窗口</span>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node process">
+                            <span class="node-icon">⚙️</span>
+                            <span>进程内嵌 Node server<br>原生 http/fs，零依赖</span>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node ai">
+                            <span class="node-icon">📄</span>
+                            <span>仅读本地 JSON / MD<br>health · automation · queue · roles · kb</span>
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-node output">
+                            <span class="node-icon">🎛️</span>
+                            <span>服务一键启停<br>Daemon / 网关 / SwanHub</span>
                         </div>
                     </div>
                 </div>
