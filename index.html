@@ -171,8 +171,8 @@
             <h2>精选项目</h2>
             <p>
                 在 45 家门店做运营时发现重复工作太多 ——<br>
-                先搭<strong>网关</strong>解决模型接入，再沉淀<strong>提示词方法论</strong>，做<strong>知识库</strong>管理文档，用 <strong>LLM Wiki</strong> 把原始资料编译成可导航知识层，最后把整套 AI 能力<strong>组织化</strong>落地。<br>
-                五个公开项目，一条完整链路：<strong>接入 AI → 用好 AI → 管理知识 → 编译知识 → 组织 AI 落地</strong>
+                这不是五个独立项目，而是<b>同一套 AI 落地体系</b>的五个环节：<strong>接入 AI → 用好 AI → 管理/编译知识 → 组织 AI 落地</strong>。<br>
+                每个环节解决一个真实故障，合起来把「AI 能干嘛」变成「AI 真的在业务里每天跑」。
             </p>
         </div>
 
@@ -190,7 +190,9 @@
                 <li>16 项离线自测全通过</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>能独立设计并实现基础设施 · 有配额/限流/冷却等真实生产问题意识
+                <strong>为什么改造：</strong>多账号配额不够、429 频发，AI 调用不稳定。<br>
+                <strong>体系价值：</strong>给上层 prompt-craft / llm-wiki / ai-native-team 提供稳定模型底座。<br>
+                <strong>单独用：</strong>任何需要多 key 稳定调用的团队可直接用（16 项自测）。
             </div>
             <a href="https://github.com/Babymrbbbb/sensenova-gateway" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -211,7 +213,9 @@
                 <li>所有内容均经过实测验证，不是理论推导</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>有 AI 提示词工程的系统化方法论 · 有跨模态的完整知识体系
+                <strong>为什么改造：</strong>AI 出图/出视频总是一眼假，内容生产碰运气。<br>
+                <strong>体系价值：</strong>让 AI 内容产出一遍过，案例沉淀进 kb-cli / llm-wiki。<br>
+                <strong>单独用：</strong>任何做 AI 图像/视频的团队可直接用这套方法论。
             </div>
             <a href="https://github.com/Babymrbbbb/prompt-craft" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -232,7 +236,9 @@
                 <li>UTF-8 强制输出 + 双写，Windows 不炸</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>能设计信息架构 · 能处理跨平台工程细节 · 从 0 到 1 构建工具链
+                <strong>为什么改造：</strong>文档越攒越多找不到，知识是死数据。<br>
+                <strong>体系价值：</strong>作为 llm-wiki 编译层的检索底座，让知识与 AI 共用。<br>
+                <strong>单独用：</strong>任何「文档多找不到」的团队可直接用（零依赖开箱即用）。
             </div>
             <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -253,7 +259,9 @@
                 <li>lint 巡检：锚定 / 死链 / 孤立页 / 冲突 / 死循环，锚定 100%</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>RAG 直接喂原始文档会泛词塌缩，加一层可导航编译层，人工与 RAG 共用同一产物
+                <strong>为什么改造：</strong>原始资料不可导航，RAG 泛词塌缩。<br>
+                <strong>体系价值：</strong>在 kb-cli 之上加编译层，人工与 RAG 共用可导航产物。<br>
+                <strong>单独用：</strong>上千篇原始资料的团队可复用这套编译方法论。
             </div>
             <a href="https://github.com/Babymrbbbb/llm-wiki" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -274,7 +282,9 @@
                 <li>四闸校验：填写/术语/驳回/反勾结，防 AI 空壳件</li>
             </ul>
             <div class="project-highlight">
-                <strong>核心价值：</strong>AI 落地真正的瓶颈不是模型不够强，而是组织怎么消化 AI
+                <strong>为什么改造：</strong>AI 能力很多但组织消化不了，工具互相覆盖。<br>
+                <strong>体系价值：</strong>把 gateway / prompt-craft / 知识库编排成生产线。<br>
+                <strong>单独用：</strong>想让多个 AI Agent 协作的团队可直接用这套组织机制。
             </div>
             <a href="https://github.com/Babymrbbbb/ai-native-team" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -399,7 +409,7 @@
         <div class="section-header">
             <span class="section-tag">LIVE DEMO</span>
             <h2>实际运行效果</h2>
-            <p>终端截图——不是 PPT 演示，是真在跑的</p>
+            <p>终端与桌面端真实截图——不是 PPT 演示，是真在跑的</p>
         </div>
 
         <div class="demo-grid">
@@ -415,6 +425,13 @@
                 <div class="demo-caption">
                     <span class="demo-label">kb-cli</span>
                     <span class="demo-desc">关键词 AND 检索，命中 4 篇，按出现次数排序</span>
+                </div>
+            </div>
+            <div class="demo-shot">
+                <img src="assets/cockpit-home.png" alt="AI 经营驾驶舱 真实桌面端截图">
+                <div class="demo-caption">
+                    <span class="demo-label">AI 经营驾驶舱</span>
+                    <span class="demo-desc">45 家门店每日打开的生产工具：经营数据 → AI 结论卡</span>
                 </div>
             </div>
         </div>
