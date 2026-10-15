@@ -171,7 +171,7 @@
             <h2>精选项目</h2>
             <p>
                 在 45 家门店做运营时发现重复工作太多 ——<br>
-                围绕「45 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → 管理/编译知识 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
+                围绕「45 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → RAG 知识库 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
                 每个产出解决一个具体故障，合起来把「AI 能干嘛」变成「AI 真的在业务里每天跑」。
             </p>
         </div>
@@ -214,7 +214,7 @@
             </ul>
             <div class="project-highlight">
                 <strong>为什么改造：</strong>AI 出图/出视频总是一眼假，内容生产碰运气。<br>
-                <strong>场景价值：</strong>让 AI 内容产出一遍过，案例沉淀进 kb-cli / llm-wiki。<br>
+                <strong>场景价值：</strong>让 AI 内容产出一遍过，案例沉淀进 llm-wiki。<br>
                 <strong>单独用：</strong>任何做 AI 图像/视频的团队可直接用这套方法论。
             </div>
             <a href="https://github.com/Babymrbbbb/prompt-craft" class="project-link" target="_blank">
@@ -224,11 +224,11 @@
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">管理知识</span>
+                <span class="project-tag">早期实现</span>
                 <h3>kb-cli</h3>
-                <span class="project-badge">私有知识库 · RAG 检索 · 158 行零依赖</span>
+                <span class="project-badge">早期知识库检索 · 158 行零依赖</span>
             </div>
-            <p class="project-desc">零依赖的本地知识库检索工具，把散落的 markdown 文档重组为「多子库 × 多层」结构。</p>
+            <p class="project-desc">零依赖的本地知识库检索工具雏形，把散落的 markdown 文档重组为「多子库 × 多层」结构——后被 llm-wiki 取代。</p>
             <ul class="project-features">
                 <li>三层架构：L1 速查 / L2 导航 / L3 原始</li>
                 <li>多子库拆分 + 单文件 158 行检索器</li>
@@ -237,8 +237,8 @@
             </ul>
             <div class="project-highlight">
                 <strong>为什么改造：</strong>文档越攒越多找不到，知识是死数据。<br>
-                <strong>场景价值：</strong>作为 llm-wiki 编译层的检索底座，让知识与 AI 共用。<br>
-                <strong>单独用：</strong>任何「文档多找不到」的团队可直接用（零依赖开箱即用）。
+                <strong>定位：</strong>早期最小实现，验证「分层 + 召回优先」思路后被 llm-wiki 取代。<br>
+                <strong>单独用：</strong>轻量文档检索场景仍可直接用（零依赖开箱即用）。
             </div>
             <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
@@ -247,11 +247,11 @@
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">编译知识</span>
+                <span class="project-tag">RAG 知识库</span>
                 <h3>llm-wiki</h3>
                 <span class="project-badge">RAG 知识库 · 概念聚合 · 增量编译</span>
             </div>
-            <p class="project-desc">raw → wiki → RAG 双轨知识编译层：把 1,600+ 篇原始资料自动编译成可导航的 wiki 知识层（实体 / 概念 / 对比 / 综合）。</p>
+            <p class="project-desc">raw → wiki → RAG 双轨知识编译层：把 1,600+ 篇原始资料自动编译成可导航的 wiki 知识层（实体 / 概念 / 对比 / 综合），替代早期 kb-cli 成为 RAG 知识库主实现。</p>
             <ul class="project-features">
                 <li>概念聚合：同一概念多源合并一页，来源逐条列源（80+ 源）</li>
                 <li>双向链接：entity ↔ concept ↔ synthesis 层级互链</li>
@@ -260,8 +260,8 @@
             </ul>
             <div class="project-highlight">
                 <strong>为什么改造：</strong>原始资料不可导航，RAG 泛词塌缩。<br>
-                <strong>场景价值：</strong>在 kb-cli 之上加编译层，人工与 RAG 共用可导航产物。<br>
-                <strong>单独用：</strong>上千篇原始资料的团队可复用这套编译方法论。
+                <strong>场景价值：</strong>RAG 知识库完整实现（编译 + 检索），替代早期 kb-cli。<br>
+                <strong>单独用：</strong>上千篇原始资料的团队可直接复用这套 RAG 编译方法论。
             </div>
             <a href="https://github.com/Babymrbbbb/llm-wiki" class="project-link" target="_blank">
                 查看仓库 <span>→</span>
