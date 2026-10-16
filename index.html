@@ -39,9 +39,9 @@
             <h1>
                 <span class="hero-line">AI × Operations</span>
             </h1>
-            <p class="subtitle">既是 45 家门店的用户运营负责人，也是 5 个公开项目的作者 —— 大模型应用交付：模型网关 · Prompt 工程 · LLM×RAG 知识库调取 · Agent 编排 · 桌面端落地</p>
+            <p class="subtitle">既是 45+ 家门店的用户运营负责人，也是 5 个公开项目的作者 —— 大模型应用交付：模型网关 · Prompt 工程 · LLM×RAG 知识库调取 · Agent 编排 · 桌面端落地</p>
             <p class="desc">
-                45 家烘焙行业门店用户运营负责人<br>
+                45+ 家烘焙行业门店用户运营负责人<br>
                 用 AI 重构运营生产线，会员复购率提升 <strong>10%~15%</strong>
             </p>
             <div class="cta">
@@ -56,12 +56,12 @@
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-value">45</span>
+                    <span class="stat-value">45+</span>
                     <span class="stat-label">门店</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value">12.1万</span>
-                    <span class="stat-label">会员客户</span>
+                    <span class="stat-value">20万+</span>
+                    <span class="stat-label">终端客户</span>
                 </div>
                 <div class="stat">
                     <span class="stat-value">5</span>
@@ -170,8 +170,8 @@
             <span class="section-tag">PROJECTS</span>
             <h2>精选项目</h2>
             <p>
-                在 45 家门店做运营时发现重复工作太多 ——<br>
-                围绕「45 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → LLM×RAG 知识库 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
+                在 45+ 家门店做运营时发现重复工作太多 ——<br>
+                围绕「45+ 家门店 AI 落地」这一场景，按真实故障逐步改造成 5 个公开项目：<strong>接入 AI → 用好 AI → LLM×RAG 知识库 → 组织 AI 落地</strong>，另有 2 个桌面软件。<br>
                 每个产出解决一个具体故障，合起来把「AI 能干嘛」变成「AI 真的在业务里每天跑」。
             </p>
         </div>
@@ -466,7 +466,7 @@
             </div>
         </div>
         <p class="philosophy-why">
-            <strong>为什么坚持这四个原则？</strong>因为这套工具的最终用户不是工程师——一线店长甚至没有电脑。软件只跑在总部自己的机器上，店长接触不到程序，只收到加工好的结果（作战卡、结论、海报），在手机里查看执行。所以工具必须零依赖、一行命令就能跑：一旦出问题，我能随手在任何一台机器上重跑、自测、修复，而不是依赖一个开发环境。
+            <strong>为什么坚持这四个原则？</strong>最终用户是一线店长，他们甚至没有电脑——软件只跑在总部，店长只收到加工好的结果（作战卡、结论、海报），在手机里查看执行。所以工具必须零依赖、一行命令能跑，出问题能随手在任何机器上重跑修复。
         </p>
     </section>
 
@@ -480,18 +480,18 @@
         <div class="article-card">
             <div class="article-header">
                 <span class="article-tag">技术选型</span>
-                <h3>我为什么用关键词 + IDF 而不是向量检索</h3>
-                <p class="article-meta">kb-cli 设计决策 · 8 分钟阅读</p>
+                <h3>为什么知识库调取要用 LLM × RAG，而不是单用其一</h3>
+                <p class="article-meta">llm-wiki 设计决策 · 8 分钟阅读</p>
             </div>
             <div class="article-excerpt">
                 <p>
-                    在 kb-cli 里我用了<strong>关键词 AND 匹配 + IDF 加权</strong>，没上向量检索——这是当前场景下的刻意选择，不是技术债。
+                    单用 LLM 会<strong>幻觉</strong>——模型没有你的业务事实，只能靠训练数据猜；单用 RAG 只有<strong>文档列表</strong>，不是答案。所以我做的是 <strong>LLM × RAG 知识库调取系统</strong>：LLM 把 1,600+ 篇原始资料编译成可导航的 wiki 知识层，RAG 排序器精确召回，命中页作为上下文喂给 LLM 生成有依据的答案。
                 </p>
                 <p>
-                    最早排序用绝对词频，结果 <strong>59.8% 的文档被"运营""系统"这类泛词压到同一个主题下</strong>；加 IDF 给到处出现的泛词降权后，这种塌缩就消失了。
+                    检索排序不是查出来就行——生产版已迭代到 <strong>v2.4</strong>：词频饱和（防长文档刷分）、业务子库加权（自家一手资料优先）、倒排索引 + 2-gram 候选定位。排序质量决定 LLM 拿到的上下文对不对，也就是答案质量的上限。
                 </p>
                 <p>
-                    垂直语料用词稳定、查询都是短的精确查询、还要零依赖可交付——这三条让我暂时不上向量；等语料过万、或出现"用户问法和文档用词对不上"的语义鸿沟时，再上本地 embedding 做混合检索。
+                    什么时候上向量？当语料过万、出现「问法和文档用词对不上」的语义鸿沟时，再上本地 embedding 做混合检索——这是按场景选型，不是技术债。
                 </p>
             </div>
             <a href="article.html" class="article-link" target="_blank">

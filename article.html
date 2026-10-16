@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我为什么用关键词 + IDF，而不是一上来就向量检索 · Babymrbbbb</title>
+    <title>为什么知识库调取要用 LLM × RAG，而不是单用其一 · Babymrbbbb</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>◆</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -38,56 +38,60 @@
     </header>
 
     <article class="article-page">
-        <h1>我为什么用关键词 + IDF，而不是一上来就向量检索</h1>
-        <p class="lead-meta">kb-cli 设计决策 · 约 8 分钟阅读</p>
+        <h1>为什么知识库调取要用 LLM × RAG，而不是单用其一</h1>
+        <p class="lead-meta">llm-wiki 设计决策 · 约 8 分钟阅读</p>
 
-        <p>在 kb-cli 这个项目里，我用的是<strong>关键词 AND 匹配 + IDF 加权打分</strong>，没有上向量检索。这不是没听过向量、也不是技术债，而是针对我这个具体场景做的选择。下面把踩过的坑、为什么这么选、什么时候会改，一次讲清楚。</p>
+        <p>做知识库调取时，最容易踩的两个极端：<strong>单用 LLM</strong> 让它凭训练数据回答，结果就是幻觉——模型根本没有你的业务事实，只能靠猜；<strong>单用 RAG</strong> 只给你一堆文档列表，那不是答案，是原材料。我做的是一套 <strong>LLM × RAG 知识库调取系统</strong>：LLM 负责组织知识，RAG 负责精确召回，命中页作为上下文喂给 LLM，生成有依据、可溯源的答案。</p>
 
-        <h2>先讲我真实踩过的坑：59.8%</h2>
-        <p>最早检索器的排序用的是<strong>绝对词频</strong>——一个词在某篇文档里出现几次，就给这篇加几分。</p>
-        <p>拿它跑 2,000 多篇同领域语料，问题非常明显：<strong>59.8% 的文档被"运营""管理""系统"这类到处都出现的泛词，压到了同一个主题下面</strong>。而真正有区分度的词——"私域""复购""会员码"——反而排不上来。</p>
-        <p>根因是：绝对词频只奖励"出现得多"，不惩罚"到处都出现"。泛词在每一篇里都出现，于是每一篇都靠它拿高分，文档全塌缩到一起。</p>
-        <p>修正办法是加 <strong>IDF（逆文档频率）</strong>：一个词越普遍，它的权重越低；越罕见、越能代表主题，权重越高。改成 TF × IDF 之后，文档被均匀地分散回各自的主题，那个 59.8% 的塌缩就消失了。</p>
+        <h2>先讲我真实踩过的坑：泛词塌缩</h2>
+        <p>最早检索器的排序用的是<strong>绝对词频</strong>——一个词在某篇文档里出现几次，就给这篇加几分。拿它跑 2,000 多篇同领域语料，问题非常明显：<strong>59.8% 的文档被"运营""管理""系统"这类到处都出现的泛词，压到了同一个主题下面</strong>，真正有区分度的词——"私域""复购""会员码"——反而排不上来。</p>
+        <p>修正办法是加 <strong>IDF（逆文档频率）</strong>：一个词越普遍，权重越低；越罕见、越能代表主题，权重越高。改成 TF × IDF 之后，文档被均匀地分散回各自的主题，泛词塌缩就消失了。</p>
 
-        <h2>那为什么没顺势上向量检索？</h2>
-        <p>向量检索我评估过，但这个场景下有三条理由让我暂时不用：</p>
+        <h2>为什么 LLM 也要参与？因为「可导航」和「可调取」是两回事</h2>
+        <p>原始资料保真但不可导航——1,600 多篇散落的 markdown，人工检索靠文件名猜，RAG 召回靠关键词碰运气，同一主题分散在几十篇里。只靠检索算法解决不了「知识组织」问题。</p>
+        <p>我的做法是加一层 <strong>wiki 编译层</strong>：LLM 把原始资料离线编译成四类可导航页面（实体 / 概念 / 对比 / 综合），同一概念多源聚合为一页、页面间双向链接、`wiki_schema.md` 作为编译契约注入每次 LLM 调用保证行为一致。编译产物既是人工检索的知识地图，也是 RAG 的召回对象——这就是 <strong>raw → wiki → RAG 双轨架构</strong>。</p>
+
+        <h2>检索排序不是查出来就行：生产版已迭代到 v2.4</h2>
+        <p>排序质量直接决定 LLM 拿到的上下文对不对，也就是答案质量的上限。生产版检索器经过四轮迭代：</p>
         <ul>
-            <li><strong>语料垂直、用词稳定。</strong>2,000 多篇都是同领域的中文资料，术语很固定（私域、复购、件单、会员码），关键词召回本来就够用，不存在"用户换个说法就找不到"的问题。</li>
-            <li><strong>查询都是短的精确查询。</strong>"私域分层""复购率怎么算"，用户心里是有关键词的，要的是精确命中，而不是一堆"语义相近"的东西。</li>
-            <li><strong>要零依赖、可交付。</strong>kb-cli 的原则是 clone 下来一行命令就能跑；向量检索要带 embedding 模型和向量索引，正好违背这条。</li>
+            <li><strong>v2.1 准确性加权</strong>：标题命中 +60、wiki 层 +40、管理文件 −120，日志待办不再刷屏。</li>
+            <li><strong>v2.2 倒排索引 + 2-gram 候选定位</strong>：全库扫描变索引定位，长词短语能连续命中。</li>
+            <li><strong>v2.3 关联页面推荐</strong>：命中 wiki 页后聚合双向链接，检索结果不孤立。</li>
+            <li><strong>v2.4 词频饱和 + 业务子库加权</strong>：单篇词频贡献封顶（防长文档刷分），自家一手资料优先于二手公开资料。</li>
         </ul>
-        <p>还有一个额外好处是<strong>可解释</strong>：业务方看得懂"这篇为什么排前面"——因为命中了哪个罕见词；向量相似度给的是一个数字，业务方没法理解，也没法验证。</p>
 
-        <h2>核心代码（零依赖，只用标准库）</h2>
-        <p>检索分两步：先做关键词 AND 过滤，再用 TF-IDF 打分排序。math 是 Python 标准库，不引入任何第三方依赖。</p>
-        <pre>import math
+        <h2>核心代码思路（零依赖，词频饱和）</h2>
+        <p>词频饱和是 v2.4 最关键的改动：一篇 100 页的长文档重复出现「会员」100 次，一篇 1 页的精准文档出现 3 次——按原始词频排序，长文档永远碾压短文档。这不是「相关」，这是「篇幅优势」。解法是单篇词频贡献封顶：</p>
+        <pre>FREQ_CAP = 10  # 每个查询词在单篇文档的词频贡献封顶
 
-def search(query_terms, docs, df, total):
-    """docs: [{"id":..., "tokens":[...]}]；df: {词: 含该词的文档数}；total: 文档总数"""
-    hits = []
-    for doc in docs:
-        # 1) 关键词 AND：所有查询词都命中，才入选
-        if not all(t in doc["tokens"] for t in query_terms):
-            continue
-        # 2) TF-IDF 加权打分
-        score = 0.0
-        for t in query_terms:
-            tf = doc["tokens"].count(t)
-            idf = math.log((total + 1) / (df.get(t, 0) + 1)) + 1
-            score += tf * idf
-        hits.append((score, doc["id"]))
-    return sorted(hits, reverse=True)</pre>
+def freq_score(count):
+    """词频饱和：超过 FREQ_CAP 后不再线性增加"""
+    return min(count, FREQ_CAP)
+
+def score_doc(doc, terms):
+    score = 0
+    for t in terms:
+        score += freq_score(doc.tokens.count(t))  # 词频饱和
+    if any(t in doc.title for t in terms):
+        score += 60          # 标题命中：强相关信号
+    if doc.is_wiki:
+        score += 40          # wiki 编译层：LLM 提炼的知识精华
+    if doc.is_business:
+        score += 25          # 业务子库：自家一手资料优先
+    if doc.is_admin:
+        score -= 120         # 管理文件：日志/待办/索引降权
+    return score</pre>
 
         <h2>什么时候我会上向量？</h2>
-        <p>不是向量不好，是场景没到。出现下面任一情况，我就会引入向量：</p>
+        <p>不是向量不好，是场景没到。出现下面任一情况，我就会引入向量做混合检索：</p>
         <ul>
             <li>语料规模过万，关键词覆盖不过来；</li>
             <li>出现"用户问法"和"文档用词"对不上的语义鸿沟；</li>
             <li>需要长查询、跨语言、模糊/口语化匹配。</li>
         </ul>
-        <p>真到那一步，我的做法是<strong>本地 embedding（bge-m3）+ sqlite-vec</strong> 就够，不需要一上来就 Milvus；再让向量召回和关键词召回做 RRF 融合，变成混合检索。</p>
+        <p>真到那一步，我的做法是<strong>本地 embedding + 向量索引</strong> 就够，不需要一上来就上重型向量库；再让向量召回和关键词召回做 RRF 融合，变成混合检索。</p>
 
-        <blockquote>没有最好的方案，只有对当前场景最合适、而且自己讲得清原理的方案。</blockquote>
+        <blockquote>单用 LLM 会幻觉，单用 RAG 只有文档列表。LLM × RAG 结合，就是让模型「先查资料再回答」——这才是知识库调取的完整闭环。</blockquote>
 
         <a class="back" href="index.html">← 返回首页</a>
     </article>
