@@ -290,6 +290,29 @@
                 查看仓库 <span>→</span>
             </a>
         </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <span class="project-tag">工业框架复刻</span>
+                <h3>langgraph-agent-demo</h3>
+                <span class="project-badge">LangGraph 状态机 · 条件边护栏 · 零依赖可跑</span>
+            </div>
+            <p class="project-desc">用 LangGraph 复刻「按部就班不偏离」智能体编排：检索→判断→推理→调工具→回收记忆，条件边做护栏。</p>
+            <ul class="project-features">
+                <li>有状态状态机：节点顺序固定，检索为空→追问不乱编</li>
+                <li>条件边护栏：judge 决定走推理还是追问，reason 决定调不调工具</li>
+                <li>共享状态黑板：memory + trace 全局累加，证明「不偏离」</li>
+                <li>离线 mock 开箱即跑，--real 接本地模型网关</li>
+            </ul>
+            <div class="project-highlight">
+                <strong>为什么做：</strong>Chain 是直线、跑完即焚，无法在中间做「要不要调工具 / 检索不到怎么办」的分支判断。<br>
+                <strong>场景价值：</strong>ai-native-team 编排思想的工业框架等价实现，两者架构同构。<br>
+                <strong>单独用：</strong>需要可控多步 Agent 编排的团队，可参考这套护栏设计。
+            </div>
+            <a href="https://github.com/Babymrbbbb/langgraph-agent-demo" class="project-link" target="_blank">
+                查看仓库 <span>→</span>
+            </a>
+        </div>
     </section>
 
     <!-- Delivered Software Section -->
