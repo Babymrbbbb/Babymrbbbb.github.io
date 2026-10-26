@@ -465,7 +465,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
       <h3>知识 · 让答案带出处</h3>
       <div class="fault"><b>遇到的故障</b>文档越攒越多却找不到，知识是死数据；直接问大模型会编造，因为它不知道我的业务事实。</div>
       <p>搭了一套知识库系统。模型负责把上千篇原始资料编译成可导航的聚合页，检索负责精确召回，命中页作为上下文再交给模型生成带引用的答案。细节见下一节。</p>
-      <div class="result-inline">1,600 余篇原始资料编译成 1,300 余个可导航页面，问答可追溯来源</div>
+      <div class="result-inline">1,600 余篇原始资料编译成 1,750 余个可导航页面，问答可追溯来源</div>
     </div>
   </div>
 
@@ -500,7 +500,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
       <div class="kb-step">
         <div class="kb-step-n">LAYER 02</div>
         <h5>聚合编译层</h5>
-        <p>模型把多源资料按「实体 / 概念」重新编译成聚合页，1,300+ 页，每页带摘要、关键事实、来源列表</p>
+        <p>模型把多源资料按「实体 / 概念」重新编译成聚合页，1,750+ 页，每页带摘要、关键事实、来源列表</p>
       </div>
       <div class="kb-step">
         <div class="kb-step-n">LAYER 03</div>
@@ -885,6 +885,56 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
       </div>
     </div>
     <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.8;margin-top:18px">底层配 10 个能力池、16 个注册模型。池的意义是隔离：战略池的模型不会因为话术池的批量任务把额度耗光。这条规则我写死在系统里——<strong style="color:var(--t1)">自动化任务永不侵占主力额度</strong>。</p>
+  </div>
+
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:10px">模型层：16 个模型，按能力分 10 个池</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;max-width:760px;margin-bottom:8px">我没有把全部任务压在一个模型上。原因很实际：<strong style="color:var(--t1)">不同任务对模型的要求完全不同</strong>——拆战略要推理深度，读长文要上下文长度，看图要视觉能力，批量话术要吞吐和成本。用一个模型干所有事，要么贵得离谱，要么关键任务质量不够。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;max-width:760px">所以我按能力把模型分成 10 个池，每个池有主模型 + 降级链 + 并发上限。任务进来先判类型，再路由到对应池。</p>
+
+    <table class="dtable" style="margin-top:28px">
+      <thead><tr><th>能力池</th><th>主模型定位</th><th>降级链</th><th>并发</th></tr></thead>
+      <tbody>
+        <tr><td>战略池</td><td>战略级推理，带思考链</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>长文池</td><td>百万级长上下文</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>看图池</td><td>视觉理解，双通道轮转</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>代码池</td><td>代码生成与重构</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>话术池</td><td>轻量高吞吐，性价比优先</td><td>2 级降级</td><td>4</td></tr>
+        <tr><td>主管池</td><td>日常管理与任务拆解</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>逻辑池</td><td>结构化推理</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>轻量池</td><td>低成本批处理</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>边缘池（三级）</td><td>极低延迟，秒级响应</td><td>单模型</td><td>按层</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:20px"><strong style="color:var(--t1)">降级链怎么用：</strong>主模型遇到限流、超时、5xx 时，自动按降级序切到下一个，任务不中断。降级事件全部记入日志，可以查「今天哪个池降了几次、降到谁」。如果一个池频繁降级，说明主模型选型需要调整——这是我看模型健康度的主要信号。</p>
+
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:14px"><strong style="color:var(--t1)">并发上限为什么这么设：</strong>战略池和长文池设 2，因为这两类任务单次耗时长、单次成本高，并发太高会互相挤占；话术池设 4，因为话术任务短平快，可以并行。并发上限不是拍脑袋，是按「单次任务耗时 × 单位时间需求量」倒推的。</p>
+
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:40px 0 14px">技能沉淀：28 个自建技能</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">模型能力是通用的，但我的业务是具体的。所以我做了一层<strong style="color:var(--t1)">技能封装</strong>——把反复要做的专业动作写成可复用的技能包，AI 调用技能而不是从零推理。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">目前自建 28 个，覆盖几类：</p>
+
+    <table class="dtable" style="margin-top:20px">
+      <thead><tr><th>类别</th><th>技能解决什么</th><th>举例</th></tr></thead>
+      <tbody>
+        <tr><td><strong>数据与分析</strong></td><td>门店异常判定、数据源真伪核验、经营深挖</td><td>异常检查、增量真伪判定、单店深挖</td></tr>
+        <tr><td><strong>内容生产</strong></td><td>出图出片、排版设计、标题生成</td><td>媒体工作流、设计评审、爆款标题</td></tr>
+        <tr><td><strong>竞品与情报</strong></td><td>竞品日报、复刻监控、深度研究</td><td>竞品日更管道、复刻监测、竞对研究</td></tr>
+        <tr><td><strong>知识治理</strong></td><td>知识库编译、治理、检索</td><td>KB 治理、KB 检索、方法卡片沉淀</td></tr>
+        <tr><td><strong>协作与调度</strong></td><td>任务分派、失败恢复、记忆守门</td><td>调度斜杠命令、失败恢复、记忆守门员</td></tr>
+        <tr><td><strong>工程与交付</strong></td><td>先蓝图后开工、网站构建、桌面看板</td><td>蓝图先行、Web 构建、Electron 看板</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:20px"><strong style="color:var(--t1)">技能和提示词的区别：</strong>提示词是一次性的，写在对话框里，用完就散。技能是可复用的，带完整的判断规则、执行步骤、失败处理，任何角色调用都得到一致结果。这也是为什么我的产出能稳定——不是每次重新教 AI，是让它调用已经验证过的技能。</p>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:36px 0 14px">为什么模型要「可换」而不是「锁定」</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">这一点在实践里救过我很多次。模型会下架、会涨价、会突然限流、能力也会被新的超过。如果业务代码直接写死某个模型，换一次就要改一遍代码。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">我的做法是<strong style="color:var(--t1)">模型注册表与业务代码完全解耦</strong>：模型清单、池归属、降级序都在配置文件里，业务侧只声明「我要一个战略级推理」或「我要一个视觉模型」，不关心背后是谁。换模型只改配置，不改代码。变更后跑一遍路由测试和配额测试就能上线。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">这套解耦的代价是前期多写一层抽象，收益是<strong style="color:var(--gold-l)">半年内换过多次模型，业务侧一次没改</strong>。</p>
   </div>
 
   <div class="ag-wrap rv">
