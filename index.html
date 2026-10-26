@@ -260,6 +260,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
   <div class="brand"><i>◆</i> BABYMRBBBB</div>
   <div class="navlinks">
     <a href="#problem">背景</a>
+    <a href="#approach">起点</a>
     <a href="#results">成果</a>
     <a href="#stages">做法</a>
     <a href="#kb">知识库</a>
@@ -289,7 +290,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
     </div>
     <div class="hm">
       <div class="hm-n">235,542</div>
-      <div class="hm-l">CRM 会员总量</div>
+      <div class="hm-l">会员总量</div>
     </div>
     <div class="hm">
       <div class="hm-n">44</div>
@@ -342,11 +343,56 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
   </div>
 </section>
 
+
+<section id="approach">
+  <div class="sec-head rv">
+    <span class="sec-tag">HOW I STARTED</span>
+    <h2>先摸清业务，再动 AI</h2>
+    <p>这套东西不是「先决定用 AI，再找场景套上去」。<strong>顺序是反的</strong>——我先花了很长时间把业务摸透，才决定哪一段该交给 AI、哪一段不能。</p>
+  </div>
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:18px">为什么必须先摸业务</h3>
+    <p style="font-size:.88rem;color:var(--t2);font-weight:300;line-height:1.95;max-width:780px;margin-bottom:16px">AI 最危险的地方不是它做不好，是它<strong style="color:var(--t1)">做得很快，但做错了你未必看得出来</strong>。如果我自己不清楚「一家店一天的正常波动范围是多少」「哪个品类掉 5% 算严重、哪个掉 20% 都正常」，AI 给我一个结论，我没有任何依据判断它对不对。</p>
+    <p style="font-size:.88rem;color:var(--t2);font-weight:300;line-height:1.95;max-width:780px;margin-bottom:16px">所以真正的前置工作不是学 AI，是<strong style="color:var(--gold-l)">把自己变成「能判断 AI 输出对不对」的人</strong>。这件事没人能替我做，因为判断依据在我脑子里，不在任何文档里。</p>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:36px 0 16px">我实际做的四步</h3>
+
+    <div class="mflow" style="grid-template-columns:repeat(2,1fr);gap:16px">
+      <div class="mstep" style="padding:24px 22px">
+        <div class="mstep-n">STEP 01</div>
+        <h6>先把数据口径统一</h6>
+        <p style="font-size:.78rem;line-height:1.8">动手之前先解决「同一个数三个系统三个值」的问题。口径不统一，AI 算得再快也是错的——它会把三个不同的数当成三个事实。</p>
+      </div>
+      <div class="mstep" style="padding:24px 22px">
+        <div class="mstep-n">STEP 02</div>
+        <h6>再把人做的动作拆开</h6>
+        <p style="font-size:.78rem;line-height:1.8">把运营每天做的事逐条写下来：谁做、多久做一次、依据什么、做完给谁。拆到这一步才发现，很多「分析」其实是「搬运」，很多「决策」其实是「按规则套」。</p>
+      </div>
+      <div class="mstep" style="padding:24px 22px">
+        <div class="mstep-n">STEP 03</div>
+        <h6>然后判断哪些能交出去</h6>
+        <p style="font-size:.78rem;line-height:1.8">拆开之后分类：纯搬运和套规则的，交给 AI；需要看人、看场、看关系的，我自己做。这条线不是拍脑袋划的，是按「错了代价多大」划的。</p>
+      </div>
+      <div class="mstep" style="padding:24px 22px">
+        <div class="mstep-n">STEP 04</div>
+        <h6>最后才是选工具</h6>
+        <p style="font-size:.78rem;line-height:1.8">到这一步才知道需要什么：要长上下文、要视觉、要低延迟、要能并行。需求清楚了，模型选型和池划分才有依据——不是为了炫技才分 10 个池。</p>
+      </div>
+    </div>
+
+    <div class="insight" style="margin-top:36px">
+      <b>一个具体的例子：</b>「某家店环比下降 20%」这个结论，AI 三秒就能算出来。但我如果不清楚这家店上周做过周年庆、不清楚它周边有学校放暑假、不清楚它某个爆品刚好断货三天，我就没法判断这个 20% 是真下滑还是假信号。<br><br>
+      所以我在 AI 之前先做了<b>三道自检</b>（防假环比、防假异常、防不可信归因）——这三道不是技术设计，是业务经验变成的规则。AI 只是负责执行它们。
+    </div>
+  </div>
+</section>
+
 <section id="results">
   <div class="sec-head rv">
     <span class="sec-tag">RESULTS</span>
     <h2>落地成果</h2>
-    <p>以下全部为系统实际运行数据，快照日期 <strong>2026-10-25</strong>，覆盖 22 个数据模块、47 家门店。</p>
+    <p>以下全部为系统实际运行数据，覆盖 22 个数据模块、47 家门店。</p>
   </div>
 
   <div class="rgrid">
@@ -375,7 +421,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
         <div class="rcard-n">235,542</div>
         <span class="rcard-badge">会员池</span>
       </div>
-      <h4>CRM 会员总量</h4>
+      <h4>会员总量</h4>
       <p>企微好友 119,169 人、社群成员 8,098 人。会员不是一堆沉睡的名单——126 个标签持续打标，让「谁该被触达、触达什么」变成可执行的问题。</p>
       <div class="bar"><i style="width:92%"></i></div>
     </div>
@@ -392,21 +438,21 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div class="rcard-n">89.4<u>%</u></div>
-        <span class="rcard-badge">进度预测</span>
+        <div class="rcard-n">7,747</div>
+        <span class="rcard-badge">在售 SKU</span>
       </div>
-      <h4>10 月营收进度</h4>
-      <p>月目标 1,163.8 万，MTD 已完成 878.6 万。预测不是拍脑袋——按「周一至周四基准 × 星期权重」建模，每天更新，让目标偏差提前暴露而不是月底才发现。</p>
-      <div class="bar"><i style="width:89.4%"></i></div>
+      <h4>商品库规模</h4>
+      <p>13 个品类、7,747 个在售单品全部纳入统一口径。商品维度打通之后，「哪个品类卖得好、哪个单品在拖后腿」才成为可回答的问题。</p>
+      <div class="bar"><i style="width:100%"></i></div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div class="rcard-n">170,510</div>
-        <span class="rcard-badge">分层覆盖</span>
+        <div class="rcard-n">126</div>
+        <span class="rcard-badge">客户标签</span>
       </div>
-      <h4>RFM 八分段客户</h4>
-      <p>重要价值 16,099 / 重要保持 15,069 / 一般发展 52,688 / 一般挽留 54,907。分层的意义在于：不同段位的人该收到完全不同的动作，而不是同一张券发所有人。</p>
+      <h4>标签体系</h4>
+      <p>126 个标签持续打标，覆盖消费偏好、活跃度、品类渗透。标签不是摆设——它决定了「谁该被触达、触达什么内容」这件事能不能自动化。</p>
       <div class="bar"><i style="width:100%"></i></div>
     </div>
 
@@ -416,7 +462,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
         <span class="rcard-badge">数据模块</span>
       </div>
       <h4>经营数据打通</h4>
-      <p>KPI 汇总、门店排行、单品日榜、RFM 八分段、六层活跃度、品类渗透、Cohort 留存——过去要人工拼一周的表，现在每天自动生成。</p>
+      <p>KPI 汇总、门店排行、单品日榜、六层活跃度、品类渗透、Cohort 留存——过去要人工拼一周的表，现在每天自动生成。</p>
       <div class="bar"><i style="width:100%"></i></div>
     </div>
 
@@ -749,7 +795,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
 <section id="dual">
   <div class="sec-head rv">
     <span class="sec-tag">DUAL-AI COLLABORATION</span>
-    <h2>双 AI 协作：WorkBuddy 干活，Codex 验收</h2>
+    <h2>双 AI 协作：WorkBuddy 执行，Codex 验收</h2>
     <p>这套系统里最反直觉的一点：<strong>写代码的和验收代码的，是两个不同的 AI。</strong> 一个人既当运动员又当裁判，最后一定验收不出问题——AI 也一样。</p>
   </div>
 
@@ -773,7 +819,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
         <div class="ag-tier-d" style="text-align:left;line-height:1.75">按任务单实现、自测、交付；<br>写执行过程与产出初稿。<br><strong style="color:var(--t1)">不给自己判通过。</strong></div>
       </div>
       <div class="ag-tier" style="text-align:left;padding:26px 22px">
-        <div class="ag-tier-n" style="font-size:1.3rem">贝大少爷</div>
+        <div class="ag-tier-n" style="font-size:1.3rem">我</div>
         <div class="ag-tier-l" style="margin:12px 0 8px">终审 · 拍板</div>
         <div class="ag-tier-d" style="text-align:left;line-height:1.75">蓝图终审、争议仲裁、是否上线。<br>两个 AI 意见冲突时，由人决定。<br><strong style="color:var(--t1)">不可让渡。</strong></div>
       </div>
@@ -932,6 +978,43 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
     </table>
 
     <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:20px"><strong style="color:var(--t1)">降级链怎么用：</strong>比如战略池的降级序是 Kimi K3 → DeepSeek V4.1 → GLM-4.7 → Spark 4B，长文池是 LongCat 2.5 → GLM-4.7 → Qwen3.8-Max → 自动路由。主模型遇到限流、超时、5xx 时自动切下一个，任务不中断。降级事件全部记入日志，可以查「今天哪个池降了几次、降到谁」。如果一个池频繁降级，说明主模型选型需要调整——这是我看模型健康度的主要信号。</p>
+
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 16px">为什么这样设置：四个真实约束</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-bottom:20px">分池不是为了看起来复杂。每一条设计都对应一个实际撞到的问题。</p>
+
+    <div class="prob" style="border-left-color:rgba(201,162,39,.5)">
+      <div class="prob-q" style="color:var(--gold-l)">约束一 · 成本不能失控，但关键任务不能降质</div>
+      <div class="prob-a">如果全部任务用最强模型，成本会高到不可持续；如果全用便宜模型，战略拆解和长文分析的质量直接崩。所以按任务价值分层：<b>战略池和长文池用推理能力强、上下文长的模型</b>（这类任务一天只跑几次，但错一次代价大）；<b>话术池和轻量池用高吞吐低成本模型</b>（这类任务一天跑几十上百次，单次错了改一下就行）。<br><br>判断标准很简单：<b>这个任务错了，是「改一下重发」还是「影响一个决策」？</b> 前者用便宜模型，后者用强模型。</div>
+    </div>
+
+    <div class="prob" style="border-left-color:rgba(201,162,39,.5)">
+      <div class="prob-q" style="color:var(--gold-l)">约束二 · 单点限流不能拖垮整条线</div>
+      <div class="prob-a">这是分池最直接的原因。早期所有任务走同一个模型账号，结果话术批量任务一跑，把额度吃光，战略分析请求全部失败。<br><br>分池之后，<b>每个池有独立的降级链</b>——战略池降级序是 Kimi K3 → DeepSeek V4.1 → GLM-4.7 → Spark 4B，即使前三个都挂了，任务还能落到第四个跑完。<b>池与池之间额度隔离</b>，话术池再怎么跑，也动不了战略池的额度。这条我写死在系统规则里：自动化任务永不侵占主力额度。</div>
+    </div>
+
+    <div class="prob" style="border-left-color:rgba(201,162,39,.5)">
+      <div class="prob-q" style="color:var(--gold-l)">约束三 · 任务特性决定模型，不是反过来</div>
+      <div class="prob-a">不同任务对模型的要求是互斥的：<br>
+      · <b>看图</b>必须用视觉模型——文本模型再强也读不了图<br>
+      · <b>长文</b>必须上下文够长——把 1M 上下文的任务塞给 32K 模型，直接截断丢内容<br>
+      · <b>边缘任务</b>必须低延迟——秒级响应和几十秒响应，体验差一个量级<br>
+      · <b>代码</b>要专门的代码模型——通用模型写代码容易语法对但逻辑错<br><br>
+      所以池的划分不是按「模型好坏」，是按<b>「任务要什么能力」</b>。先有任务分类，才有池。</div>
+    </div>
+
+    <div class="prob" style="border-left-color:rgba(201,162,39,.5)">
+      <div class="prob-q" style="color:var(--gold-l)">约束四 · 并发上限按「单次耗时 × 需求量」倒推</div>
+      <div class="prob-a">为什么战略池并发只给 2，话术池给 4？<br><br>
+      <b>战略池</b>：单次任务耗时长（几十秒到几分钟）、单次成本高。并发开大只会互相挤占，还容易触发限流。给 2 是「一个在跑、一个排队」的健康水位。<br>
+      <b>话术池</b>：单次任务几秒完成、单次成本低。早间话术要在 08:00 前全部发完，必须并行，给 4 刚好。<br><br>
+      这不是拍脑袋，是按实际「单位时间需求量 ÷ 单次耗时」算出来的。算完之后再留一点余量，避免突发任务全部失败。</div>
+    </div>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 16px">降级链为什么是这个顺序</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-bottom:16px">降级序不是随便排的，按「能力接近程度」排——降级后质量不能掉太多，否则任务虽然跑完了但结果不能用。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-bottom:16px"><strong style="color:var(--t1)">战略池</strong>：Kimi K3（主）→ DeepSeek V4.1（推理能力接近）→ GLM-4.7（通用但稍弱）→ Spark 4B（兜底，只保证跑完不保证质量）。<strong style="color:var(--t1)">长文池</strong>：LongCat 2.5（主，1M 上下文）→ GLM-4.7 → Qwen3.8-Max（同为长上下文）→ 自动路由。<strong style="color:var(--t1)">看图池</strong>：视觉模型双通道轮转 → 备用视觉 → 通用兜底。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">每级降级都记日志。如果一个池频繁降到第 3、第 4 级，说明主模型选型有问题，需要换主模型——这是我看模型健康度的主要信号。</p>
 
     <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:14px"><strong style="color:var(--t1)">并发上限为什么这么设：</strong>战略池和长文池设 2，因为这两类任务单次耗时长、单次成本高，并发太高会互相挤占；话术池设 4，因为话术任务短平快，可以并行。并发上限不是拍脑袋，是按「单次任务耗时 × 单位时间需求量」倒推的。</p>
 
