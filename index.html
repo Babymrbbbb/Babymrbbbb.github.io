@@ -265,6 +265,7 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
     <a href="#kb">知识库</a>
     <a href="#method">方法论</a>
     <a href="#agent">Agent</a>
+    <a href="#dual">双AI</a>
     <a href="#boundary">边界</a>
     <a href="#contact">联系</a>
   </div>
@@ -718,6 +719,97 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
       </div>
     </div>
     <div class="mnote"><b>为什么有效：</b>第 4 层最难也最重要。AI 的本能是「给一个答案」，而运营最怕「一个错的答案被当真」。所以我在知识库层面做了硬约束：关键事实只能有唯一真相源，追溯不到就拒答。</div>
+  </div>
+</section>
+
+
+<section id="dual">
+  <div class="sec-head rv">
+    <span class="sec-tag">DUAL-AI COLLABORATION</span>
+    <h2>双 AI 协作：WorkBuddy 干活，Codex 验收</h2>
+    <p>这套系统里最反直觉的一点：<strong>写代码的和验收代码的，是两个不同的 AI。</strong> 一个人既当运动员又当裁判，最后一定验收不出问题——AI 也一样。</p>
+  </div>
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:10px">为什么要两个 AI，而不是一个更强的</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;max-width:760px;margin-bottom:8px">这是我在实际项目里撞出来的结论。早期我让一个 AI 从头做到尾——它写完代码，自己说「已完成」，我再让它检查，它也说「检查通过」。结果上线就崩。</p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;max-width:760px">问题不在能力，在<strong style="color:var(--t1)">立场</strong>。同一个 AI 检查自己的产出，它有强烈的动机认为自己做对了——这不是恶意，是它的上下文里已经装满了「我这样做是对的」的理由。所以我立了一条规则：<strong style="color:var(--gold-l)">执行方和验收方必须是两个独立的 AI，且验收方必须真跑，不能模拟。</strong></p>
+  </div>
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:20px">三方分工：谁定、谁做、谁验</h3>
+    <div class="ag-org" style="grid-template-columns:repeat(3,1fr)">
+      <div class="ag-tier" style="text-align:left;padding:26px 22px">
+        <div class="ag-tier-n" style="font-size:1.3rem">Codex</div>
+        <div class="ag-tier-l" style="margin:12px 0 8px">总监 · 拆单 + 验收</div>
+        <div class="ag-tier-d" style="text-align:left;line-height:1.75">把蓝图拆成可执行任务单（目标 / 素材 / 输入输出 / 验收标准）；<br>开发完成后做真调验收，出验收记录。<br><strong style="color:var(--t1)">不写业务代码。</strong></div>
+      </div>
+      <div class="ag-tier" style="text-align:left;padding:26px 22px">
+        <div class="ag-tier-n" style="font-size:1.3rem">WorkBuddy</div>
+        <div class="ag-tier-l" style="margin:12px 0 8px">员工 · 执行</div>
+        <div class="ag-tier-d" style="text-align:left;line-height:1.75">按任务单实现、自测、交付；<br>写执行过程与产出初稿。<br><strong style="color:var(--t1)">不给自己判通过。</strong></div>
+      </div>
+      <div class="ag-tier" style="text-align:left;padding:26px 22px">
+        <div class="ag-tier-n" style="font-size:1.3rem">贝大少爷</div>
+        <div class="ag-tier-l" style="margin:12px 0 8px">终审 · 拍板</div>
+        <div class="ag-tier-d" style="text-align:left;line-height:1.75">蓝图终审、争议仲裁、是否上线。<br>两个 AI 意见冲突时，由人决定。<br><strong style="color:var(--t1)">不可让渡。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:18px">协作链路：从蓝图到上线的五步</h3>
+    <div class="mflow">
+      <div class="mstep">
+        <div class="mstep-n">STEP 01</div>
+        <h6>需求拷问</h6>
+        <p>先把模糊需求问清楚：给谁用、解决什么、边界在哪。不写代码之前先对齐</p>
+      </div>
+      <div class="mstep">
+        <div class="mstep-n">STEP 02</div>
+        <h6>蓝图终审</h6>
+        <p>出架构蓝图，由人终审确认。蓝图没过不许开工——这是防返工的第一道闸</p>
+      </div>
+      <div class="mstep">
+        <div class="mstep-n">STEP 03</div>
+        <h6>Codex 拆单</h6>
+        <p>总监把蓝图拆成任务单：目标 / 素材清单 / 输入输出文件 / 验收标准，逐项可核</p>
+      </div>
+      <div class="mstep">
+        <div class="mstep-n">STEP 04</div>
+        <h6>WorkBuddy 执行</h6>
+        <p>按任务单实现 + 自测 + 交付。严格在授权目录内作业，不越界</p>
+      </div>
+      <div class="mstep">
+        <div class="mstep-n">STEP 05</div>
+        <h6>Codex 真调验收</h6>
+        <p>独立 AI 跑真实链路验收，出逐项验收记录。不通过就退回重做</p>
+      </div>
+    </div>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-top:20px">目前累计跑通 <strong style="color:var(--t1)">45 份任务单</strong>、<strong style="color:var(--t1)">20 余份验收记录</strong>。从调度系统、知识库改造、到驾驶舱重做，每一个都是走完这五步才上线的。</p>
+  </div>
+
+  <div class="ag-wrap rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:8px">验收必须「真调」，不许「扮演」</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-bottom:20px">这条规则我写死了，零例外：<strong style="color:var(--gold-l)">验收必须由 Codex CLI 真实执行完整链路</strong>——真调用、真跑测试、真出结果。严禁用「同款模型扮演总监」代替，因为扮演出来的验收报告看起来一样漂亮，但它没有真的跑过。</p>
+
+    <div class="prob" style="border-left-color:rgba(201,162,39,.5)">
+      <div class="prob-q" style="color:var(--gold-l)">为什么这条这么重要</div>
+      <div class="prob-a">因为「假验收」是最难发现的错。一份验收报告如果格式正确、结论写「通过」、逐项都打了勾，你从文档上完全看不出它是不是真跑的。<b>唯一可靠的区分方式，就是看它有没有真实调用的痕迹</b>——token 消耗、模型名、耗时、失败重试记录。所以我把这些写进验收记录的必填项，缺一项就不算通过。</div>
+    </div>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:32px 0 14px">地盘隔离：不让两个 AI 互相踩</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9;margin-bottom:16px">两个 AI 协作最大的风险不是能力不够，是<strong style="color:var(--t1)">互相覆盖对方的文件</strong>。所以我定了一份「文件夹隔离宪法」——每个工具只能读写自己的目录，跨工具交接一律走「任务单 + 结果文件」，禁止直接改对方的地盘。</p>
+
+    <table class="dtable" style="margin-top:20px">
+      <thead><tr><th>角色</th><th>只允许访问</th><th>禁止碰</th></tr></thead>
+      <tbody>
+        <tr><td>Codex</td><td>任务单 / 自己的方案代码与验收记录 / 最终交付 / 每日复盘</td><td>WorkBuddy 工作空间、看板项目源码、个人目录</td></tr>
+        <tr><td>WorkBuddy</td><td>自己的工作空间 / 共用素材库（只读）</td><td>Codex 工作空间、个人目录</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.8;margin-top:20px">临时文件、诊断脚本、中间产物必须留在自己工作区，不许丢到项目根目录。这条规则来自一次真实事故——两个工具同时改同一个项目，文件被覆盖，功能受损，最后靠打包产物才恢复回来。<strong style="color:var(--t1)">定这条宪法之后，再没发生过。</strong></p>
   </div>
 </section>
 
