@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babymrbbbb · AI × Operations</title>
+    <title>用 AI 重构门店运营生产线 · Babymrbbbb</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>◆</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Background Grid -->
     <div class="bg-grid"></div>
-    
+
     <!-- Navigation -->
     <header>
         <nav>
@@ -19,12 +18,11 @@
                 <span class="logo-mark">◆</span> BABYMRBBBB
             </div>
             <ul>
-                <li><a href="#about">关于</a></li>
                 <li><a href="#background">背景</a></li>
-                <li><a href="#projects">做了什么</a></li>
-                <li><a href="#demo">截图</a></li>
-                <li><a href="article.html">文章</a></li>
-                <li><a href="#philosophy">哲学</a></li>
+                <li><a href="#stages">我做了什么</a></li>
+                <li><a href="#results">结果</a></li>
+                <li><a href="#demo">实际运行</a></li>
+                <li><a href="#principles">原则</a></li>
                 <li><a href="#contact">联系</a></li>
             </ul>
         </nav>
@@ -35,145 +33,72 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                Building AI tools that run in real businesses
+                47 家门店 · 每天在跑 · 不是演示
             </div>
             <h1>
-                <span class="hero-line">AI × Operations</span>
+                <span class="hero-line">用 AI 重构门店运营生产线</span>
             </h1>
-            <p class="subtitle">47 家烘焙连锁门店的运营负责人 —— 把运营里每天重复的劳动，一件件改造成由 AI 驱动的自动化生产线。现在这套东西每天在公司里真实运行。</p>
+            <p class="subtitle">我是 47 家烘焙连锁门店的运营负责人。过去一年多，我把运营里每天重复发生的劳动，一件一件改造成由 AI 驱动的自动化生产线——现在这套东西每天在公司里真实运行。</p>
             <p class="desc">
                 清远含连州 40 家 / 广州含花都 4 家 / 肇庆 2 家 / 佛山 1 家<br>
                 服务约 20 万终端客户，会员复购率提升 <strong>10%~15%</strong>
             </p>
             <div class="cta">
-                <a href="#projects" class="btn primary">
-                    查看项目
+                <a href="#stages" class="btn primary">
+                    看我怎么做的
                     <span class="btn-arrow">→</span>
                 </a>
-                <a href="https://github.com/Babymrbbbb" class="btn secondary" target="_blank">
-                    GitHub
-                    <span class="btn-icon">↗</span>
+                <a href="#results" class="btn secondary">
+                    直接看结果
+                    <span class="btn-icon">↓</span>
                 </a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
                     <span class="stat-value">47</span>
-                    <span class="stat-label">门店</span>
+                    <span class="stat-label">覆盖门店</span>
                 </div>
                 <div class="stat">
                     <span class="stat-value">20万+</span>
                     <span class="stat-label">终端客户</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value">7</span>
-                    <span class="stat-label">公开项目</span>
+                    <span class="stat-value">44</span>
+                    <span class="stat-label">自动化任务</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-value">2</span>
-                    <span class="stat-label">桌面软件</span>
+                    <span class="stat-value">10~15%</span>
+                    <span class="stat-label">复购率提升</span>
                 </div>
             </div>
         </div>
         <div class="hero-visual">
-            <div class="code-window">
-                <div class="code-header">
-                    <span class="code-dot red"></span>
-                    <span class="code-dot yellow"></span>
-                    <span class="code-dot green"></span>
-                    <span class="code-title">gateway.js</span>
-                </div>
-                <div class="code-body">
-                    <pre><span class="code-keyword">const</span> <span class="code-var">client</span> = <span class="code-keyword">new</span> <span class="code-class">OpenAI</span>({
-  baseURL: <span class="code-string">"http://127.0.0.1:8787/v1"</span>,
-  apiKey: <span class="code-string">"sk-local-gateway"</span>
-});
-
-<span class="code-comment">// 聚合 N 个 AI 账号 → 1 个端点</span>
-<span class="code-keyword">await</span> client.chat.completions.<span class="code-method">create</span>({
-  model: <span class="code-string">"sensenova-6.8-flash-lite"</span>,
-  messages: [{ role: <span class="code-string">"user"</span>, content: <span class="code-string">"你好"</span> }]
-});</pre>
-                </div>
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">今日自动化任务</span>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="section-header">
-            <span class="section-tag">ABOUT</span>
-            <h2>我能做什么</h2>
-            <p>从 AI 工程化到数据驱动运营，全链路能力</p>
-        </div>
-        <div class="capabilities">
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                </div>
-                <h3>AI 工程化</h3>
-                <p>自建网关、质检工具，把 AI 从玩具变成生产线</p>
-            </div>
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                    </svg>
-                </div>
-                <h3>提示词工程</h3>
-                <p>系统化方法论，从"一句话许愿"到"一句话下订单"</p>
-            </div>
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 3v18h18M9 17V7m4 10V7m4 10V7"/>
-                    </svg>
-                </div>
-                <h3>数据驱动</h3>
-                <p>全渠道数据统一口径，每天自动产出经营看板 / 门店作战卡 / 数据日报</p>
-            </div>
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                    </svg>
-                </div>
-                <h3>工具化沉淀</h3>
-                <p>把工作里的重复动作写成 CLI / 脚本</p>
-            </div>
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </div>
-                <h3>业务翻译</h3>
-                <p>14 年一线业务，直接和客户、店长对话，需求不需要中间人转述</p>
-            </div>
-            <div class="capability">
-                <div class="capability-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                </div>
-                <h3>端到端交付</h3>
-                <p>从理解需求、构建、部署到验证结果独立闭环，对最终效果负责</p>
+            <div class="terminal-body">
+                <div class="terminal-line"><span class="t-ok">07:00</span> <span class="t-muted">经营数据管道</span> <span class="t-ok">✓ 完成</span></div>
+                <div class="terminal-line"><span class="t-ok">08:00</span> <span class="t-muted">私域早间话术</span> <span class="t-ok">✓ 已推送</span></div>
+                <div class="terminal-line"><span class="t-ok">09:00</span> <span class="t-muted">行业趋势扫描</span> <span class="t-ok">✓ 完成</span></div>
+                <div class="terminal-line"><span class="t-ok">10:30</span> <span class="t-muted">竞品动态简报</span> <span class="t-ok">✓ 已生成</span></div>
+                <div class="terminal-line"><span class="t-ok">12:00</span> <span class="t-muted">私域午间话术</span> <span class="t-ok">✓ 已推送</span></div>
+                <div class="terminal-line"><span class="t-ok">19:30</span> <span class="t-muted">每日自检采集</span> <span class="t-ok">✓ 完成</span></div>
+                <div class="terminal-line"><span class="t-ok">21:00</span> <span class="t-muted">竞对全量分析</span> <span class="t-ok">✓ 完成</span></div>
+                <div class="terminal-line"><span class="t-ok">22:10</span> <span class="t-muted">晚间综合复盘</span> <span class="t-ok">✓ 完成</span></div>
+                <div class="terminal-line" style="margin-top:12px;padding-top:12px;border-top:1px solid #222"><span class="t-info">共 44 条自动化 · 按日/周/月运行</span></div>
             </div>
         </div>
     </section>
 
     <!-- Background Section -->
-    <section id="background" class="projects">
+    <section id="background" class="about">
         <div class="section-header">
             <span class="section-tag">BACKGROUND</span>
             <h2>我面对的是什么</h2>
-            <p>
-                47 家门店意味着每天几十份数据要汇总、几十个问题要回答、几十条动作要追踪。<br>
-                真实的困难不在策略，在执行密度。
-            </p>
+            <p>47 家门店意味着每天几十份数据要汇总、几十个问题要回答、几十条动作要追踪。<br>真实的困难不在策略，在执行密度。</p>
         </div>
         <div class="capabilities">
             <div class="capability">
@@ -193,403 +118,183 @@
                 <p>话术、日报、作战卡、复盘，每天重复做同样的事</p>
             </div>
         </div>
-        <p class="philosophy-why" style="margin-top:40px">
-            <strong>我的做法：</strong>我是一线运营负责人，不是科班工程师。所以路径很直接——哪个环节每天在消耗人，就用 AI 把它接过去。下面每个项目都对应一个真实发生过的故障。
+        <p class="philosophy-why">
+            <strong>我的做法：</strong>我是一线运营负责人，不是科班工程师。所以路径很直接——哪个环节每天在消耗人，就用 AI 把它接过去。下面每个阶段都对应一个真实发生过的故障。
         </p>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <!-- Stages Section -->
+    <section id="stages" class="projects">
         <div class="section-header">
-            <span class="section-tag">PROJECTS</span>
+            <span class="section-tag">WHAT I DID</span>
             <h2>我用 AI 做了什么</h2>
-            <p>
-                四个阶段，每个阶段都对应一个真实发生过的故障——不是先有技术再找场景。<br>
-                <strong>接入 AI → 用好 AI → 知识带出处 → 进入业务流程</strong>，另有 2 套每天在跑的桌面工具。
-            </p>
+            <p>四个阶段，每个阶段都对应一个真实发生过的故障——不是先有技术再找场景。</p>
         </div>
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">全栈工程</span>
-                <h3>swan_kb</h3>
-                <span class="project-badge">后端底座 + RAG 服务 · 单一代码库 · 完整能力链</span>
+                <span class="project-tag">阶段一 · 接入</span>
+                <h3>让 AI 调用稳定下来</h3>
             </div>
-            <p class="project-desc">把「后端服务底座」与「RAG 知识问答服务」收敛为单一代码库，呈现从 CRUD 到 AI 架构的完整证据链。</p>
-            <ul class="project-features">
-                <li>backend-store：FastAPI + SQLModel + Alembic 迁移 + API Key 鉴权 + Docker</li>
-                <li>rag-service：混合检索（倒排 + 向量 RRF 融合）+ wiki 聚合层优先</li>
-                <li>数据护栏：真相源 JSON + 启动自愈索引 + 接地测试阻断错误资料</li>
-                <li>评测闭环：golden-set 检索命中率 + 忠实度，pytest 可回归</li>
-            </ul>
             <div class="project-highlight">
-                <strong>为什么合并：</strong>两个仓库讲同一件事，访客要跳来跳去，故事被切碎。<br>
-                <strong>场景价值：</strong>一个仓库讲完「后端怎么搭 → 知识怎么检索 → 质量怎么保证」。<br>
-                <strong>单独用：</strong>需要 RAG 落地的团队可直接复用这套数据护栏与评测设计。
+                <strong>遇到的故障：</strong>多个模型账号配额不够，429 频繁中断，AI 一忙就不可用。
             </div>
-            <a href="https://github.com/Babymrbbbb/swan_kb" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
+            <p class="project-desc">自建了一个本地模型网关，把多个账号聚合成一个端点，按配额自动轮询，遇到限流或失效自动切换并隔离。</p>
+            <div class="project-highlight">
+                <strong>结果：</strong>上层所有 AI 应用有了稳定底座，不再因为单个账号限流而停摆。
+            </div>
         </div>
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">接入 AI</span>
-                <h3>sensenova-gateway</h3>
-                <span class="project-badge">统一模型调用层 · 多模型路由 · 530 行零依赖</span>
+                <span class="project-tag">阶段二 · 用好</span>
+                <h3>让 AI 产出可用</h3>
             </div>
-            <p class="project-desc">零依赖的本地 OpenAI 兼容网关，把 N 个 SenseNova API key 聚合成一个端点。</p>
-            <ul class="project-features">
-                <li>多账号轮询（按 5h 窗口内用量最少）</li>
-                <li>429/401 自动切换 + 冷却隔离</li>
-                <li>别名映射 + SSE 流式转发</li>
-                <li>16 项离线自测全通过</li>
-            </ul>
             <div class="project-highlight">
-                <strong>为什么改造：</strong>多账号配额不够、429 频发，AI 调用不稳定。<br>
-                <strong>场景价值：</strong>给上层 prompt-craft / llm-wiki / ai-native-team 提供稳定模型底座。<br>
-                <strong>单独用：</strong>任何需要多 key 稳定调用的团队可直接用（16 项自测）。
+                <strong>遇到的故障：</strong>AI 出的图、出的视频一眼就假，内容生产变成碰运气。
             </div>
-            <a href="https://github.com/Babymrbbbb/sensenova-gateway" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
+            <p class="project-desc">把每次成功的提示词写法沉淀成方法论——通用铁律、图像结构、视频叙事骨架，全部经过实测验证后入库，不是理论推导。</p>
+            <div class="project-highlight">
+                <strong>结果：</strong>AI 内容产出一遍过的比例明显提高，方法可复用给团队。
+            </div>
         </div>
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">用好 AI</span>
-                <h3>prompt-craft</h3>
-                <span class="project-badge">Prompt 工程 · 模板体系 · 1189 行</span>
+                <span class="project-tag">阶段三 · 知识</span>
+                <h3>让答案带出处</h3>
             </div>
-            <p class="project-desc">AI 提示词写法库（图像 + 视频），从"一句话许愿"到"一句话下订单"的实战手册。</p>
-            <ul class="project-features">
-                <li>通用铁律 6 条（抽象词翻译 / "不要"比"要"更有效...）</li>
-                <li>图像篇：九要素结构、写实增强层、人物防大头贴、电影感六件...</li>
-                <li>视频篇：三大治法、5 大维度骨架、情绪三法、叙事方法论</li>
-                <li>所有内容均经过实测验证，不是理论推导</li>
-            </ul>
             <div class="project-highlight">
-                <strong>为什么改造：</strong>AI 出图/出视频总是一眼假，内容生产碰运气。<br>
-                <strong>场景价值：</strong>让 AI 内容产出一遍过，案例沉淀进 llm-wiki。<br>
-                <strong>单独用：</strong>任何做 AI 图像/视频的团队可直接用这套方法论。
+                <strong>遇到的故障：</strong>文档越攒越多却找不到，知识是死数据；直接问大模型会编造，因为它不知道我的业务事实。
             </div>
-            <a href="https://github.com/Babymrbbbb/prompt-craft" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
+            <p class="project-desc">搭了一套知识库系统。模型负责把上千篇原始资料编译成可导航的聚合页，检索负责精确召回，命中页作为上下文再交给模型生成带引用的答案。</p>
+            <div class="project-highlight">
+                <strong>结果：</strong>1,600 余篇原始资料被编译成 1,300 余个可导航页面，问答可以追溯来源，不再是模型凭印象作答。
+            </div>
         </div>
 
         <div class="project-card">
             <div class="project-header">
-                <span class="project-tag">早期实现</span>
-                <h3>kb-cli</h3>
-                <span class="project-badge">早期知识库检索 · 158 行零依赖</span>
+                <span class="project-tag">阶段四 · 组织与交付</span>
+                <h3>让 AI 真的进入业务流程</h3>
             </div>
-            <p class="project-desc">零依赖的本地知识库检索工具雏形，多子库 × 多层结构——后被 llm-wiki 取代。</p>
-            <ul class="project-features">
-                <li>三层架构：L1 速查 / L2 导航 / L3 原始</li>
-                <li>多子库拆分 + 单文件 158 行检索器</li>
-                <li>自动同步聊天记录，智能分类到不同子库</li>
-                <li>UTF-8 强制输出 + 双写，Windows 不炸</li>
-            </ul>
             <div class="project-highlight">
-                <strong>为什么改造：</strong>文档越攒越多找不到，知识是死数据。<br>
-                <strong>定位：</strong>早期最小实现，验证「分层 + 召回优先」思路后被 llm-wiki 取代。<br>
-                <strong>单独用：</strong>轻量文档检索场景仍可直接用（零依赖开箱即用）。
+                <strong>遇到的故障：</strong>AI 能力很多，但组织消化不了，工具之间互相覆盖，最后没人用。
             </div>
-            <a href="https://github.com/Babymrbbbb/kb-cli" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
-        </div>
-
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">LLM × RAG 知识库</span>
-                <h3>llm-wiki</h3>
-                <span class="project-badge">LLM×RAG 知识库调取 · 概念聚合 · 增量编译</span>
-            </div>
-            <p class="project-desc">LLM × RAG 知识库调取系统：LLM 编译知识层，RAG 精确召回，供 LLM 问答与人工检索共用。</p>
-            <ul class="project-features">
-                <li>LLM 参与知识组织：Schema 契约注入，同一概念多源合并一页（80+ 源）</li>
-                <li>双向链接：entity ↔ concept ↔ synthesis 层级互链</li>
-                <li>增量局部重编：--local-rebuild 实测仅重编 4 页</li>
-                <li>lint 巡检：锚定 / 死链 / 孤立页 / 冲突 / 死循环，锚定 100%</li>
-            </ul>
+            <p class="project-desc">一边把多个 AI 角色编排成有分工、有决策边界、有校验闸门的生产线；一边把高频操作做成两套 Windows 桌面软件——经营驾驶舱和调度运维工作台，双击即用。</p>
             <div class="project-highlight">
-                <strong>为什么改造：</strong>原始资料不可导航，RAG 泛词塌缩。<br>
-                <strong>场景价值：</strong>LLM×RAG 知识库调取层（编译 + 召回），LLM 与人工共用。<br>
-                <strong>单独用：</strong>上千篇原始资料的团队可复用这套 LLM+RAG 知识库方法论。
+                <strong>结果：</strong>AI 从「偶尔试试」变成「每天打开的生产工具」。
             </div>
-            <a href="https://github.com/Babymrbbbb/llm-wiki" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
-        </div>
-
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">组织 AI 落地</span>
-                <h3>ai-native-team</h3>
-                <span class="project-badge">Agent 编排 · Skill 体系 · 44 自动化</span>
-            </div>
-            <p class="project-desc">「AI 原生组织」操作系统：1 个老板 + 数十个 AI 角色 + 40+ 自动化任务跑成生产线。</p>
-            <ul class="project-features">
-                <li>智能路由：用户只下指令，系统自动判断角色/机制/层级</li>
-                <li>任务拆解 SOP：CEO 拆方向、主管拆动作、专员拆步骤</li>
-                <li>决策边界：≤1 万自决、1-5 万报备、>5 万请示</li>
-                <li>四闸校验：填写/术语/驳回/反勾结，防 AI 空壳件</li>
-            </ul>
-            <div class="project-highlight">
-                <strong>为什么改造：</strong>AI 能力很多但组织消化不了，工具互相覆盖。<br>
-                <strong>场景价值：</strong>把 gateway / prompt-craft / 知识库编排成生产线。<br>
-                <strong>单独用：</strong>想让多个 AI Agent 协作的团队可直接用这套组织机制。
-            </div>
-            <a href="https://github.com/Babymrbbbb/ai-native-team" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
-        </div>
-
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">工业框架复刻</span>
-                <h3>langgraph-agent-demo</h3>
-                <span class="project-badge">LangGraph 状态机 · 条件边护栏 · 零依赖可跑</span>
-            </div>
-            <p class="project-desc">用 LangGraph 复刻「按部就班不偏离」智能体编排：检索→判断→推理→调工具→回收记忆，条件边做护栏。</p>
-            <ul class="project-features">
-                <li>有状态状态机：节点顺序固定，检索为空→追问不乱编</li>
-                <li>条件边护栏：judge 决定走推理还是追问，reason 决定调不调工具</li>
-                <li>共享状态黑板：memory + trace 全局累加，证明「不偏离」</li>
-                <li>离线 mock 开箱即跑，--real 接本地模型网关</li>
-            </ul>
-            <div class="project-highlight">
-                <strong>为什么做：</strong>Chain 是直线、跑完即焚，无法在中间做「要不要调工具 / 检索不到怎么办」的分支判断。<br>
-                <strong>场景价值：</strong>ai-native-team 编排思想的工业框架等价实现，两者架构同构。<br>
-                <strong>单独用：</strong>需要可控多步 Agent 编排的团队，可参考这套护栏设计。
-            </div>
-            <a href="https://github.com/Babymrbbbb/langgraph-agent-demo" class="project-link" target="_blank">
-                查看仓库 <span>→</span>
-            </a>
         </div>
     </section>
 
-    <!-- Delivered Software Section -->
-    <section id="product" class="product">
+    <!-- Results Section -->
+    <section id="results" class="product">
         <div class="section-header">
-            <span class="section-tag">DELIVERED SOFTWARE</span>
-            <h2>落地软件</h2>
-            <p>公开项目之外，还有两套真实部署在门店运营中的桌面端软件</p>
+            <span class="section-tag">RESULTS</span>
+            <h2>落地结果</h2>
+            <p>这些数字对应的是公司现在每天在用的系统，不是事后整理的成果清单。</p>
         </div>
 
-        <div class="product-grid">
-            <div class="product-info">
-                <div class="project-header">
-                    <span class="project-tag">桌面端 · 已落地</span>
-                    <h3>AI 经营驾驶舱</h3>
-                    <span class="project-badge">Electron 桌面端 · 业务系统集成</span>
-                </div>
-                <p class="project-desc">Windows 桌面端一体化经营看板：经营数据 → AI 结论卡，47 家门店每日打开的生产工具。</p>
-                <ul class="project-features">
-                    <li>4 张 AI 结论卡：昨日整体 / 环比 / 门店归因 / 今日行动</li>
-                    <li>统计三道自检：防假环比 / 防假异常 / 防不可信归因</li>
-                    <li>门店归因：哪家店为什么差、差在哪、怎么办</li>
-                    <li>AI 对话调数：侧边面板直接调全部数据，可联动跳转</li>
-                </ul>
-                <div class="project-highlight">
-                    <strong>核心价值：</strong>把 AI 从"玩具 Demo"推到"每天打开的生产工具"
-                </div>
-                <a href="https://github.com/Babymrbbbb/swan-electron-suite" class="project-link" target="_blank">
-                    查看架构与设计决策 <span>→</span>
-                </a>
+        <div class="capabilities">
+            <div class="capability">
+                <h3>47 家门店</h3>
+                <p>清远含连州 40 / 广州含花都 4 / 肇庆 2 / 佛山 1，全部纳入同一套数据口径</p>
             </div>
-
-            <div class="product-diagram">
-                <div class="diagram-box">
-                    <div class="diagram-title">数据流模型</div>
-                    <div class="diagram-flow">
-                        <div class="flow-node source">
-                            <span class="node-icon">📊</span>
-                            <span>经营数据快照</span>
-                        </div>
-                        <div class="flow-node source">
-                            <span class="node-icon">📚</span>
-                            <span>本地知识库</span>
-                        </div>
-                        <div class="flow-node source">
-                            <span class="node-icon">📍</span>
-                            <span>门店 POI / 竞品</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node process">
-                            <span class="node-icon">⚙️</span>
-                            <span>自动发现最新快照<br>22 模块解析</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node ai">
-                            <span class="node-icon">🤖</span>
-                            <span>AI 分析层<br>统计自检 · 归因 · 结论卡</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node output">
-                            <span class="node-icon">🖥️</span>
-                            <span>黑金主题桌面端<br>4 张结论卡 · AI 对话</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="capability">
+                <h3>约 20 万终端客户</h3>
+                <p>会员、订单、私域数据统一到一个口径下运营</p>
             </div>
-        </div>
-
-        <!-- AI 调度运维工作台 -->
-        <div class="product-grid">
-            <div class="product-info">
-                <div class="project-header">
-                    <span class="project-tag">桌面端 · 自制工作台</span>
-                    <h3>AI 调度运维工作台</h3>
-                    <span class="project-badge">Electron 桌面端 · 本地运维控制台</span>
-                </div>
-                <p class="project-desc">本地 AI 调度运维控制台（Electron 桌面端）：系统健康、自动化清单、模型池配额与任务队列一屏掌握。</p>
-                <ul class="project-features">
-                    <li>配置化服务一键启停：Daemon 调度守护 / 模型网关 / 调度中枢一键启动</li>
-                    <li>服务状态交叉验证：本地运行时记录 + 守护进程事件</li>
-                    <li>单实例锁 + 空闲端口自动探测 + 中文应用菜单 + 异常兜底不崩溃</li>
-                    <li>零经营数据 / 零社交平台数据 / 零外部 API，仅读本地 JSON/MD，目录穿越防护</li>
-                </ul>
-                <div class="project-highlight">
-                    <strong>核心价值：</strong>把「本地多服务难管理」做成双击即用的桌面工作台
-                </div>
-                <a href="https://github.com/Babymrbbbb/swan-electron-suite" class="project-link" target="_blank">
-                    查看架构与设计决策 <span>→</span>
-                </a>
+            <div class="capability">
+                <h3>复购率提升 10%~15%</h3>
+                <p>用标签、自动化触达和券把「数据→洞察→触达→回流」跑成闭环</p>
             </div>
-
-            <div class="product-diagram">
-                <div class="diagram-box">
-                    <div class="diagram-title">工作台架构</div>
-                    <div class="diagram-flow">
-                        <div class="flow-node source">
-                            <span class="node-icon">🖥️</span>
-                            <span>Electron 桌面端<br>自带 Chromium 窗口</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node process">
-                            <span class="node-icon">⚙️</span>
-                            <span>进程内嵌 Node server<br>原生 http/fs，零依赖</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node ai">
-                            <span class="node-icon">📄</span>
-                            <span>仅读本地 JSON / MD<br>health · automation · queue · services</span>
-                        </div>
-                        <div class="flow-arrow">↓</div>
-                        <div class="flow-node output">
-                            <span class="node-icon">🎛️</span>
-                            <span>服务一键启停<br>Daemon / 网关 / 调度中枢</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="capability">
+                <h3>44 条自动化任务</h3>
+                <p>按日、周、月自动运行，覆盖数据、话术、竞品、复盘、自检</p>
+            </div>
+            <div class="capability">
+                <h3>1,600+ 篇 → 1,300+ 页</h3>
+                <p>原始资料被编译成可导航知识页，问答带出处</p>
+            </div>
+            <div class="capability">
+                <h3>2 套每天在跑的桌面工具</h3>
+                <p>经营驾驶舱、调度运维工作台，总部与店长都在用</p>
             </div>
         </div>
     </section>
 
-    <!-- Live Demo Section -->
+    <!-- Demo Section -->
     <section id="demo" class="demo">
         <div class="section-header">
-            <span class="section-tag">LIVE DEMO</span>
+            <span class="section-tag">IN PRODUCTION</span>
             <h2>实际运行效果</h2>
             <p>生产工具界面示意（数据已脱敏）——不是 PPT 演示，是每天在跑的系统</p>
         </div>
 
         <div class="demo-grid">
             <div class="demo-shot">
-                <img src="assets/gateway-stats.png" alt="sensenova-gateway 网关负载示意（数据脱敏）">
+                <img src="assets/cockpit-home.png" alt="AI 经营驾驶舱 界面示意（数据脱敏）">
                 <div class="demo-caption">
-                    <span class="demo-label">sensenova-gateway</span>
-                    <span class="demo-desc">多账号池化负载均衡示意，587 次请求成功率 100%</span>
+                    <span class="demo-label">AI 经营驾驶舱</span>
+                    <span class="demo-desc">经营总览：KPI → AI 经营分析 → 异常雷达 / 30 日趋势（数据脱敏）</span>
                 </div>
             </div>
             <div class="demo-shot">
                 <img src="assets/kb-search.png" alt="知识库检索示意（数据脱敏）">
                 <div class="demo-caption">
-                    <span class="demo-label">知识库检索（llm-wiki / kb-cli）</span>
-                    <span class="demo-desc">关键词 AND 检索 + wiki 关联推荐示意</span>
+                    <span class="demo-label">知识库检索</span>
+                    <span class="demo-desc">店长提问，答案带出处，可直接追溯原文</span>
                 </div>
             </div>
             <div class="demo-shot">
-                <img src="assets/cockpit-home.png" alt="AI 经营驾驶舱 界面示意（数据脱敏）">
+                <img src="assets/gateway-stats.png" alt="模型网关负载示意（数据脱敏）">
                 <div class="demo-caption">
-                    <span class="demo-label">AI 经营驾驶舱</span>
-                    <span class="demo-desc">经营总览界面示意：KPI → AI 经营分析 → 异常雷达 / 30日趋势（数据脱敏）</span>
+                    <span class="demo-label">模型网关</span>
+                    <span class="demo-desc">多账号池化负载均衡，587 次请求成功率 100%</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="philosophy">
+    <!-- Principles Section -->
+    <section id="principles" class="philosophy">
         <div class="section-header">
-            <span class="section-tag">PHILOSOPHY</span>
-            <h2>设计哲学</h2>
+            <span class="section-tag">PRINCIPLES</span>
+            <h2>我的原则</h2>
         </div>
         <div class="philosophy-grid">
             <div class="philosophy-item">
                 <span class="philosophy-num">01</span>
-                <h3>零依赖</h3>
-                <p>能用标准库解决，不装第三方</p>
+                <h3>先解决故障</h3>
+                <p>每个工具都对应一个真实发生过的故障，不为了用技术而用技术</p>
             </div>
             <div class="philosophy-item">
                 <span class="philosophy-num">02</span>
-                <h3>可运行</h3>
-                <p>git clone + 一行命令就能跑</p>
+                <h3>明天还会被打开</h3>
+                <p>判断价值的标准只有一个：这套东西明天还会不会有人用</p>
             </div>
             <div class="philosophy-item">
                 <span class="philosophy-num">03</span>
-                <h3>可自测</h3>
-                <p>不需要 mock 环境也能验证</p>
+                <h3>能跑才算数</h3>
+                <p>一行命令能起、出问题能重跑修复，比架构图漂亮更重要</p>
             </div>
             <div class="philosophy-item">
                 <span class="philosophy-num">04</span>
-                <h3>可扩展</h3>
-                <p>核心逻辑和配置解耦，改一行字典就能适配新场景</p>
+                <h3>给一线用</h3>
+                <p>最终用户是店长，他们不常开电脑，所以结果要能在手机上直接执行</p>
             </div>
         </div>
         <p class="philosophy-why">
-            <strong>为什么坚持这四个原则？</strong>最终用户是一线店长，他们甚至没有电脑——软件只跑在总部，店长只收到加工好的结果（作战卡、结论、海报），在手机里查看执行。所以工具必须零依赖、一行命令能跑，出问题能随手在任何机器上重跑修复。
+            <strong>为什么这么想？</strong>我不做演示给人看的东西。47 家门店每天真的在跑，出错就是门店当天少一份作战卡、店长少一条结论。所以宁可朴素，也要能用、能修、能交给别人接手。
         </p>
-    </section>
-
-    <!-- Article Section -->
-    <section id="article" class="article">
-        <div class="section-header">
-            <span class="section-tag">ARTICLE</span>
-            <h2>技术思考</h2>
-            <p>纯工程师写不出来的视角 —— 从业务痛点到技术选型</p>
-        </div>
-        <div class="article-card">
-            <div class="article-header">
-                <span class="article-tag">技术选型</span>
-                <h3>为什么知识库调取要用 LLM × RAG，而不是单用其一</h3>
-                <p class="article-meta">llm-wiki 设计决策 · 8 分钟阅读</p>
-            </div>
-            <div class="article-excerpt">
-                <p>
-                    单用 LLM 会<strong>幻觉</strong>——模型没有你的业务事实，只能靠训练数据猜；单用 RAG 只有<strong>文档列表</strong>，不是答案。所以我做的是 <strong>LLM × RAG 知识库调取系统</strong>：LLM 把 1,600+ 篇原始资料编译成可导航的 wiki 知识层，RAG 排序器精确召回，命中页作为上下文喂给 LLM 生成有依据的答案。
-                </p>
-                <p>
-                    检索排序不是查出来就行——生产版已迭代到 <strong>v2.4</strong>：词频饱和（防长文档刷分）、业务子库加权（自家一手资料优先）、倒排索引 + 2-gram 候选定位。排序质量决定 LLM 拿到的上下文对不对，也就是答案质量的上限。
-                </p>
-                <p>
-                    什么时候上向量？当语料过万、出现「问法和文档用词对不上」的语义鸿沟时，再上本地 embedding 做混合检索——这是按场景选型，不是技术债。
-                </p>
-            </div>
-            <a href="article.html" class="article-link" target="_blank">
-                阅读全文 <span>→</span>
-            </a>
-        </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="contact-content">
-            <h2>让我看看能不能帮到你</h2>
-            <p>无论是 AI 工程化、数据驱动运营，还是工具化沉淀，都欢迎聊聊。</p>
+            <h2>想聊聊具体怎么落地</h2>
+            <p>这套东西的每个环节我都能讲清来龙去脉——为什么做、踩了什么坑、最后怎么解决的。</p>
             <div class="contact-info">
                 <a href="mailto:358368437@qq.com" class="contact-item">
                     <div class="contact-icon">
@@ -614,24 +319,12 @@
                         <span class="contact-value">Edward_bei</span>
                     </div>
                 </div>
-                <a href="https://github.com/Babymrbbbb" class="contact-item" target="_blank">
-                    <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-                        </svg>
-                    </div>
-                    <div class="contact-text">
-                        <span class="contact-label">GitHub</span>
-                        <span class="contact-value">github.com/Babymrbbbb</span>
-                    </div>
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>© 2026 Babymrbbbb · 用工程化的方式解决真实业务问题</p>
+        <p>© 2026 · 用工程化的方式解决真实业务问题</p>
     </footer>
 </body>
 </html>
