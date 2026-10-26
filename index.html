@@ -488,47 +488,70 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
   </div>
 
   <div class="kb-box rv">
-    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:10px">四层结构：从原始语料到可追溯的答案</h3>
-    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.85;max-width:720px">问题出在「原始文档」和「模型答案」之间少了两层：一层负责把散落的资料组织成可导航的结构，一层负责在提问时精确召回。缺了这两层，模型只能靠印象答，也就是编造。</p>
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:10px">先回答一个容易误解的问题：1,750 页不是 1,750 篇资料</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.85;max-width:740px">看到「1,750 页」第一反应通常是：这么多，怎么找得到？其实这 1,750 页里，真正给人看的聚合页只有 <strong style="color:var(--t1)">73 页</strong>，其余 1,449 页是每篇原文的自动摘要，另有 228 页历史归档（不进检索）。</p>
 
-    <div class="kb-flow">
-      <div class="kb-step">
-        <div class="kb-step-n">LAYER 01</div>
-        <h5>原始语料</h5>
-        <p>1,600+ 篇：SOP、新品资料、竞品分析、加盟政策、决策记录，按 11 个子库分域存放</p>
+    <table class="dtable" style="margin-top:24px">
+      <thead><tr><th>类型</th><th>页数</th><th>作用</th><th>进不进检索</th></tr></thead>
+      <tbody>
+        <tr><td><strong>聚合页</strong>（实体 / 概念 / 对比 / 综述）</td><td>73</td><td>多源资料编译成一页，带摘要、关键事实、来源列表</td><td>✅ 优先命中</td></tr>
+        <tr><td><strong>单篇摘要</strong></td><td>1,449</td><td>每篇原始资料的结构化摘要，供细查</td><td>✅ 兜底命中</td></tr>
+        <tr><td><strong>历史归档</strong></td><td>228</td><td>旧版页面留档</td><td>❌ 排除</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:18px"><strong style="color:var(--t1)">为什么要这么多页：</strong>因为知识库的价值不在「存了多少」，在「问的时候能不能只捞出那 3 条」。1,449 页单篇摘要是<strong>召回池</strong>——问得越具体，越需要细粒度的候选。如果只有 73 页聚合页，问「某家店某个品类上个月为什么掉」这种具体问题时，聚合页粒度太粗，捞不出来。</p>
+
+    <h3 style="font-size:1.15rem;font-weight:600;margin:44px 0 14px">怎么精准找到：四层检索机制</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.85;max-width:740px;margin-bottom:24px">精准不是靠「索引做得好」，是靠<strong style="color:var(--t1)">四层机制层层收窄</strong>。每一层解决上一层的漏网。</p>
+
+    <div class="mflow" style="grid-template-columns:repeat(2,1fr);gap:16px">
+      <div class="mstep" style="padding:22px 20px">
+        <div class="mstep-n">LAYER 01</div>
+        <h6>聚合层优先</h6>
+        <p style="font-size:.78rem;line-height:1.75">提问先查 73 页聚合页。命中就优先用聚合页的正文作上下文——因为它已经多源合并、标好新旧口径，比零散原文更完整。没命中才往下走。</p>
       </div>
-      <div class="kb-step">
-        <div class="kb-step-n">LAYER 02</div>
-        <h5>聚合编译层</h5>
-        <p>模型把多源资料按「实体 / 概念」重新编译成聚合页，1,750+ 页，每页带摘要、关键事实、来源列表</p>
+      <div class="mstep" style="padding:22px 20px">
+        <div class="mstep-n">LAYER 02</div>
+        <h6>双路召回</h6>
+        <p style="font-size:.78rem;line-height:1.75">倒排路管精确术语（业务词、编号、门店名），向量路管语义换说法（「面包店」能命中「烘焙坊」）。两路并行，取长补短——单路都有明显盲区。</p>
       </div>
-      <div class="kb-step">
-        <div class="kb-step-n">LAYER 03</div>
-        <h5>三层索引</h5>
-        <p>倒排索引管精确术语、向量索引管语义换说法、聚合索引管跨源关联，三路召回后融合排序</p>
+      <div class="mstep" style="padding:22px 20px">
+        <div class="mstep-n">LAYER 03</div>
+        <h6>加权融合</h6>
+        <p style="font-size:.78rem;line-height:1.75">两路结果用 RRF 融合。倒排分里已乘上「新鲜度 × 权威度」——新资料加权、裁决类资料权重更高，防止旧口径靠数量多数派压过最新裁决。</p>
       </div>
-      <div class="kb-step">
-        <div class="kb-step-n">LAYER 04</div>
-        <h5>带引用生成</h5>
-        <p>命中页作为上下文交给模型生成答案，强制标注出处；追溯不到来源就直接拒答</p>
+      <div class="mstep" style="padding:22px 20px">
+        <div class="mstep-n">LAYER 04</div>
+        <h6>精排三重信号</h6>
+        <p style="font-size:.78rem;line-height:1.75">最终排序 = 1.0×RRF 共识 + 0.6×倒排分（候选内归一）+ 0.4×向量余弦 + 0.15×权威先验。三个独立信号交叉验证，避免单一信号误判。</p>
       </div>
     </div>
 
-    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 8px">搭完之后得到的三个结论</h3>
-    <p style="font-size:.84rem;color:var(--t3);font-weight:300;margin-bottom:24px">这些不是我事先设计的目标，是搭完跑起来之后实际验证出来的。</p>
+    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 14px">三个让检索「准」的关键设计</h3>
 
-    <div class="kb-concl">
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9"><strong style="color:var(--t1)">① 关键词证据太弱时，不让倒排路进融合。</strong>如果查询的词面证据低于阈值（说明查询词在库里几乎没有精确匹配），倒排路就完全不参与——否则它会「蹭分」，把真正语义相关的文档压下去。这是我踩过的坑：早期两路无条件融合，问口语化问题时总是被关键词路带偏。</p>
+
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9"><strong style="color:var(--t1)">② 短文档不做高频词过滤。</strong>事实卡这类文档只有几百字，正文里的关键词可能只出现 1 次。如果按长文档的标准做「词频 ≥2 才算命中」，这类高价值文档会被直接杀掉。所以短文档走单独规则。</p>
+
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9"><strong style="color:var(--t1)">③ 两个索引的文档 ID 必须统一口径。</strong>这是最难发现的一个 bug——倒排索引记的路径是「子库|L3/x」，但真实目录叫「L3_原始资料」，导致所有原始资料「检索得到、内容读不出」，问答上下文全靠聚合页在撑。同时两个索引的 ID 格式不一致，RRF 融合时同一篇文档被拆成两票，排序全乱。修复方式是在融合前统一归一 ID，并在读取时做路径兜底。</p>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 14px">怎么验证「真的准」：24 条用例做回归</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">检索链路改一行，效果可能变好也可能变坏，肉眼看不出来。所以我建了 24 条评测用例，覆盖权威口径、竞品、防幻觉、品牌、运营、产品、行业、供应链、加盟、聚合层、口语化 11 类。<strong style="color:var(--gold-l)">凡改检索链路，必须跑全量回归，通过率必须 100%。</strong></p>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.9">这条规则救过很多次——有一次改完感觉「应该更好了」，跑评测发现口语化那 2 条挂了，回滚重做才通过。</p>
+
+    <div class="kb-concl" style="margin-top:36px">
+      <div class="kbc">
+        <div class="kbc-n">73<u>页</u></div>
+        <div class="kbc-l"><strong>真正给人看的聚合页</strong>多源合并成一页，带摘要、关键事实、来源列表。命中它就用它的正文，比零散原文更完整。</div>
+      </div>
       <div class="kbc">
         <div class="kbc-n">24<u>条</u></div>
-        <div class="kbc-l"><strong>评测必须固化成用例</strong>24 条评测用例覆盖权威口径、竞品、防幻觉、品牌、运营、产品等 11 类，每次改检索链路必须全量回归。没有这条，改一处坏三处，你永远不会知道。</div>
+        <div class="kbc-l"><strong>评测用例覆盖 11 类场景</strong>每次改检索链路必须全量回归，通过率必须 100%。改一处坏三处，靠肉眼永远发现不了。</div>
       </div>
       <div class="kbc">
-        <div class="kbc-n">1<u>个</u></div>
-        <div class="kbc-l"><strong>事实只能有唯一真相源</strong>门店数曾经因为「旧文档 77 篇 vs 裁决 1 篇」，朴素检索让旧口径获胜。教训是：关键事实必须单一来源，冲突时以裁决为准，且旧口径必须显式标注已过时。</div>
-      </div>
-      <div class="kbc">
-        <div class="kbc-n">0<u>容忍</u></div>
-        <div class="kbc-l"><strong>测试绿 ≠ 线上对</strong>评测通过不代表生产正确——曾出现「索引重建了但内容读不出」，问答上下文全靠聚合层在撑。验证正确性必须做检索探针，不能只看测试结果。</div>
+        <div class="kbc-n">4<u>层</u></div>
+        <div class="kbc-l"><strong>层层收窄的检索机制</strong>聚合优先 → 双路召回 → 加权融合 → 三重信号精排。每一层解决上一层的漏网。</div>
       </div>
     </div>
   </div>
@@ -896,19 +919,19 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
     <table class="dtable" style="margin-top:28px">
       <thead><tr><th>能力池</th><th>主模型定位</th><th>降级链</th><th>并发</th></tr></thead>
       <tbody>
-        <tr><td>战略池</td><td>战略级推理，带思考链</td><td>4 级降级</td><td>2</td></tr>
-        <tr><td>长文池</td><td>百万级长上下文</td><td>4 级降级</td><td>2</td></tr>
-        <tr><td>看图池</td><td>视觉理解，双通道轮转</td><td>4 级降级</td><td>2</td></tr>
-        <tr><td>代码池</td><td>代码生成与重构</td><td>4 级降级</td><td>2</td></tr>
-        <tr><td>话术池</td><td>轻量高吞吐，性价比优先</td><td>2 级降级</td><td>4</td></tr>
-        <tr><td>主管池</td><td>日常管理与任务拆解</td><td>2 级降级</td><td>2</td></tr>
-        <tr><td>逻辑池</td><td>结构化推理</td><td>2 级降级</td><td>2</td></tr>
-        <tr><td>轻量池</td><td>低成本批处理</td><td>2 级降级</td><td>2</td></tr>
-        <tr><td>边缘池（三级）</td><td>极低延迟，秒级响应</td><td>单模型</td><td>按层</td></tr>
+        <tr><td>战略池</td><td>Kimi K3（战略级推理，带思考链）</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>长文池</td><td>LongCat 2.5（百万级长上下文）</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>看图池</td><td>视觉模型（双通道轮转）</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>代码池</td><td>GLM-4.7（代码生成与重构）</td><td>4 级降级</td><td>2</td></tr>
+        <tr><td>话术池</td><td>SenseNova 6.8 Lite（轻量高吞吐）</td><td>2 级降级</td><td>4</td></tr>
+        <tr><td>主管池</td><td>GLM-4.7（日常管理与任务拆解）</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>逻辑池</td><td>GLM-4.7（结构化推理）</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>轻量池</td><td>SenseNova 6.8 Lite（低成本批处理）</td><td>2 级降级</td><td>2</td></tr>
+        <tr><td>边缘池（三级）</td><td>Spark 1.7B / 4B（极低延迟）</td><td>单模型</td><td>按层</td></tr>
       </tbody>
     </table>
 
-    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:20px"><strong style="color:var(--t1)">降级链怎么用：</strong>主模型遇到限流、超时、5xx 时，自动按降级序切到下一个，任务不中断。降级事件全部记入日志，可以查「今天哪个池降了几次、降到谁」。如果一个池频繁降级，说明主模型选型需要调整——这是我看模型健康度的主要信号。</p>
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:20px"><strong style="color:var(--t1)">降级链怎么用：</strong>比如战略池的降级序是 Kimi K3 → DeepSeek V4.1 → GLM-4.7 → Spark 4B，长文池是 LongCat 2.5 → GLM-4.7 → Qwen3.8-Max → 自动路由。主模型遇到限流、超时、5xx 时自动切下一个，任务不中断。降级事件全部记入日志，可以查「今天哪个池降了几次、降到谁」。如果一个池频繁降级，说明主模型选型需要调整——这是我看模型健康度的主要信号。</p>
 
     <p style="font-size:.84rem;color:var(--t3);font-weight:300;line-height:1.85;margin-top:14px"><strong style="color:var(--t1)">并发上限为什么这么设：</strong>战略池和长文池设 2，因为这两类任务单次耗时长、单次成本高，并发太高会互相挤占；话术池设 4，因为话术任务短平快，可以并行。并发上限不是拍脑袋，是按「单次任务耗时 × 单位时间需求量」倒推的。</p>
 
