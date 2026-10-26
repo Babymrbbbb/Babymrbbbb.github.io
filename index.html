@@ -88,7 +88,8 @@ section{padding:120px 40px;max-width:var(--max);margin:0 auto}
 .sec-tag::before{content:'';display:inline-block;width:26px;height:1px;background:var(--gold);
   vertical-align:middle;margin-right:12px;opacity:.6}
 h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:700;letter-spacing:-.025em;
-  line-height:1.2;margin-bottom:18px}
+  line-height:1.2;margin-bottom:18px;word-break:keep-all;overflow-wrap:break-word}
+.nowrap{white-space:nowrap}
 .sec-head p{color:var(--t2);font-size:.98rem;font-weight:300;line-height:1.9}
 
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -792,8 +793,8 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
 <section id="dual">
   <div class="sec-head rv">
     <span class="sec-tag">DUAL-AI COLLABORATION</span>
-    <h2>双 AI 协作：WorkBuddy 执行，Codex 验收</h2>
-    <p>这套系统里最反直觉的一点：<strong>写代码的和验收代码的，是两个不同的 AI。</strong> 一个人既当运动员又当裁判，最后一定验收不出问题——AI 也一样。</p>
+    <h2>双 AI 协作：<span class="nowrap">执行与验收分离</span></h2>
+    <p>这套系统里最反直觉的一点：<strong>写代码的和验收代码的，是<span class="nowrap">两个不同的 AI</span>。</strong> 一个人既当运动员又当裁判，最后一定验收不出问题——AI 也一样。</p>
   </div>
 
   <div class="ag-wrap rv">
