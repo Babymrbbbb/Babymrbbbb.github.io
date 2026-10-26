@@ -1,344 +1,739 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用 AI 重构门店运营落地模式 · Babymrbbbb</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>◆</text></svg>">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用 AI 重构门店运营落地模式 · Babymrbbbb</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d4af37'>◆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080a; --bg2:#0e0e11; --card:#111114; --line:#1e1e23;
+  --gold:#c9a227; --gold-l:#e8c95a; --gold-dim:rgba(201,162,39,.12);
+  --t1:#f2f2f4; --t2:#9a9aa3; --t3:#5c5c66;
+  --max:1120px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--t1);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  line-height:1.75; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,162,39,.07), transparent 60%),
+    radial-gradient(ellipse 700px 400px at 85% 20%, rgba(201,162,39,.04), transparent 60%);
+}
+.wrap{position:relative;z-index:1}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 40px;
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  background:rgba(8,8,10,.72); border-bottom:1px solid rgba(255,255,255,.05);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.16em;font-size:.82rem}
+.brand i{color:var(--gold);font-style:normal;font-size:1rem}
+.navlinks{display:flex;gap:30px}
+.navlinks a{
+  color:var(--t3); text-decoration:none; font-size:.8rem;
+  letter-spacing:.04em; transition:color .25s; position:relative;
+}
+.navlinks a:hover{color:var(--gold-l)}
+
+/* ---------- HERO ---------- */
+.hero{padding:170px 40px 90px;max-width:var(--max);margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:.7rem;letter-spacing:.2em;color:var(--gold);
+  border:1px solid rgba(201,162,39,.28);border-radius:100px;
+  padding:7px 16px;margin-bottom:34px;
+}
+.eyebrow b{width:5px;height:5px;border-radius:50%;background:var(--gold);display:block;
+  box-shadow:0 0 10px var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+h1{
+  font-size:clamp(2.5rem,6.2vw,4.6rem);
+  font-weight:800; line-height:1.06; letter-spacing:-.035em;
+  margin-bottom:34px;
+}
+h1 em{font-style:normal;color:var(--gold);position:relative;display:inline-block}
+h1 em::after{
+  content:'';position:absolute;left:0;right:0;bottom:.06em;height:.09em;
+  background:linear-gradient(90deg,var(--gold),transparent);opacity:.35;
+}
+.lede{
+  font-size:1.08rem;color:var(--t2);max-width:660px;
+  line-height:1.95;font-weight:300;margin-bottom:14px;
+}
+.lede strong{color:var(--t1);font-weight:600}
+.lede-sub{font-size:.86rem;color:var(--t3);max-width:660px;margin-bottom:48px}
+
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:96px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 30px;border-radius:100px;text-decoration:none;
+  font-size:.88rem;font-weight:600;letter-spacing:.01em;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.btn-p{background:var(--gold);color:#0a0a0a}
+.btn-p:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,162,39,.28)}
+.btn-s{border:1px solid var(--line);color:var(--t2)}
+.btn-s:hover{border-color:rgba(201,162,39,.45);color:var(--gold-l);transform:translateY(-2px)}
+
+/* ---------- HERO METRICS ---------- */
+.hmetrics{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.hm{padding:36px 8px 36px 0;position:relative}
+.hm+.hm{padding-left:32px;border-left:1px solid var(--line)}
+.hm-n{
+  font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1;color:var(--t1);
+  font-variant-numeric:tabular-nums;
+}
+.hm-n u{text-decoration:none;font-size:.5em;color:var(--gold);margin-left:3px;font-weight:600}
+.hm-l{font-size:.72rem;color:var(--t3);letter-spacing:.1em;margin-top:12px;text-transform:uppercase}
+
+/* ---------- SECTION ---------- */
+section{padding:120px 40px;max-width:var(--max);margin:0 auto}
+.sec-head{margin-bottom:64px;max-width:760px}
+.sec-tag{
+  font-size:.68rem;letter-spacing:.22em;color:var(--gold);
+  display:block;margin-bottom:18px;font-weight:600;
+}
+.sec-tag::before{content:'';display:inline-block;width:26px;height:1px;background:var(--gold);
+  vertical-align:middle;margin-right:12px;opacity:.6}
+h2{
+  font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:700;
+  letter-spacing:-.025em;line-height:1.2;margin-bottom:18px;
+}
+.sec-head p{color:var(--t2);font-size:.98rem;font-weight:300;line-height:1.9}
+
+/* ---------- PROBLEM GRID ---------- */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pcard{background:var(--card);padding:34px 30px;transition:background .3s;position:relative}
+.pcard:hover{background:#151519}
+.pcard::before{
+  content:attr(data-n);position:absolute;top:22px;right:24px;
+  font-size:.66rem;color:var(--t3);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;
+}
+.pcard h3{font-size:1rem;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
+.pcard h3 span{color:var(--gold);font-size:.7rem;display:block;margin-bottom:8px;
+  letter-spacing:.12em;font-weight:500}
+.pcard p{font-size:.85rem;color:var(--t2);line-height:1.85;font-weight:300}
+
+.insight{
+  margin-top:36px;padding:30px 34px;
+  background:linear-gradient(135deg,rgba(201,162,39,.07),rgba(201,162,39,.01));
+  border-left:2px solid var(--gold);border-radius:0 12px 12px 0;
+  font-size:.95rem;color:var(--t1);line-height:1.95;font-weight:300;
+}
+.insight b{color:var(--gold-l);font-weight:600}
+
+/* ---------- RESULTS ---------- */
+.rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.rcard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:32px;transition:all .35s;
+}
+.rcard:hover{border-color:rgba(201,162,39,.3);transform:translateY(-3px)}
+.rcard-top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:6px}
+.rcard-n{
+  font-size:2.3rem;font-weight:800;letter-spacing:-.035em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.rcard-n u{text-decoration:none;font-size:.42em;color:var(--gold);margin-left:4px;font-weight:600}
+.rcard-badge{
+  font-size:.66rem;color:var(--gold);background:var(--gold-dim);
+  padding:4px 10px;border-radius:100px;letter-spacing:.06em;white-space:nowrap;
+}
+.rcard h4{font-size:.86rem;color:var(--t1);font-weight:600;margin:14px 0 8px}
+.rcard p{font-size:.8rem;color:var(--t3);line-height:1.75;font-weight:300}
+
+.bar{margin-top:20px;height:3px;background:#1a1a1f;border-radius:100px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));
+  border-radius:100px;transform-origin:left;animation:grow 1.4s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- STAGES ---------- */
+.stage{
+  display:grid;grid-template-columns:88px 1fr;gap:36px;
+  padding:44px 0;border-bottom:1px solid var(--line);
+}
+.stage:first-of-type{border-top:1px solid var(--line)}
+.stage-no{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;
+  color:var(--gold);letter-spacing:.1em;padding-top:6px;
+}
+.stage-no b{display:block;font-size:1.5rem;color:rgba(201,162,39,.28);
+  font-weight:300;margin-top:6px}
+.stage h3{font-size:1.28rem;font-weight:600;margin-bottom:20px;letter-spacing:-.015em}
+.fault{
+  font-size:.86rem;color:var(--t2);padding:14px 18px;margin-bottom:18px;
+  background:rgba(255,90,90,.04);border-left:2px solid rgba(255,90,90,.4);
+  border-radius:0 8px 8px 0;font-weight:300;
+}
+.fault b{color:#ff8b8b;font-weight:600;font-size:.78rem;letter-spacing:.06em;
+  display:block;margin-bottom:5px}
+.stage p{font-size:.9rem;color:var(--t2);line-height:1.9;font-weight:300;margin-bottom:16px}
+.stage p strong{color:var(--t1);font-weight:600}
+.result-inline{
+  font-size:.86rem;color:var(--gold-l);font-weight:400;
+  padding-top:4px;display:flex;gap:10px;align-items:flex-start;
+}
+.result-inline::before{content:'→';color:var(--gold);flex-shrink:0}
+
+/* ---------- KB DEEP DIVE ---------- */
+.kb-box{
+  background:linear-gradient(160deg,#0f0f13,#0b0b0e);
+  border:1px solid var(--line);border-radius:20px;
+  padding:52px 48px;position:relative;overflow:hidden;
+}
+.kb-box::before{
+  content:'';position:absolute;top:-100px;right:-100px;width:320px;height:320px;
+  background:radial-gradient(circle,rgba(201,162,39,.09),transparent 70%);
+}
+.kb-flow{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+  margin:36px 0 40px;position:relative;
+}
+.kb-step{
+  background:rgba(255,255,255,.02);border:1px solid var(--line);
+  border-radius:12px;padding:22px 18px;position:relative;
+}
+.kb-step-n{font-family:'JetBrains Mono',monospace;font-size:.62rem;
+  color:var(--gold);letter-spacing:.14em;margin-bottom:12px}
+.kb-step h5{font-size:.85rem;font-weight:600;margin-bottom:9px}
+.kb-step p{font-size:.74rem;color:var(--t3);line-height:1.7;font-weight:300}
+.kb-concl{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+}
+.kbc{background:rgba(255,255,255,.015);padding:24px 22px}
+.kbc-n{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.kbc-n u{text-decoration:none;font-size:.5em;color:var(--gold);margin-left:3px}
+.kbc-l{font-size:.73rem;color:var(--t3);line-height:1.65;font-weight:300}
+
+/* ---------- METHODOLOGY ---------- */
+.mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.mcard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:34px;position:relative;transition:all .35s;
+}
+.mcard:hover{border-color:rgba(201,162,39,.28);background:#131317}
+.mcard-tag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:.63rem;color:var(--gold);letter-spacing:.12em;
+  margin-bottom:16px;padding:3px 9px;border:1px solid rgba(201,162,39,.22);
+  border-radius:4px;
+}
+.mcard h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
+.mcard .why{font-size:.8rem;color:var(--t3);margin-bottom:20px;font-weight:300;line-height:1.75}
+.mlist{list-style:none;counter-reset:m}
+.mlist li{
+  counter-increment:m;position:relative;padding-left:32px;
+  font-size:.84rem;color:var(--t2);line-height:1.8;
+  margin-bottom:11px;font-weight:300;
+}
+.mlist li::before{
+  content:counter(m,decimal-leading-zero);position:absolute;left:0;top:1px;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;
+  color:rgba(201,162,39,.55);
+}
+.mlist li strong{color:var(--t1);font-weight:600}
+
+/* ---------- DECISION ---------- */
+.dtable{width:100%;border-collapse:collapse;margin-top:12px}
+.dtable th{
+  text-align:left;padding:14px 18px;font-size:.7rem;
+  color:var(--gold);letter-spacing:.14em;font-weight:600;
+  border-bottom:1px solid var(--line);text-transform:uppercase;
+}
+.dtable td{
+  padding:24px 18px;font-size:.86rem;color:var(--t2);
+  border-bottom:1px solid var(--line);vertical-align:top;font-weight:300;
+}
+.dtable td:first-child{color:var(--t1);font-weight:600;font-size:.9rem;white-space:nowrap}
+.dtable td em{font-style:normal;color:var(--gold-l);font-size:.78rem;display:block;
+  margin-top:6px;font-weight:500}
+
+.pullquote{
+  margin:56px 0 0;padding:44px 48px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.7;
+  font-weight:300;color:var(--t1);letter-spacing:-.01em;
+}
+.pullquote b{color:var(--gold);font-weight:700}
+
+/* ---------- CONTACT ---------- */
+.contact-sec{
+  text-align:center;padding:130px 40px 100px;max-width:820px;margin:0 auto;
+}
+.contact-sec h2{margin-bottom:22px}
+.contact-sec>p{color:var(--t2);font-size:.98rem;font-weight:300;
+  line-height:1.9;margin-bottom:44px}
+.cinfo{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:64px}
+.citem{text-decoration:none;text-align:center}
+.citem span{display:block;font-size:.68rem;color:var(--t3);letter-spacing:.14em;
+  margin-bottom:7px;text-transform:uppercase}
+.citem b{font-size:.9rem;color:var(--t1);font-weight:500;transition:color .25s}
+.citem:hover b{color:var(--gold-l)}
+
+footer{
+  padding:36px 40px;border-top:1px solid var(--line);
+  text-align:center;font-size:.74rem;color:var(--t3);letter-spacing:.05em;
+}
+
+/* ---------- REVEAL ---------- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  nav{padding:14px 22px}
+  .navlinks{display:none}
+  .hero{padding:130px 22px 60px}
+  section{padding:80px 22px}
+  .hmetrics{grid-template-columns:repeat(2,1fr)}
+  .hm:nth-child(3){padding-left:0;border-left:none;border-top:1px solid var(--line)}
+  .hm:nth-child(4){border-top:1px solid var(--line)}
+  .pgrid{grid-template-columns:1fr}
+  .rgrid,.mgrid{grid-template-columns:1fr}
+  .stage{grid-template-columns:1fr;gap:14px}
+  .stage-no b{display:none}
+  .kb-box{padding:34px 24px}
+  .kb-flow{grid-template-columns:1fr 1fr}
+  .kb-concl{grid-template-columns:1fr}
+  .dtable{font-size:.8rem}
+  .dtable th:nth-child(3),.dtable td:nth-child(3){display:none}
+  .pullquote{padding:32px 24px}
+  .cinfo{gap:30px}
+}
+</style>
 </head>
 <body>
-    <div class="bg-grid"></div>
+<div class="wrap">
 
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <div class="logo">
-                <span class="logo-mark">◆</span> BABYMRBBBB
-            </div>
-            <ul>
-                <li><a href="#background">背景</a></li>
-                <li><a href="#stages">我做了什么</a></li>
-                <li><a href="#results">结果</a></li>
-                <li><a href="#demo">实际运行</a></li>
-                <li><a href="#principles">原则</a></li>
-                <li><a href="#contact">联系</a></li>
-            </ul>
-        </nav>
-    </header>
+<nav>
+  <div class="brand"><i>◆</i> BABYMRBBBB</div>
+  <div class="navlinks">
+    <a href="#problem">背景</a>
+    <a href="#results">成果</a>
+    <a href="#stages">做法</a>
+    <a href="#kb">知识库</a>
+    <a href="#method">方法论</a>
+    <a href="#boundary">边界</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                47 家门店 · 每天在跑 · 不是演示
-            </div>
-            <h1>
-                <span class="hero-line">用 AI 重构门店运营落地模式</span>
-            </h1>
-            <p class="subtitle">我是 47 家烘焙连锁门店的用户运营负责人。我把运营里每天重复发生的劳动，一件一件改造成由 AI 驱动的自动化运营分析——现在这套东西每天在公司里真实运行。</p>
-            <p class="desc">
-                清远含连州 40 家 / 广州含花都 4 家 / 肇庆 2 家 / 佛山 1 家<br>
-                服务约 20 万终端客户，会员复购率月均提升 <strong>13%</strong>
-            </p>
-            <div class="cta">
-                <a href="#stages" class="btn primary">
-                    看我怎么做的
-                    <span class="btn-arrow">→</span>
-                </a>
-                <a href="article.html" class="btn secondary">
-                    读落地复盘全文
-                    <span class="btn-icon">↗</span>
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-value">47</span>
-                    <span class="stat-label">覆盖门店</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">20万+</span>
-                    <span class="stat-label">终端客户</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">44</span>
-                    <span class="stat-label">自动化任务</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">13%</span>
-                    <span class="stat-label">复购率月均提升</span>
-                </div>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="terminal-header">
-                <span class="terminal-dot red"></span>
-                <span class="terminal-dot yellow"></span>
-                <span class="terminal-dot green"></span>
-                <span class="terminal-title">今日自动化任务</span>
-            </div>
-            <div class="terminal-body">
-                <div class="terminal-line"><span class="t-ok">07:00</span> <span class="t-muted">经营数据管道</span> <span class="t-ok">✓ 完成</span></div>
-                <div class="terminal-line"><span class="t-ok">08:00</span> <span class="t-muted">私域早间话术</span> <span class="t-ok">✓ 已推送</span></div>
-                <div class="terminal-line"><span class="t-ok">09:00</span> <span class="t-muted">行业趋势扫描</span> <span class="t-ok">✓ 完成</span></div>
-                <div class="terminal-line"><span class="t-ok">10:30</span> <span class="t-muted">竞品动态简报</span> <span class="t-ok">✓ 已生成</span></div>
-                <div class="terminal-line"><span class="t-ok">12:00</span> <span class="t-muted">私域午间话术</span> <span class="t-ok">✓ 已推送</span></div>
-                <div class="terminal-line"><span class="t-ok">19:30</span> <span class="t-muted">每日自检采集</span> <span class="t-ok">✓ 完成</span></div>
-                <div class="terminal-line"><span class="t-ok">21:00</span> <span class="t-muted">竞对全量分析</span> <span class="t-ok">✓ 完成</span></div>
-                <div class="terminal-line"><span class="t-ok">22:10</span> <span class="t-muted">晚间综合复盘</span> <span class="t-ok">✓ 完成</span></div>
-                <div class="terminal-line" style="margin-top:12px;padding-top:12px;border-top:1px solid #222"><span class="t-info">共 44 条自动化 · 按日/周/月运行</span></div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow"><b></b>47 家门店 · 每天在跑 · 不是演示</div>
+  <h1>用 AI 重构<br><em>门店运营落地模式</em></h1>
+  <p class="lede">我是 47 家烘焙连锁门店的<strong>用户运营负责人</strong>。我把运营里每天重复发生的劳动，一件一件改造成由 AI 驱动的自动化运营分析——现在这套东西每天在公司里真实运行。</p>
+  <p class="lede-sub">清远含连州 40 家 / 广州含花都 4 家 / 肇庆 2 家 / 佛山 1 家 · 服务约 20 万终端客户</p>
 
-    <!-- Background Section -->
-    <section id="background" class="about">
-        <div class="section-header">
-            <span class="section-tag">BACKGROUND</span>
-            <h2>我面对的是什么</h2>
-            <p>47 家门店意味着每天几十份数据要汇总、几十个问题要回答、几十条动作要追踪。<br>真实的困难不在策略，在执行密度——六个卡点，全都指向同一个问题：分析和执行之间没有闭环。</p>
-        </div>
-        <div class="capabilities">
-            <div class="capability">
-                <h3>数据散</h3>
-                <p>订单、会员、客流分散在不同系统，每天手工汇总，口径还不统一</p>
-            </div>
-            <div class="capability">
-                <h3>知识散</h3>
-                <p>SOP、新品资料、加盟政策散落在文档里，店长查得慢、新人靠口口相传</p>
-            </div>
-            <div class="capability">
-                <h3>情报散</h3>
-                <p>竞品动态无人持续整理，等到要用时找不到</p>
-            </div>
-            <div class="capability">
-                <h3>重复劳动多</h3>
-                <p>话术、日报、作战卡、复盘，每天重复做同样的事</p>
-            </div>
-            <div class="capability">
-                <h3>数据分析浅</h3>
-                <p>能拉出数字，但看不出原因：哪家店为什么掉、掉在哪个品类、该动哪个动作，全靠人一个个翻</p>
-            </div>
-            <div class="capability">
-                <h3>落地执行断</h3>
-                <p>分析结论停在报告里，到店长手上就变成「知道了」，谁做、什么时候做、做完没做，无人追踪</p>
-            </div>
-        </div>
-        <p class="philosophy-why">
-            <strong>我的做法：</strong>我是一线运营负责人，不是科班工程师。所以路径很直接——哪个环节每天在消耗人，就用 AI 把它接过去。下面每个阶段都对应一个真实发生过的故障。
-        </p>
-    </section>
+  <div class="cta-row">
+    <a href="article.html" class="btn btn-p">读完整落地复盘 <span>→</span></a>
+    <a href="#results" class="btn btn-s">先看成果 <span>↓</span></a>
+  </div>
 
-    <!-- Stages Section -->
-    <section id="stages" class="projects">
-        <div class="section-header">
-            <span class="section-tag">WHAT I DID</span>
-            <h2>我用 AI 做了什么</h2>
-            <p>四个阶段，每个阶段都对应一个真实发生过的故障——不是先有技术再找场景。</p>
-        </div>
+  <div class="hmetrics">
+    <div class="hm">
+      <div class="hm-n">13<u>%</u></div>
+      <div class="hm-l">复购率月均提升</div>
+    </div>
+    <div class="hm">
+      <div class="hm-n">178,648</div>
+      <div class="hm-l">CRM 会员总量</div>
+    </div>
+    <div class="hm">
+      <div class="hm-n">44</div>
+      <div class="hm-l">自动化任务</div>
+    </div>
+    <div class="hm">
+      <div class="hm-n">1,600<u>+</u></div>
+      <div class="hm-l">知识库原始资料</div>
+    </div>
+  </div>
+</div>
 
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">阶段一 · 接入</span>
-                <h3>让 AI 调用稳定下来</h3>
-            </div>
-            <div class="project-highlight">
-                <strong>遇到的故障：</strong>多个模型账号配额不够，429 频繁中断，AI 一忙就不可用。
-            </div>
-            <p class="project-desc">自建了一个本地模型网关，把多个账号聚合成一个端点，按配额自动轮询，遇到限流或失效自动切换并隔离。</p>
-            <div class="project-highlight">
-                <strong>结果：</strong>上层所有 AI 应用有了稳定底座，不再因为单个账号限流而停摆。
-            </div>
-        </div>
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="sec-head rv">
+    <span class="sec-tag">BACKGROUND</span>
+    <h2>我面对的是什么</h2>
+    <p>47 家门店意味着每天几十份数据要汇总、几十个问题要回答、几十条动作要追踪。真实的困难不在策略，在执行密度——六个卡点，全都指向同一个问题：分析和执行之间没有闭环。</p>
+  </div>
 
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">阶段二 · 用好</span>
-                <h3>让 AI 产出可用</h3>
-            </div>
-            <div class="project-highlight">
-                <strong>遇到的故障：</strong>AI 出的图、出的视频一眼就假，内容生产变成碰运气。
-            </div>
-            <p class="project-desc">把每次成功的提示词写法沉淀成方法论——通用铁律、图像结构、视频叙事骨架，全部经过实测验证后入库，不是理论推导。</p>
-            <div class="project-highlight">
-                <strong>结果：</strong>AI 内容产出一遍过的比例明显提高，方法可复用给团队。
-            </div>
-        </div>
+  <div class="pgrid rv">
+    <div class="pcard" data-n="01">
+      <h3><span>量的问题</span>数据散</h3>
+      <p>订单、会员、客流分散在不同系统，每天手工汇总，口径还不统一。同一家店的营业额，三个系统能给出三个数。</p>
+    </div>
+    <div class="pcard" data-n="02">
+      <h3><span>量的问题</span>知识散</h3>
+      <p>SOP、新品资料、加盟政策散落在文档里。店长查得慢，新人靠口口相传，同一个问题不同人答出不同答案。</p>
+    </div>
+    <div class="pcard" data-n="03">
+      <h3><span>量的问题</span>情报散</h3>
+      <p>竞品动态无人持续整理，等到要做决策时找不到。上个月的竞品动作，这个月已经没人记得。</p>
+    </div>
+    <div class="pcard" data-n="04">
+      <h3><span>量的问题</span>重复劳动多</h3>
+      <p>话术、日报、作战卡、复盘，每天重复做同样的事。人被困在搬运和排版里，没时间想策略。</p>
+    </div>
+    <div class="pcard" data-n="05">
+      <h3><span>质的问题</span>数据分析浅</h3>
+      <p>能拉出数字，但看不出原因：哪家店为什么掉、掉在哪个品类、该动哪个动作，全靠人一个个翻。</p>
+    </div>
+    <div class="pcard" data-n="06">
+      <h3><span>质的问题</span>落地执行断</h3>
+      <p>分析结论停在报告里，到店长手上就变成「知道了」。谁做、什么时候做、做完没做，无人追踪。</p>
+    </div>
+  </div>
 
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">阶段三 · 知识</span>
-                <h3>让答案带出处</h3>
-            </div>
-            <div class="project-highlight">
-                <strong>遇到的故障：</strong>文档越攒越多却找不到，知识是死数据；直接问大模型会编造，因为它不知道我的业务事实。
-            </div>
-            <p class="project-desc">搭了一套知识库系统。模型负责把上千篇原始资料编译成可导航的聚合页，检索负责精确召回，命中页作为上下文再交给模型生成带引用的答案。</p>
-            <div class="project-highlight">
-                <strong>结果：</strong>1,600 余篇原始资料被编译成 1,300 余个可导航页面，问答可以追溯来源，不再是模型凭印象作答。
-            </div>
-        </div>
+  <div class="insight rv">
+    前四个是<b>「量」的问题</b>，靠工具和自动化能解决。后两个是<b>「质」的问题</b>——分析出来的结论没有变成门店当天要做的动作，动作做完也没有回到数据里验证。<br><br>
+    所以这件事从一开始就不是「上一个 AI 工具」，而是<b>重做一遍运营的落地方式</b>。
+  </div>
+</section>
 
-        <div class="project-card">
-            <div class="project-header">
-                <span class="project-tag">阶段四 · 组织与交付</span>
-                <h3>让 AI 真的进入业务流程</h3>
-            </div>
-            <div class="project-highlight">
-                <strong>遇到的故障：</strong>AI 能力很多，但组织消化不了，工具之间互相覆盖，最后没人用。
-            </div>
-            <p class="project-desc">一边把多个 AI 角色编排成有分工、有决策边界、有校验闸门的生产线；一边把高频操作做成两套 Windows 桌面软件——经营驾驶舱和调度运维工作台，双击即用。</p>
-            <div class="project-highlight">
-                <strong>结果：</strong>AI 从「偶尔试试」变成「每天打开的生产工具」。
-            </div>
-        </div>
-    </section>
+<!-- RESULTS -->
+<section id="results">
+  <div class="sec-head rv">
+    <span class="sec-tag">RESULTS</span>
+    <h2>落地成果</h2>
+    <p>以下数字全部来自系统实际运行数据（快照日期 2026-09-30，覆盖 22 个数据模块），不是估算值。</p>
+  </div>
 
-    <!-- Results Section -->
-    <section id="results" class="product">
-        <div class="section-header">
-            <span class="section-tag">RESULTS</span>
-            <h2>落地结果</h2>
-            <p>这些数字对应的是公司现在每天在用的系统，不是事后整理的成果清单。</p>
-        </div>
+  <div class="rgrid">
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">13<u>%</u></div>
+        <span class="rcard-badge">月均提升</span>
+      </div>
+      <h4>会员复购率</h4>
+      <p>靠「数据 → 洞察 → 触达 → 回流」这条链路真的跑通：数据被拉通、洞察被 AI 算清楚、触达靠标签和自动化执行、回流数据又回到下一轮分析。少了任何一环，这个数字都不成立。</p>
+      <div class="bar"><i style="width:100%"></i></div>
+    </div>
 
-        <div class="capabilities">
-            <div class="capability">
-                <h3>47 家门店</h3>
-                <p>清远含连州 40 / 广州含花都 4 / 肇庆 2 / 佛山 1，全部纳入同一套数据口径</p>
-            </div>
-            <div class="capability">
-                <h3>约 20 万终端客户</h3>
-                <p>会员、订单、私域数据统一到一个口径下运营</p>
-            </div>
-            <div class="capability">
-                <h3>复购率月均提升 13%</h3>
-                <p>用标签、自动化触达和券把「数据→洞察→触达→回流」跑成闭环</p>
-            </div>
-            <div class="capability">
-                <h3>44 条自动化任务</h3>
-                <p>按日、周、月自动运行，覆盖数据、话术、竞品、复盘、自检</p>
-            </div>
-            <div class="capability">
-                <h3>1,600+ 篇 → 1,300+ 页</h3>
-                <p>原始资料被编译成可导航知识页，问答带出处</p>
-            </div>
-            <div class="capability">
-                <h3>2 套每天在跑的桌面工具</h3>
-                <p>经营驾驶舱、调度运维工作台，总部与店长都在用</p>
-            </div>
-        </div>
-    </section>
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">51.4<u>%</u></div>
+        <span class="rcard-badge">当前水位</span>
+      </div>
+      <h4>存量客户复购率</h4>
+      <p>累计购买 96,377 人中，有 49,574 人产生复购。这个数字能算出来，本身就是因为数据口径被统一了——过去散在三个系统里，算不出一个可信的复购率。</p>
+      <div class="bar"><i style="width:51.4%"></i></div>
+    </div>
 
-    <!-- Demo Section -->
-    <section id="demo" class="demo">
-        <div class="section-header">
-            <span class="section-tag">IN PRODUCTION</span>
-            <h2>实际运行效果</h2>
-            <p>生产工具界面示意（数据已脱敏）——不是 PPT 演示，是每天在跑的系统</p>
-        </div>
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">178,648</div>
+        <span class="rcard-badge">会员池</span>
+      </div>
+      <h4>CRM 会员总量</h4>
+      <p>其中企微好友 78,114 人、社群成员 7,191 人。会员不是一堆沉睡的名单——126 个标签持续打标，让「谁该被触达、触达什么」变成可执行的问题。</p>
+      <div class="bar"><i style="width:88%"></i></div>
+    </div>
 
-        <div class="demo-grid">
-            <div class="demo-shot">
-                <img src="assets/cockpit-home.png" alt="AI 经营驾驶舱 界面示意（数据脱敏）">
-                <div class="demo-caption">
-                    <span class="demo-label">AI 经营驾驶舱</span>
-                    <span class="demo-desc">经营总览：KPI → AI 经营分析 → 异常雷达 / 30 日趋势（数据脱敏）</span>
-                </div>
-            </div>
-            <div class="demo-shot">
-                <img src="assets/kb-search.png" alt="知识库检索示意（数据脱敏）">
-                <div class="demo-caption">
-                    <span class="demo-label">知识库检索</span>
-                    <span class="demo-desc">店长提问，答案带出处，可直接追溯原文</span>
-                </div>
-            </div>
-            <div class="demo-shot">
-                <img src="assets/gateway-stats.png" alt="模型网关负载示意（数据脱敏）">
-                <div class="demo-caption">
-                    <span class="demo-label">模型网关</span>
-                    <span class="demo-desc">多账号池化负载均衡，587 次请求成功率 100%</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">42.7<u>%</u></div>
+        <span class="rcard-badge">核销率</span>
+      </div>
+      <h4>优惠券核销</h4>
+      <p>累计发放 163,993 张、核销 70,077 张。券不是发出去就算完成——核销率被持续追踪，才能判断是券设计问题、触达人群问题，还是门店执行问题。</p>
+      <div class="bar"><i style="width:42.7%"></i></div>
+    </div>
 
-    <!-- Principles Section -->
-    <section id="principles" class="philosophy">
-        <div class="section-header">
-            <span class="section-tag">PRINCIPLES</span>
-            <h2>我的原则</h2>
-        </div>
-        <div class="philosophy-grid">
-            <div class="philosophy-item">
-                <span class="philosophy-num">01</span>
-                <h3>先解决故障</h3>
-                <p>每个工具都对应一个真实发生过的故障，不为了用技术而用技术</p>
-            </div>
-            <div class="philosophy-item">
-                <span class="philosophy-num">02</span>
-                <h3>明天还会被打开</h3>
-                <p>判断价值的标准只有一个：这套东西明天还会不会有人用</p>
-            </div>
-            <div class="philosophy-item">
-                <span class="philosophy-num">03</span>
-                <h3>能跑才算数</h3>
-                <p>一行命令能起、出问题能重跑修复，比架构图漂亮更重要</p>
-            </div>
-            <div class="philosophy-item">
-                <span class="philosophy-num">04</span>
-                <h3>给一线用</h3>
-                <p>最终用户是店长，他们不常开电脑，所以结果要能在手机上直接执行</p>
-            </div>
-        </div>
-        <p class="philosophy-why">
-            <strong>为什么这么想？</strong>我不做演示给人看的东西。47 家门店每天真的在跑，出错就是门店当天少一份作战卡、店长少一条结论。所以宁可朴素，也要能用、能修、能交给别人接手。
-        </p>
-    </section>
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">99.9<u>%</u></div>
+        <span class="rcard-badge">达成率</span>
+      </div>
+      <h4>月饼项目目标达成</h4>
+      <p>目标 248 万，实际完成 247.7 万。这个项目跨 45 天、涉及散装与礼盒两条线，靠每日进度追踪和门店归因把偏差压到 0.1% 以内。</p>
+      <div class="bar"><i style="width:99.9%"></i></div>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="contact-content">
-            <h2>想聊聊具体怎么落地的</h2>
-            <p>背景、当时的情况、数据、怎么分析、结果如何，以及 AI 用在哪、哪些决策必须我自己拍板、AI 的边界怎么划、Agent 怎么搭——我把完整过程写成了一篇复盘。</p>
-            <div class="cta" style="margin-top:32px">
-                <a href="article.html" class="btn primary">
-                    读落地复盘全文
-                    <span class="btn-arrow">→</span>
-                </a>
-            </div>
-            <div class="contact-info" style="margin-top:40px">
-                <a href="mailto:358368437@qq.com" class="contact-item">
-                    <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                    </div>
-                    <div class="contact-text">
-                        <span class="contact-label">邮箱</span>
-                        <span class="contact-value">358368437@qq.com</span>
-                    </div>
-                </a>
-                <div class="contact-item" onclick="navigator.clipboard.writeText('Edward_bei');this.querySelector('.contact-value').textContent='已复制 ✓';setTimeout(()=>this.querySelector('.contact-value').textContent='Edward_bei',1500)" style="cursor:pointer" title="点击复制微信号">
-                    <div class="contact-icon">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                        </svg>
-                    </div>
-                    <div class="contact-text">
-                        <span class="contact-label">微信（点击复制）</span>
-                        <span class="contact-value">Edward_bei</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div class="rcard-n">22</div>
+        <span class="rcard-badge">数据模块</span>
+      </div>
+      <h4>经营数据打通</h4>
+      <p>从 KPI 汇总、门店排行、单品日榜，到 RFM 八分段、六层活跃度、品类漏斗、Cohort 留存——过去要人工拼一周的表，现在每天自动生成。</p>
+      <div class="bar"><i style="width:100%"></i></div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>© 2026 · 用工程化的方式解决真实业务问题</p>
-    </footer>
+<!-- STAGES -->
+<section id="stages">
+  <div class="sec-head rv">
+    <span class="sec-tag">WHAT I DID</span>
+    <h2>我用 AI 做了什么</h2>
+    <p>四个阶段，每个阶段都对应一个真实发生过的故障——不是先有技术再找场景。</p>
+  </div>
+
+  <div class="stage rv">
+    <div class="stage-no">PHASE<b>01</b></div>
+    <div>
+      <h3>接入 · 让 AI 调用稳定下来</h3>
+      <div class="fault"><b>遇到的故障</b>多个模型账号配额不够，429 频繁中断，AI 一忙就不可用。所有上层应用都跟着停摆。</div>
+      <p>自建一个本地模型网关，把多个账号聚合成一个端点，按配额自动轮询，遇到限流或失效自动切换并隔离。上层应用只需要面对一个地址，不再关心背后有几个账号。</p>
+      <div class="result-inline">上层所有 AI 应用有了稳定底座，不再因为单个账号限流而停摆</div>
+    </div>
+  </div>
+
+  <div class="stage rv">
+    <div class="stage-no">PHASE<b>02</b></div>
+    <div>
+      <h3>用好 · 让 AI 产出可用</h3>
+      <div class="fault"><b>遇到的故障</b>AI 出的图、出的视频一眼就假，内容生产变成碰运气。同一个需求，改十遍提示词也未必能出可用的东西。</div>
+      <p>把每次成功的写法沉淀成方法论——通用铁律、图像结构、视频叙事骨架，全部经过实测验证后入库，不是理论推导。方法论的价值在于：它把「凭感觉调」变成「按结构填」。</p>
+      <div class="result-inline">AI 内容产出一遍过的比例明显提高，方法可复用给团队</div>
+    </div>
+  </div>
+
+  <div class="stage rv">
+    <div class="stage-no">PHASE<b>03</b></div>
+    <div>
+      <h3>知识 · 让答案带出处</h3>
+      <div class="fault"><b>遇到的故障</b>文档越攒越多却找不到，知识是死数据；直接问大模型会编造，因为它不知道我的业务事实。</div>
+      <p>搭了一套知识库系统。模型负责把上千篇原始资料编译成可导航的聚合页，检索负责精确召回，命中页作为上下文再交给模型生成带引用的答案。细节见下一节。</p>
+      <div class="result-inline">1,600 余篇原始资料编译成 1,300 余个可导航页面，问答可追溯来源</div>
+    </div>
+  </div>
+
+  <div class="stage rv">
+    <div class="stage-no">PHASE<b>04</b></div>
+    <div>
+      <h3>组织与交付 · 让 AI 真的进入业务流程</h3>
+      <div class="fault"><b>遇到的故障</b>AI 能力很多，但组织消化不了，工具之间互相覆盖，最后没人用。做了十个工具，一线一个都不打开。</div>
+      <p>一边把多个 AI 角色编排成有分工、有决策边界、有校验闸门的生产线；一边把高频操作做成两套 Windows 桌面软件——经营驾驶舱和调度运维工作台，双击即用。</p>
+      <div class="result-inline">AI 从「偶尔试试」变成「每天打开的生产工具」，44 条自动化按日/周/月运行</div>
+    </div>
+  </div>
+</section>
+
+<!-- KB DEEP DIVE -->
+<section id="kb">
+  <div class="sec-head rv">
+    <span class="sec-tag">KNOWLEDGE BASE</span>
+    <h2>知识库：具体怎么搭的</h2>
+    <p>这一节单独讲，因为它是整套系统里最难、也最容易被误解的部分。它不是「把文档丢给模型」，而是重做了一遍知识的组织方式。</p>
+  </div>
+
+  <div class="kb-box rv">
+    <h3 style="font-size:1.15rem;font-weight:600;margin-bottom:10px">四层结构：从原始语料到可追溯的答案</h3>
+    <p style="font-size:.86rem;color:var(--t2);font-weight:300;line-height:1.85;max-width:720px">问题出在「原始文档」和「模型答案」之间少了两层：一层负责把散落的资料组织成可导航的结构，一层负责在提问时精确召回。缺了这两层，模型只能靠印象答，也就是编造。</p>
+
+    <div class="kb-flow">
+      <div class="kb-step">
+        <div class="kb-step-n">LAYER 01</div>
+        <h5>原始语料</h5>
+        <p>1,600+ 篇：SOP、新品资料、竞品分析、加盟政策、决策记录，按 11 个子库分域存放</p>
+      </div>
+      <div class="kb-step">
+        <div class="kb-step-n">LAYER 02</div>
+        <h5>聚合编译层</h5>
+        <p>模型把多源资料按「实体 / 概念」重新编译成聚合页，1,300+ 页，每页带摘要、关键事实、来源列表</p>
+      </div>
+      <div class="kb-step">
+        <div class="kb-step-n">LAYER 03</div>
+        <h5>三层索引</h5>
+        <p>倒排索引管精确术语、向量索引管语义换说法、聚合索引管跨源关联，三路召回后融合排序</p>
+      </div>
+      <div class="kb-step">
+        <div class="kb-step-n">LAYER 04</div>
+        <h5>带引用生成</h5>
+        <p>命中页作为上下文交给模型生成答案，强制标注出处；追溯不到来源就直接拒答</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.05rem;font-weight:600;margin:44px 0 8px">搭完之后得到的三个结论</h3>
+    <p style="font-size:.84rem;color:var(--t3);font-weight:300;margin-bottom:24px">这些不是我事先设计的目标，是搭完跑起来之后实际验证出来的。</p>
+
+    <div class="kb-concl">
+      <div class="kbc">
+        <div class="kbc-n">24<u>条</u></div>
+        <div class="kbc-l"><strong style="color:#f2f2f4;display:block;margin-bottom:6px">评测必须固化成用例</strong>24 条评测用例覆盖权威口径、竞品、防幻觉、品牌、运营、产品等 11 类，每次改检索链路必须全量回归。没有这条，改一处坏三处，你永远不会知道。</div>
+      </div>
+      <div class="kbc">
+        <div class="kbc-n">1<u>个</u></div>
+        <div class="kbc-l"><strong style="color:#f2f2f4;display:block;margin-bottom:6px">事实只能有唯一真相源</strong>门店数曾经因为「旧文档 77 篇 vs 裁决 1 篇」，朴素检索让旧口径获胜。教训是：关键事实必须单一来源，冲突时以裁决为准，且旧口径必须显式标注已过时。</div>
+      </div>
+      <div class="kbc">
+        <div class="kbc-n">0<u>容忍</u></div>
+        <div class="kbc-l"><strong style="color:#f2f2f4;display:block;margin-bottom:6px">测试绿 ≠ 线上对</strong>评测通过不代表生产正确——曾出现「索引重建了但内容读不出」，问答上下文全靠聚合层在撑。验证正确性必须做检索探针，不能只看测试结果。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section id="method">
+  <div class="sec-head rv">
+    <span class="sec-tag">METHODOLOGY</span>
+    <h2>我沉淀的方法论</h2>
+    <p>这些不是技术，是踩过坑之后提炼的判断规则。每一条都对应一次真实的翻车，写下来是为了下次不再翻。</p>
+  </div>
+
+  <div class="mgrid">
+    <div class="mcard rv">
+      <span class="mcard-tag">A-88</span>
+      <h3>多轨交付终核法</h3>
+      <p class="why">问题：多个自动化任务同日产出，声称都交付了，但实际有假交付漏网。只查「有没有文件」不够。</p>
+      <ul class="mlist">
+        <li><strong>查落盘</strong>正式产出必须在约定目录，草稿和聊天记录一律不计件</li>
+        <li><strong>查档位</strong>应产出 N 档实扫只找到 M 档，缺口即退回，并连带查首档是否准点</li>
+        <li><strong>查占位符</strong>扫「待补充/示例/待确认」，出现 ≥3 次判为空壳件退回</li>
+        <li><strong>查口径</strong>数据类必须标注数据日期与覆盖范围，结论必须带数值与来源</li>
+      </ul>
+    </div>
+
+    <div class="mcard rv">
+      <span class="mcard-tag">A-94</span>
+      <h3>「名义增量、实际无增量」判定法</h3>
+      <p class="why">问题：数据管道的时间戳推进了，看起来是新数据，但实际数据还停在昨天。看时间戳会得出错误结论。</p>
+      <ul class="mlist">
+        <li><strong>查元信息</strong>读快照的 latest_date 是否推进</li>
+        <li><strong>验模块</strong>实读核心数据模块最后一条日期，与 latest_date 比对</li>
+        <li><strong>判形态</strong>时间戳推进但模块未推进 = 名义增量；模块为 null = 空壳半成品</li>
+        <li><strong>处置</strong>全量重核，且结论时效以实际数据日为准，不以时间戳为准</li>
+      </ul>
+    </div>
+
+    <div class="mcard rv">
+      <span class="mcard-tag">SELF-CHECK</span>
+      <h3>分析结论三道自检</h3>
+      <p class="why">问题：AI 最容易出的错不是算错，而是给了一个听起来对、但站不住的结论。必须让它先自证。</p>
+      <ul class="mlist">
+        <li><strong>防假环比</strong>对比基线必须同口径，活动日、节假日、停业都要先标记</li>
+        <li><strong>防假异常</strong>区分真异常与随机噪声，连续多日偏离才判定异常</li>
+        <li><strong>防不可信归因</strong>归因必须落到可验证因素；只能说「原因不明」时不许硬编理由</li>
+      </ul>
+    </div>
+
+    <div class="mcard rv">
+      <span class="mcard-tag">BOUNDARY</span>
+      <h3>AI 边界四层</h3>
+      <p class="why">问题：靠自觉守边界迟早会破。边界必须做成系统约束，它才真的存在。</p>
+      <ul class="mlist">
+        <li><strong>数据边界</strong>分层授权，敏感字段不进上下文——它不知道的，就不可能编出来</li>
+        <li><strong>动作边界</strong>只能建议和生成，不能直接执行；发券改价必须人工确认</li>
+        <li><strong>表达边界</strong>生成内容必须标来源，无出处的结论不允许发给门店</li>
+        <li><strong>失败边界</strong>不确定必须说不确定，检索不到就拒答，不许用常识补全</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION / BOUNDARY -->
+<section id="boundary">
+  <div class="sec-head rv">
+    <span class="sec-tag">DECISION</span>
+    <h2>哪些决策必须我自己拍板</h2>
+    <p>很多人问 AI 到底能替人做多少。我的答案是：AI 可以替我做「分析和执行」，但不能替我做「判断和责任」。</p>
+  </div>
+
+  <table class="dtable rv">
+    <thead>
+      <tr><th>决策类型</th><th>谁来决定</th><th>举例</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>事实类<em>AI 决定</em></td>
+        <td>AI 决定，我抽检</td>
+        <td>昨天哪家店环比下降、降了多少、哪个品类降得最多。有明确数据源，AI 比人快也更不容易漏。</td>
+      </tr>
+      <tr>
+        <td>建议类<em>我拍板</em></td>
+        <td>AI 出选项，我拍板</td>
+        <td>这家店要不要做促销、做多大力度、推哪个品。AI 给出方案和依据，选哪个由我定，因为涉及成本和品牌调性。</td>
+      </tr>
+      <tr>
+        <td>责任类<em>只能我定</em></td>
+        <td>只能我决定</td>
+        <td>是否关店、是否换店长、是否调整加盟政策、是否对外承诺。一旦错了就是真金白银和人心，AI 只提供背景信息。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pullquote rv">
+    AI 算得出坪效，算不出这家店背后的人、算不出关店对周边门店口碑的影响、算不出加盟商的感受。<br>
+    <b>AI 不会为结果负责，我会。</b>
+  </div>
+
+  <div class="sec-head rv" style="margin-top:96px">
+    <span class="sec-tag">AGENT DESIGN</span>
+    <h2>Agent 怎么搭</h2>
+    <p>我没有一上来就做「全能 Agent」，而是一个个拆。全能 Agent 的问题是：出错时你不知道错在哪一环。</p>
+  </div>
+
+  <div class="mgrid">
+    <div class="mcard rv">
+      <h3 style="margin-bottom:18px">五个角色，各干一件事</h3>
+      <ul class="mlist">
+        <li><strong>数据角色</strong>拉取、清洗、对齐口径 → 结构化当日经营数据</li>
+        <li><strong>分析角色</strong>跑三道自检、做归因 → 通过自检的结论 + 异常门店清单</li>
+        <li><strong>知识角色</strong>回答「标准是什么」→ 带出处的 SOP / 政策答案</li>
+        <li><strong>生成角色</strong>把结论变成门店能执行的话 → 作战卡、话术、简报</li>
+        <li><strong>追踪角色</strong>记录动作是否执行、结果如何 → 执行台账 + 回流数据</li>
+      </ul>
+    </div>
+    <div class="mcard rv">
+      <h3 style="margin-bottom:18px">为什么不让 Agent 自由决定顺序</h3>
+      <p style="font-size:.86rem;color:var(--t2);line-height:1.9;font-weight:300;margin-bottom:16px">因为运营有硬时序。数据没拉完不能分析，分析没过自检不能下动作，动作没执行不能复盘。这些顺序是业务规律，不是 AI 该自由发挥的地方。</p>
+      <p style="font-size:.86rem;color:var(--t2);line-height:1.9;font-weight:300;margin-bottom:16px">所以我把顺序写死在流程里，AI 只在每一步内部做判断。角色之间靠固定格式传递，不靠自由对话——哪一环出错，看输出就知道；要改也只改那一环，不会牵一发动全身。</p>
+      <p style="font-size:.86rem;color:var(--gold-l);line-height:1.9;font-weight:400">再往上一层是调度：我下指令，系统判断该叫哪几个角色、按什么顺序跑。44 条自动化任务就是这一层的产物。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-sec">
+  <div class="rv">
+    <span class="sec-tag" style="text-align:center;display:block">GET IN TOUCH</span>
+    <h2>想聊聊具体怎么落地的</h2>
+    <p>背景、当时的情况、数据怎么分析、结果如何，以及 AI 用在哪、哪些决策必须我自己拍板、AI 的边界怎么划、Agent 怎么搭——我把完整过程写成了一篇复盘。</p>
+    <a href="article.html" class="btn btn-p">读完整落地复盘 <span>→</span></a>
+
+    <div class="cinfo">
+      <a href="mailto:358368437@qq.com" class="citem">
+        <span>Email</span><b>358368437@qq.com</b>
+      </a>
+      <div class="citem" onclick="navigator.clipboard.writeText('Edward_bei');this.querySelector('b').textContent='已复制 ✓';setTimeout(()=>this.querySelector('b').textContent='Edward_bei',1500)" style="cursor:pointer">
+        <span>WeChat · 点击复制</span><b>Edward_bei</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 · 用工程化的方式解决真实业务问题</footer>
+
+</div>
+
+<script>
+const io = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
