@@ -226,6 +226,47 @@ h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:700;letter-spacing:-.025em;
 footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
   font-size:.74rem;color:var(--t3);letter-spacing:.05em}
 
+
+/* ---------- RESULTS NEW LAYOUT ---------- */
+.rfeature{display:grid;grid-template-columns:1.15fr 1fr;gap:20px;margin-bottom:20px}
+.rfeat{
+  background:linear-gradient(160deg,#131318,#0d0d10);
+  border:1px solid var(--line);border-radius:18px;padding:40px 38px;
+  position:relative;overflow:hidden;transition:all .35s;
+}
+.rfeat:hover{border-color:rgba(201,162,39,.35)}
+.rfeat::before{
+  content:'';position:absolute;top:-80px;right:-80px;width:240px;height:240px;
+  background:radial-gradient(circle,rgba(201,162,39,.08),transparent 70%);
+}
+.rfeat-label{
+  font-size:.66rem;letter-spacing:.18em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:22px;font-weight:600;
+}
+.rfeat-n{
+  font-size:clamp(3rem,6vw,4.2rem);font-weight:800;letter-spacing:-.045em;
+  line-height:.95;font-variant-numeric:tabular-nums;margin-bottom:14px;
+}
+.rfeat-n u{text-decoration:none;font-size:.4em;color:var(--gold);margin-left:6px;font-weight:600}
+.rfeat h4{font-size:.98rem;font-weight:600;margin-bottom:14px;letter-spacing:-.01em}
+.rfeat p{font-size:.82rem;color:var(--t3);line-height:1.85;font-weight:300}
+
+.rsmall{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.rs{background:var(--card);padding:28px 24px;transition:background .3s}
+.rs:hover{background:#151519}
+.rs-n{font-size:1.65rem;font-weight:800;letter-spacing:-.03em;
+  line-height:1;font-variant-numeric:tabular-nums;margin-bottom:12px}
+.rs-n u{text-decoration:none;font-size:.5em;color:var(--gold);margin-left:3px;font-weight:600}
+.rs-l{font-size:.8rem;font-weight:600;color:var(--t1);margin-bottom:8px}
+.rs-d{font-size:.71rem;color:var(--t3);line-height:1.6;font-weight:300}
+
+@media(max-width:900px){
+  .rfeature{grid-template-columns:1fr}
+  .rsmall{grid-template-columns:repeat(2,1fr)}
+  .rfeat{padding:30px 26px}
+}
+
 .rv{opacity:0;transform:translateY(24px);
   transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -395,85 +436,41 @@ footer{padding:36px 40px;border-top:1px solid var(--line);text-align:center;
     <p>以下全部为系统实际运行数据，覆盖 22 个数据模块、47 家门店。</p>
   </div>
 
-  <div class="rgrid">
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">13<u>%</u></div>
-        <span class="rcard-badge">月均提升</span>
-      </div>
-      <h4>会员复购率</h4>
+  <div class="rfeature">
+    <div class="rfeat rv">
+      <div class="rfeat-label">核心指标</div>
+      <div class="rfeat-n">13<u>%</u></div>
+      <h4>会员复购率 · 月均提升</h4>
       <p>靠「数据 → 洞察 → 触达 → 回流」这条链路真的跑通：数据被拉通、洞察被 AI 算清楚、触达靠标签和自动化执行、回流数据又回到下一轮分析。少了任何一环，这个数字都不成立。</p>
-      <div class="bar"><i style="width:100%"></i></div>
     </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">44.3<u>%</u></div>
-        <span class="rcard-badge">当前水位</span>
-      </div>
+    <div class="rfeat rv">
+      <div class="rfeat-label">存量水位</div>
+      <div class="rfeat-n">44.3<u>%</u></div>
       <h4>存量客户复购率</h4>
       <p>累计购买 147,297 人中，65,196 人产生复购。这个数字能算出来，本身就是因为数据口径被统一了——过去散在多个系统里，算不出一个可信的复购率。</p>
-      <div class="bar"><i style="width:44.3%"></i></div>
     </div>
+  </div>
 
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">235,542</div>
-        <span class="rcard-badge">会员池</span>
-      </div>
-      <h4>会员总量</h4>
-      <p>企微好友 119,169 人、社群成员 8,098 人。会员不是一堆沉睡的名单——126 个标签持续打标，让「谁该被触达、触达什么」变成可执行的问题。</p>
-      <div class="bar"><i style="width:92%"></i></div>
+  <div class="rsmall">
+    <div class="rs rv">
+      <div class="rs-n">235,542</div>
+      <div class="rs-l">会员总量</div>
+      <div class="rs-d">企微好友 119,169 / 社群 8,098</div>
     </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">52.0<u>%</u></div>
-        <span class="rcard-badge">核销率</span>
-      </div>
-      <h4>优惠券核销</h4>
-      <p>累计发放 214,341 张、核销 111,371 张。券不是发出去就算完成——核销率被持续追踪，才能判断是券设计问题、触达人群问题，还是门店执行问题。</p>
-      <div class="bar"><i style="width:52%"></i></div>
+    <div class="rs rv">
+      <div class="rs-n">52.0<u>%</u></div>
+      <div class="rs-l">优惠券核销率</div>
+      <div class="rs-d">发放 214,341 张 / 核销 111,371 张</div>
     </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">7,747</div>
-        <span class="rcard-badge">在售 SKU</span>
-      </div>
-      <h4>商品库规模</h4>
-      <p>13 个品类、7,747 个在售单品全部纳入统一口径。商品维度打通之后，「哪个品类卖得好、哪个单品在拖后腿」才成为可回答的问题。</p>
-      <div class="bar"><i style="width:100%"></i></div>
+    <div class="rs rv">
+      <div class="rs-n">22</div>
+      <div class="rs-l">经营数据模块</div>
+      <div class="rs-d">KPI / 排行 / 日榜 / 活跃度 / 渗透 / 留存</div>
     </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">126</div>
-        <span class="rcard-badge">客户标签</span>
-      </div>
-      <h4>标签体系</h4>
-      <p>126 个标签持续打标，覆盖消费偏好、活跃度、品类渗透。标签不是摆设——它决定了「谁该被触达、触达什么内容」这件事能不能自动化。</p>
-      <div class="bar"><i style="width:100%"></i></div>
-    </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">22</div>
-        <span class="rcard-badge">数据模块</span>
-      </div>
-      <h4>经营数据打通</h4>
-      <p>KPI 汇总、门店排行、单品日榜、六层活跃度、品类渗透、Cohort 留存——过去要人工拼一周的表，现在每天自动生成。</p>
-      <div class="bar"><i style="width:100%"></i></div>
-    </div>
-
-    <div class="rcard rv">
-      <div class="rcard-top">
-        <div class="rcard-n">44</div>
-        <span class="rcard-badge">AI 角色</span>
-      </div>
-      <h4>AI 团队在编规模</h4>
-      <p>1 个战略层 + 7 个总监 + 24 个专员 + 10 个视觉 + 2 个协调，配 10 个能力池、16 个模型。这不是「一个助手」，是一支有分工的组织。</p>
-      <div class="bar"><i style="width:100%"></i></div>
+    <div class="rs rv">
+      <div class="rs-n">44</div>
+      <div class="rs-l">AI 角色在编</div>
+      <div class="rs-d">战略 1 / 主管 7 / 专员 24 / 视觉 10 / 协调 2</div>
     </div>
   </div>
 </section>
