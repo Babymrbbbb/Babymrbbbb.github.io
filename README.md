@@ -1,6 +1,6 @@
-# Portfolio Website
+# GitHub Pages Site
 
-GitHub Pages 个人作品集网站。
+GitHub Pages 静态站点。
 
 ## 预览
 

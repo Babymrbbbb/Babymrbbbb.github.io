@@ -3,12 +3,12 @@
 ## 方案一：直接推送到 GitHub Pages（推荐）
 
 ```bash
-cd C:\Users\Administrator\.workbuddy\2026-09-29-10-26-32\portfolio\website
+cd ./your-local-site
 
 # 初始化 git
 git init
 git add .
-git commit -m "init: portfolio website"
+git commit -m "init: github pages site"
 
 # 创建 GitHub 仓库（在 GitHub 网页上创建，仓库名必须是 Babymrbbbb.github.io）
 # 注意：仓库名必须是 {你的用户名}.github.io，这样 GitHub Pages 才能自动部署
@@ -30,11 +30,11 @@ git push -u origin main
 如果你不想新建 `Babymrbbbb.github.io` 仓库，可以把网站放在任意仓库的 `/docs` 或 `/gh-pages` 目录下：
 
 ```bash
-cd C:\Users\Administrator\.workbuddy\2026-09-29-10-26-32\portfolio\website
+cd ./your-local-site
 
 git init
 git add .
-git commit -m "init: portfolio website"
+git commit -m "init: github pages site"
 
 # 推送到已有仓库的 gh-pages 分支
 git remote add origin https://github.com/Babymrbbbb/你的仓库名.git
