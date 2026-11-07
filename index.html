@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--line); padding:32px 0; text-align:center; colo
       <div class="metric"><div class="n">20万+</div><div class="l">终端会员运营</div></div>
       <div class="metric"><div class="n">44条</div><div class="l">自动化任务每天在跑</div></div>
       <div class="metric"><div class="n">+10~15pp</div><div class="l">会员复购提升</div></div>
-      <div class="metric"><div class="n">6个</div><div class="l">公开项目</div></div>
+      <div class="metric"><div class="n">9个</div><div class="l">精选项目</div></div>
     </div>
   </div>
 </section>
@@ -213,6 +213,27 @@ footer{border-top:1px solid var(--line); padding:32px 0; text-align:center; colo
       <p class="problem">47 家门店数据分散在不同系统，口径不一，同一家店三个系统三个数。</p>
       <p class="result">建立唯一真相源，统一数据链路，<strong>店长验收闭环，生产环境每天在跑</strong>。</p>
       <div class="project-links mono"><a href="https://github.com/Babymrbbbb" target="_blank">作品集主页 ↗</a></div>
+    </div>
+
+    <div class="project-card">
+      <h3><span>07</span>rag-vector-vs-keyword · 检索方式对照</h3>
+      <p class="problem">「换成向量检索就更准」常被当成默认假设，选方案时缺可复现的实测依据。</p>
+      <p class="result">32 条带标注查询在同一套评测标准下对照：<strong>BM25 Recall@5 0.953、ONNX MiniLM 0.594，结果集重合度仅 0.258</strong>，据此给出两路融合而非二选一的适用条件。</p>
+      <div class="project-links mono"><a href="https://github.com/Babymrbbbb/rag-vector-vs-keyword" target="_blank">GitHub ↗</a></div>
+    </div>
+
+    <div class="project-card">
+      <h3><span>08</span>langchain-kb-qa · 检索增强问答服务</h3>
+      <p class="problem">检索对照的结论停在报告里，没有落到能部署、能调用的服务。</p>
+      <p class="result">LangChain LCEL + chromadb + 中文二元组 BM25 混合检索，<strong>FastAPI /api/ask、单页 UI、Docker，离线可跑且编码器可插拔自动降级</strong>。</p>
+      <div class="project-links mono"><a href="https://github.com/Babymrbbbb/langchain-kb-qa" target="_blank">GitHub ↗</a></div>
+    </div>
+
+    <div class="project-card">
+      <h3><span>09</span>lora-finetune-demo · 参数高效微调对照</h3>
+      <p class="problem">LoRA 省参数常被当结论引用，但 ΔW=B·A 怎么起作用、究竟省多少说不清。</p>
+      <p class="result">零依赖手写前向与反向，<strong>全量 280 参数 vs LoRA(r=2) 108 参数（38.6%）</strong>，在构造的小型分类任务上两者准确率均 100%；附 PEFT 生产模板。</p>
+      <div class="project-links mono"><a href="https://github.com/Babymrbbbb/lora-finetune-demo" target="_blank">GitHub ↗</a></div>
     </div>
 
     <!-- 完整复盘入口 -->
