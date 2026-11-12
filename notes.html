@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构方法论 · Babymrbbbb</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c9a227'>◆</text></svg>">
+<style>
+:root{
+  --bg:#08080a; --bg2:#0e0e11; --card:#111114; --line:#1e1e23;
+  --gold:#c9a227; --gold-l:#e8c95a; --gold-dim:rgba(201,162,39,.12);
+  --t1:#f2f2f4; --t2:#9a9aa3; --t3:#5c5c66;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg); color:var(--t1);
+  font-family:'Segoe UI','Microsoft YaHei',system-ui,-apple-system,sans-serif;
+  line-height:1.75; -webkit-font-smoothing:antialiased;}
+a{color:var(--gold-l); text-decoration:none}
+a:hover{color:var(--gold)}
+.container{max-width:920px; margin:0 auto; padding:0 24px}
+header{position:sticky; top:0; z-index:100; background:rgba(8,8,10,.85);
+  backdrop-filter:blur(12px); border-bottom:1px solid var(--line);}
+nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:1px}
+.brand i{color:var(--gold); font-style:normal; font-size:18px}
+.navlinks{display:flex; gap:20px}
+.navlinks a{color:var(--t2); font-size:14px}
+.navlinks a:hover{color:var(--gold-l)}
+section{padding:64px 0}
+.sec-tag{display:inline-block; font-size:11px; font-weight:700; letter-spacing:3px;
+  color:var(--gold); margin-bottom:10px; font-family:Consolas,monospace}
+h1{font-size:36px; font-weight:900; letter-spacing:-.5px}
+h2{font-size:24px; font-weight:800; margin:36px 0 12px; color:var(--t1)}
+h3{font-size:18px; color:var(--gold-l); margin:24px 0 8px}
+p{color:var(--t2); margin:10px 0}
+strong{color:var(--t1)}
+code{background:#0e0e12; color:var(--gold); padding:2px 7px; border-radius:6px;
+  font-family:Consolas,monospace; font-size:13px}
+pre{background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:18px 20px; overflow:auto; margin:14px 0; color:var(--t2);
+  font-family:Consolas,monospace; font-size:13px; line-height:1.6}
+.lead{font-size:17px; color:var(--t2); max-width:760px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:26px 28px; margin:22px 0}
+.diagram{background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:20px; margin:22px 0; text-align:center}
+.diagram svg{width:100%; height:auto; max-width:760px}
+.foot{color:var(--t3); font-size:13px}
+ul{color:var(--t2); padding-left:22px; margin:10px 0}
+li{margin:6px 0}
+.note{color:var(--t3); font-size:12px; margin-top:8px}
+footer{border-top:1px solid var(--line); padding:28px 0; text-align:center; color:var(--t3); font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <div class="brand"><i>◆</i> BABYMRBBBB</div>
+    <div class="navlinks">
+      <a href="index.html">首页</a>
+      <a href="article.html">完整复盘</a>
+      <a href="#erp">端口-适配器</a>
+      <a href="#loop">门店执行闭环</a>
+    </div>
+  </nav>
+</header>
+
+<section class="container">
+  <span class="sec-tag">ARCHITECTURE NOTES</span>
+  <h1>两套可复用的架构方法论</h1>
+  <p class="lead">这是两篇工程方法论笔记，配一张合成架构示意图。所有示例均为合成演示，
+  不对应任何真实品牌、门店或线上系统；只讲模式，不写真实数据。</p>
+
+  <!-- 合成架构图 -->
+  <div class="diagram">
+    <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="端口-适配器与执行闭环合成架构图">
+      <defs>
+        <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#c9a227"/>
+        </marker>
+      </defs>
+      <style>
+        .box{fill:#111114; stroke:#1e1e23; stroke-width:1.5;}
+        .boxg{fill:rgba(201,162,39,.10); stroke:#c9a227; stroke-width:1.5;}
+        .t{fill:#f2f2f4; font-family:Consolas,monospace; font-size:13px; text-anchor:middle;}
+        .tg{fill:#e8c95a; font-family:Consolas,monospace; font-size:13px; text-anchor:middle;}
+        .lbl{fill:#9a9aa3; font-size:11px; text-anchor:middle;}
+      </style>
+
+      <!-- 外部系统 -->
+      <rect class="box" x="20" y="40" width="150" height="80" rx="10"/>
+      <text class="t" x="95" y="72">外部系统（占位）</text>
+      <text class="lbl" x="95" y="92">ERP / 上游模型</text>
+      <text class="lbl" x="95" y="108">仅接口契约</text>
+
+      <!-- 端口/接口 -->
+      <rect class="boxg" x="240" y="40" width="150" height="80" rx="10"/>
+      <text class="tg" x="315" y="72">端口（接口）</text>
+      <text class="lbl" x="315" y="92">ErpSource / LLM</text>
+      <text class="lbl" x="315" y="108">抽象，不依赖实现</text>
+
+      <!-- 适配器 -->
+      <rect class="box" x="460" y="10" width="150" height="56" rx="10"/>
+      <text class="t" x="535" y="34">Mock 适配器</text>
+      <text class="lbl" x="535" y="52">is_live = false</text>
+      <rect class="box" x="460" y="84" width="150" height="56" rx="10"/>
+      <text class="t" x="535" y="108">Live 适配器</text>
+      <text class="lbl" x="535" y="126">is_live = true（占位）</text>
+
+      <!-- 应用层 -->
+      <rect class="boxg" x="240" y="170" width="370" height="70" rx="10"/>
+      <text class="tg" x="425" y="198">应用层（业务用例）</text>
+      <text class="lbl" x="425" y="218">门店执行闭环 · RAG 检索 · 模型路由</text>
+
+      <!-- 下游 -->
+      <rect class="box" x="240" y="270" width="170" height="34" rx="8"/>
+      <text class="t" x="325" y="292">合成门店 12 家</text>
+      <rect class="box" x="440" y="270" width="170" height="34" rx="8"/>
+      <text class="t" x="525" y="292">评测 / 看板</text>
+
+      <!-- 连线 -->
+      <line x1="170" y1="80" x2="238" y2="80" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="390" y1="60" x2="458" y2="38" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="390" y1="80" x2="458" y2="112" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="315" y1="120" x2="315" y2="168" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="535" y1="66" x2="535" y2="168" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="535" y1="140" x2="535" y2="168" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="425" y1="240" x2="325" y2="268" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="425" y1="240" x2="525" y2="268" stroke="#c9a227" stroke-width="1.5" marker-end="url(#arr)"/>
+    </svg>
+    <p class="note">示意图：外部系统经「端口（接口契约）」与「适配器（Mock / Live）」解耦，
+    业务只依赖端口；下游为合成门店与评测看板。仅作方法论演示。</p>
+  </div>
+
+  <!-- 端口-适配器 -->
+  <h2 id="erp">一、端口-适配器（Ports &amp; Adapters）接入外部系统</h2>
+  <div class="card">
+    <h3>问题</h3>
+    <p>业务系统常要对接外部系统（如 ERP、上游模型）。若业务代码直接调用某家具体实现的
+    SDK / 接口，一旦供应商替换或接口变更，业务层要跟着大改，且本地无法脱离外部依赖做测试。</p>
+
+    <h3>模式</h3>
+    <p>把外部能力抽象成<strong>端口（接口契约）</strong>，具体对接写成<strong>适配器</strong>：
+    一个 Mock 适配器（合成镜像，<code>is_live = false</code>）用于本地与测试；
+    一个 Live 适配器（真实对接，<code>is_live = true</code>，占位未接入）用于生产。
+    业务只依赖端口，不依赖实现。</p>
+
+    <pre>// 端口：仅定义契约
+interface ErpSource {
+  isLive: boolean;
+  fetchStores(): Store[];
+}
+
+// 适配器 A：合成镜像（本地 / 测试默认）
+class MockErpSource implements ErpSource {
+  isLive = false;
+  fetchStores() { return SAMPLE_MIRROR; }   // 合成门店，与真实无关
+}
+
+// 适配器 B：真实对接（占位，未接入）
+class LiveErpSource implements ErpSource {
+  isLive = true;
+  fetchStores() { /* TODO: 接真实端点 */ }
+}</pre>
+
+    <h3>收益</h3>
+    <ul>
+      <li><strong>可测试</strong>：Mock 适配器让整条链路在零外部依赖下跑通与回归；</li>
+      <li><strong>可替换</strong>：换供应商只需新增一个适配器，业务层零改动；</li>
+      <li><strong>数据安全</strong>：本地永远跑合成镜像，真实接口凭据不进代码、不进公开仓。</li>
+    </ul>
+    <p class="note">本页所有门店、接口均为合成演示，不对应任何真实 ERP 或线上系统。</p>
+  </div>
+
+  <!-- 门店执行闭环 -->
+  <h2 id="loop">二、门店执行闭环（合成参考实现）</h2>
+  <div class="card">
+    <h3>问题</h3>
+    <p>总部把标准动作做成「作战卡」下发给每家门店，门店执行后由门店验收，形成
+    <strong>下发 → 执行 → 验收</strong> 的管控闭环。难点不在"发下去"，而在覆盖完整与状态不可跳步。</p>
+
+    <h3>状态机</h3>
+    <pre>dispatched ──执行──▶ executed ──验收──▶ accepted
+（已下发）            （已执行）          （已验收）</pre>
+    <p>推进必须依次走过，从 <code>dispatched</code> 直接到 <code>accepted</code> 会被拦截——
+    避免"看起来闭环了其实没执行"的假闭环。</p>
+
+    <h3>全量下发与试点</h3>
+    <ul>
+      <li>合成门店：演示品牌 A / B / C / D 四市共 <strong>12 家</strong>（与 hunkon_rag 真相源一致）；</li>
+      <li>3 张作战卡 × 12 家 = <strong>36 条下发记录</strong>，缺一条就是覆盖漏洞；</li>
+      <li>试点门店跑通全闭环验证流程，其余门店先只下发。</li>
+    </ul>
+
+    <h3>把"闭环不破洞"做成断言</h3>
+    <pre># 全量下发计数、合法推进、非法跳过拦截，均有单测覆盖
+seed_loop()                      # 12 家 × 3 卡 = 36 下发
+stats()["by_status"]["accepted"] # 试点门店全闭环数
+advance(did, "accepted")         # 从 dispatched 直接验收 → 抛错</pre>
+    <p class="note">完整代码见 store_tool 的 <code>app/store_loop.py</code> 与
+    <code>tests/test_store_loop.py</code>，均为合成数据。</p>
+  </div>
+
+  <p class="foot">两篇笔记均只描述方法论与工程模式，示例为合成演示，不对应任何真实品牌、门店或生产系统。</p>
+</section>
+
+<footer>
+  <div class="container">© 2026 Babymrbbbb · AI 系统工程方法论与工程实践 ·
+    <a href="index.html">返回首页</a></div>
+</footer>
+
+</body>
+</html>
